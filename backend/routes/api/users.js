@@ -29,17 +29,31 @@ const validateSignup = [
     handleValidationErrors
   ];
 
+// router.post('/api/users',async(req,res)=>{
+//   const{ firstName, lastName, email, userName}=req.body;
+//   const newUser=await User.create({
+//     firstName,
+//     lastName,
+//     email,
+//     userName
+//   })
+// return res.json(newUser)  
+
+// })  
+
 // Sign up
 router.post(
     '/',
     validateSignup,
     async (req, res) => {
-      const { email, password, username } = req.body;
+      const { firstName,lastName,email, password, username } = req.body;
       const hashedPassword = bcrypt.hashSync(password);
-      const user = await User.create({ email, username, hashedPassword });
+      const user = await User.create({ firstName,lastName,email, username, hashedPassword });
   
       const safeUser = {
         id: user.id,
+        firstName:user.firstName,
+        lastName:user.lastName,
         email: user.email,
         username: user.username,
       };
