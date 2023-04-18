@@ -7,6 +7,8 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
+
+
 //Get Spots
 router.get('/',async(req,res)=>{ 
 let spots=await Spot.findAll({
@@ -82,7 +84,39 @@ if(spotImageUrl){
 return (res.json({spots}))
 
 })
+//Get details of a Spot from an id
+router.get('/:spotId',async(req,res)=>{ 
+    let spotbyId=await Spot.findByPk(req.params.spotId,{
+        include:[
+            {
+            model:SpotImage,
+            attributes:['id','url','preview'],
+        },
+        {
+            model:User,
+            attributes:['id','firstName','lastName']
+        },        
+    ],
     
+    }); 
+   spotbyId=spotbyId.toJSON()
+    let reviews=await Review.findAll({
+        attributes:['stars'],
+        where:{
+           spotId:spotbyId.id
+        },
+        raw:true    
+   })
+   let starSum=0;
+   for (let review of reviews){
+    starSum+=review.stars
+   }
+   spotbyId.numReviews=reviews.length;
+   spotbyId.avgStarRating=(starSum/reviews.length)
+       
+return(res.json(spotbyId))
+
+})
 
 
 
