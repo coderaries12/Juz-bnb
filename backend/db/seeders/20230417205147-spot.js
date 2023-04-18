@@ -20,7 +20,7 @@ module.exports = {
    await queryInterface.bulkInsert(options,[
     
       {
-    
+        "ownerId":1,
         "address": "64 Modoc Alley",
         "city": "Meridian",
         "state": "Idaho",
@@ -32,7 +32,7 @@ module.exports = {
         "price": 156, 
       },
       {
-    
+        "ownerId":2,
         "address": "2177 Hillcrest Lane",
         "city": "Irvine",
         "state": "California",
@@ -44,7 +44,7 @@ module.exports = {
         "price": 255, 
       },
       {
-    
+        "ownerId":3,
         "address": "2811 Bernardo Street",
         "city": "Chandler",
         "state": "Indiana",

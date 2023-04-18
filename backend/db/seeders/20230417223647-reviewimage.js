@@ -21,13 +21,16 @@ module.exports = {
    options.tableName='ReviewImages';
    await queryInterface.bulkInsert(options,[
    {
-    url:'image12 url'
+    "reviewId":1,
+    "url":'image12 url'
    },
    {
-    url:'image156 url'
+    "reviewId":2,
+    "url":'image156 url'
    },
    {
-    url:'image1343 url'
+    "reviewId":3,
+    "url":'image1343 url'
    },
 
    ],{})
