@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Spot,{
         foreignKey:'ownerId'
       })
-      User.belongsToMany(models.spot,{
+      User.belongsToMany(models.Spot,{
         through:models.Review,
         foreignKey:'userId',
         otherKey:'spotId'
