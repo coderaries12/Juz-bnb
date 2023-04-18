@@ -1,6 +1,9 @@
 const express = require('express')
 const { Spot,Review,User,SpotImage,sequelize} = require('../../db/models');
 const spot = require('../../db/models/spot');
+const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
@@ -15,17 +18,13 @@ let reviews=await Review.findAll({
      attributes:['spotId','stars'],
      raw:true
 })
-//console.log("Total Reviews",reviews)
-
 for(let spot of spots){
     let starSum=0;
     let spotReviews=reviews.filter(review=>review.spotId===spot.id)
-   // console.log("Spot Reviews",spotReviews)
     for(const spotReview of spotReviews){
         starSum+=spotReview.stars
     }
     spot.avgRating=(starSum/spotReviews.length)
-   console.log("Avg rating",spots.avgRating)
     
     let spotImageUrl=await SpotImage.findOne({
         attributes:['url'],
@@ -35,7 +34,6 @@ for(let spot of spots){
         },
         raw:true
     })
-    console.log(spotImageUrl)
     if(spotImageUrl){
         spot.previewImage=spotImageUrl.url
     }
@@ -46,6 +44,45 @@ return res.json({spots})
 })
 
 //### Get all Spots owned by the Current User
+router.get('/current',requireAuth,async(req,res)=>{ 
+    const { user } = req;
+    const id=user.dataValues.id
+    let spots=await Spot.findAll({
+        where:{
+            ownerId:id
+        },
+        raw:true
+    });
+   for(let spot of spots){
+    let reviews=await Review.findAll({
+        attributes:['stars'],
+        where:{
+           spotId:spot.id
+        },
+        raw:true
+   })
+   let starSum=0;
+   for (let review of reviews){
+    starSum+=review.stars
+   }
+   spot.avgRating=(starSum/reviews.length)
+
+   let spotImageUrl=await SpotImage.findOne({
+    attributes:['url'],
+    where:{
+        spotId:spot.id,
+        preview:true
+    },
+    raw:true
+})
+if(spotImageUrl){
+    spot.previewImage=spotImageUrl.url
+}
+}
+return (res.json({spots}))
+
+})
+    
 
 
 
