@@ -45,6 +45,8 @@ return res.json({spots})
 
 })
 
+//### Get all Spots owned by the Current User
+
 
 
 module.exports=router;

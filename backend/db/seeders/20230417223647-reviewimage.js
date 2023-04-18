@@ -43,7 +43,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    mapFinderOptions.tableName='Reviews';
+    options.tableName='Reviews';
     await queryInterface.bulkDelete(options)
   }
 };
