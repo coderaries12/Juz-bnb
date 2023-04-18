@@ -18,15 +18,21 @@ module.exports = {
     */
    options.tableName='Bookings';
    await queryInterface.bulkInsert(options,[
-    {
+    {  
+      "spotId":1,
+      "userId":1,
       "startDate":"2020-11-15",
       "endDate":"2021-08-12"
     },
-    {
+    {  
+      "spotId":2,
+      "userId":2,
       "startDate":"2005-10-14",
       "endDate":"2009-04-11"
     },
-    {
+    { 
+      "spotId":3,
+      "userId":3,
       "startDate":"2006-08-17",
       "endDate":"2003-04-13"
     },
