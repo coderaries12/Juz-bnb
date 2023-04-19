@@ -1,9 +1,10 @@
 const express = require('express')
-const { Spot,Review,User,SpotImage,ReviewImage,sequelize} = require('../../db/models');
+const { Spot,Review,User,SpotImage,ReviewImage,sequelize,Booking} = require('../../db/models');
 const spot = require('../../db/models/spot');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { check } = require('express-validator');
+const { check,body } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const booking = require('../../db/models/booking');
 const router = express.Router();
 const validateSpot = [
     check('address')
@@ -21,10 +22,11 @@ const validateSpot = [
       .withMessage('Country is required'),
     check('lat')
       .exists({ checkFalsy: true })
+      .isLatLong({checkDMS:true})
       .withMessage('Latitude is not valid'),
     check('lng')
       .exists({ checkFalsy: true })
-      .isFloat()
+      .isLatLong({checkDMS:true})
       .withMessage('Longitude is not valid'),  
     check('name')
       .exists({ checkFalsy: true })
@@ -38,6 +40,15 @@ const validateSpot = [
       .withMessage('Price per day is required'), 
     handleValidationErrors
   ];
+
+//  const validationReview=[
+//   body('review')
+//   .exists({ checkFalsy: true })
+//   .withMessage('Review text is required'),
+//   body('stars').exists({ checkFalsy: true })
+//   .isNumeric().isLength({min:1,max:5})
+//   .withMessage("Stars must be an integer from 1 to 5"),
+//  ]; 
 
 
 //Get Spots
@@ -145,9 +156,10 @@ router.get('/:spotId',async(req,res)=>{
    })
    let starSum=0;
    for (let review of reviews){
-    starSum+=review.stars
+    starSum=starSum+review.stars
    }
    spotbyId.numReviews=reviews.length;
+   console.log(reviews.length)
    spotbyId.avgStarRating=(starSum/reviews.length)
        
 return(res.json(spotbyId))
@@ -230,10 +242,10 @@ router.post('/:spotId/images',requireAuth,async(req,res)=>{
         spotId:newSpot.id
       },
       include:[
-        // {
-        //   model:User,
-        //   attributes:['id','firstName','lastName']
-        // },
+        {
+          model:User,
+          attributes:['id','firstName','lastName']
+        },
         {
           model:ReviewImage,
           attributes:['id','url']
@@ -245,6 +257,95 @@ router.post('/:spotId/images',requireAuth,async(req,res)=>{
     return res.json({Reviews})
   })
 
+  //Create a Review for a Spot based on the Spot's id 
+  router.post('/:spotId/reviews',
+  requireAuth,
+  body('review')
+  .exists({ checkFalsy: true })
+  .withMessage('Review text is required'),
+  body('stars').exists({ checkFalsy: true })
+  .isNumeric().isFloat({options: { min: 1, max: 5 }})
+  .withMessage("Stars must be an integer from 1 to 5"),
+  async(req,res)=>{ 
+    const { user } = req;
+    const id=user.dataValues.id
+    const { review,stars} = req.body; 
 
+    const newSpot = await Spot.findByPk(req.params.spotId);  
+    if(!newSpot) {
+      return res.status(404).json({
+        "message": "Spot couldn't be found"
+      })
+    }
+    let currentuserReviews=await Review.findAll({
+      where:{
+        spotId:newSpot.id
+      },
+      raw:true
 
+    })
+    for(let review of currentuserReviews){
+      if(review.userId===id)
+      {
+        return res.status(500).json({
+          "message": "User already has a review for this spot"
+        })
+      }
+    }
+    let newReview=await Review.create({
+      spotId:newSpot.id,
+      userId:id,
+      review,
+      stars  
+    })
+    return res.json(newReview) 
+  })
+
+ // Get all Bookings for a Spot based on the Spot's id
+ router.get('/:spotId/bookings',requireAuth,async(req,res)=>{
+  const { user } = req;
+  const id=user.dataValues.id
+  const newSpot=await Spot.findByPk(req.params.spotId,{
+    raw:true
+  });
+  if(!newSpot){
+    return res.status(404).json({
+      "message": "Spot couldn't be found"
+    })
+  }
+  const spotBookings=await Booking.findAll({
+    where:{
+      spotId:newSpot.id,
+    },
+    include:{
+      model:User,
+      attributes:['id','firstName','lastName']
+    }
+  })
+  return res.json(spotBookings)
+
+})
+
+ //Create a Booking from a Spot based on the Spot's id
+ router.post('/:spotId/bookings',requireAuth,async(req,res)=>{ 
+   const { user } = req;
+   const id=user.dataValues.id
+   const { startDate,endDate} = req.body; 
+
+   const newSpot = await Spot.findByPk(req.params.spotId);  
+   if(!newSpot) {
+     return res.status(404).json({
+       "message": "Spot couldn't be found"
+     })
+   }
+   let currentuserReviews=await Review.findAll({
+     where:{
+       spotId:newSpot.id
+     },
+     raw:true
+
+    })
+    
+ })  
+ 
 module.exports=router;
