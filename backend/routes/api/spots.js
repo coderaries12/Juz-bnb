@@ -41,14 +41,15 @@ const validateSpot = [
     handleValidationErrors
   ];
 
-//  const validationReview=[
-//   body('review')
-//   .exists({ checkFalsy: true })
-//   .withMessage('Review text is required'),
-//   body('stars').exists({ checkFalsy: true })
-//   .isNumeric().isLength({min:1,max:5})
-//   .withMessage("Stars must be an integer from 1 to 5"),
-//  ]; 
+ const validationReview=[
+  check('review')
+  .exists({ checkFalsy: true })
+  .withMessage('Review text is required'),
+  check('stars').exists({ checkFalsy: true })
+  .isInt({min:1,max:5})
+  .withMessage("Stars must be an integer from 1 to 5"),
+  handleValidationErrors
+ ]; 
 
 
 //Get Spots
@@ -259,13 +260,7 @@ router.post('/:spotId/images',requireAuth,async(req,res)=>{
 
   //Create a Review for a Spot based on the Spot's id 
   router.post('/:spotId/reviews',
-  requireAuth,
-  body('review')
-  .exists({ checkFalsy: true })
-  .withMessage('Review text is required'),
-  body('stars').exists({ checkFalsy: true })
-  .isNumeric().isFloat({options: { min: 1, max: 5 }})
-  .withMessage("Stars must be an integer from 1 to 5"),
+  requireAuth,validationReview,
   async(req,res)=>{ 
     const { user } = req;
     const id=user.dataValues.id
@@ -305,47 +300,104 @@ router.post('/:spotId/images',requireAuth,async(req,res)=>{
  router.get('/:spotId/bookings',requireAuth,async(req,res)=>{
   const { user } = req;
   const id=user.dataValues.id
-  const newSpot=await Spot.findByPk(req.params.spotId,{
-    raw:true
-  });
+  const newSpot=await Spot.findByPk(req.params.spotId);
   if(!newSpot){
     return res.status(404).json({
       "message": "Spot couldn't be found"
     })
   }
-  const spotBookings=await Booking.findAll({
-    where:{
-      spotId:newSpot.id,
-    },
-    include:{
-      model:User,
-      attributes:['id','firstName','lastName']
-    }
+ else if(newSpot.ownerId===id){
+    const Bookings=await Booking.findAll({
+      where:{
+        spotId:newSpot.id,
+        userId:id
+      },
+      include:{
+        model:User,
+        attributes:['id','firstName','lastName']
+      }
+    })
+    return res.json(Bookings)
+  }
+  else if(newSpot.ownerId !==id){
+    const Bookings=await Booking.findAll({
+      where:{
+        spotId:newSpot.id,
+      }, 
+      attributes:['id','spotId','startDate','endDate'] 
+    
+    })
+    return res.json({Bookings})
+  }
   })
-  return res.json(spotBookings)
-
-})
-
+  
  //Create a Booking from a Spot based on the Spot's id
- router.post('/:spotId/bookings',requireAuth,async(req,res)=>{ 
+ router.post('/:spotId/bookings',requireAuth,
+  async(req,res)=>{ 
    const { user } = req;
    const id=user.dataValues.id
    const { startDate,endDate} = req.body; 
-
-   const newSpot = await Spot.findByPk(req.params.spotId);  
-   if(!newSpot) {
-     return res.status(404).json({
-       "message": "Spot couldn't be found"
-     })
-   }
-   let currentuserReviews=await Review.findAll({
-     where:{
-       spotId:newSpot.id
-     },
-     raw:true
-
+  console.log(id)
+  //  const currUserSpot = await Spot.findByPk(req.params.spotId,{
+  //   where:{
+  //     ownerId:id
+  //   }
+  //  });  
+  //  if(currUserSpot) {
+  //    return res.status(404).json({
+  //      "message": "Spot must NOT belong to the current user"
+  //    })
+  //  }
+   const newSpot = await Spot.findByPk(req.params.spotId); 
+   if(!newSpot){
+    return res.status(404).json({
+      "message": "Spot couldn't be found"
     })
+   } 
+   const currUserBooking=await Booking.findAll({
+    where:{
+      spotId:id
+    } 
+   })
+  //  if(currUserBooking) {
+  //      return res.status(404).json({
+  //        "message": "Spot must NOT belong to the current user"
+  //      })
+  //    }
+
+   let spotIdBooking=await Booking.create({
+       spotId:newSpot.id,
+       startDate,
+       endDate
+     
+    })
+   return res.json(spotIdBooking) 
     
  })  
+
+ //Delete a spot
+ router.delete('/:spotId',requireAuth,async(req,res)=>{ 
+   const { user } = req;
+   const id=user.dataValues.id
+   const spotToDelete=await Spot.findByPk(req.params.spotId)
+   if(!spotToDelete){
+    return res.status(404).json({
+      "message": "Spot couldn't be found"
+    })
+   }
+   else if(spotToDelete.ownerId !== id){
+    return res.json({
+      message:"Spot must belong to the current user"
+    })
+   }
+   else if(spotToDelete.ownerId===id){
+    await spotToDelete.destroy();
+    return res.json({
+      "message": "Successfully deleted"
+     })
+
+   }
+  })
+
  
 module.exports=router;
