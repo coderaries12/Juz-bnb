@@ -21,21 +21,21 @@ module.exports = {
     {  
       "spotId":1,
       "userId":1,
-      "startDate":new Date("2020,11,15"),
-      "endDate":new Date("2021,08,12")
+      "startDate":new Date("2022,01,15"),
+      "endDate":new Date("2022,01,20")
     },
     
     {  
       "spotId":2,
       "userId":2,
-      "startDate":new Date("2005,10,14"),
-      "endDate":new Date("2009,04,11")
+      "startDate":new Date("2022,04,14"),
+      "endDate":new Date("2022,04,22")
     },
     { 
       "spotId":3,
       "userId":3,
-      "startDate":new Date("2006,08,17"),
-      "endDate":new Date("2003,04,13")
+      "startDate":new Date("2022,05,17"),
+      "endDate":new Date("2022,05,23")
     },
 
    ],{})
