@@ -230,16 +230,16 @@ router.post('/:spotId/images',requireAuth,async(req,res)=>{
         spotId:newSpot.id
       },
       include:[
-        {
-          model:User,
-          attributes:['id','firstName','lastName']
-        },
+        // {
+        //   model:User,
+        //   attributes:['id','firstName','lastName']
+        // },
         {
           model:ReviewImage,
           attributes:['id','url']
         }
       ],
-      raw:true
+      
 
     })
     return res.json({Reviews})
