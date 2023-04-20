@@ -131,11 +131,7 @@ router.delete('/:bookingsId',requireAuth,async(req,res)=>{
        "message": "Booking couldn't be found"
      })
     }
-    
-    
-
-     console.log(bookingToDelete)
-    // await bookingToDelete.destroy();
+     await bookingToDelete.destroy();
      return res.json({
        "message": "Successfully deleted"
       })
