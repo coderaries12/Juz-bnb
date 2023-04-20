@@ -169,8 +169,11 @@ return(res.json(spotbyId))
 
 //Create a Spot
 router.post('/',validateSpot,async(req,res)=>{ 
+  const { user } = req;
+  const id=user.dataValues.id
 const { address,city,state, country, lat,lng,name,description,price } = req.body; 
 const newSpot = await Spot.create({ 
+    ownerId:id,
     address,city,state, country, lat,lng,name,description,price
 });  
 
