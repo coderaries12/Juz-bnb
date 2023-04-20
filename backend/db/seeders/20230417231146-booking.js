@@ -28,14 +28,14 @@ module.exports = {
     {  
       "spotId":2,
       "userId":2,
-      "startDate":new Date("2022,04,14"),
-      "endDate":new Date("2022,04,22")
+      "startDate":new Date("2023,07,14"),
+      "endDate":new Date("2023,07,22")
     },
     { 
       "spotId":3,
       "userId":3,
-      "startDate":new Date("2022,05,17"),
-      "endDate":new Date("2022,05,23")
+      "startDate":new Date("2023,05,17"),
+      "endDate":new Date("2023,05,23")
     },
 
    ],{})

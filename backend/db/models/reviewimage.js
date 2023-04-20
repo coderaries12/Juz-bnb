@@ -28,7 +28,9 @@ module.exports = (sequelize, DataTypes) => {
       references:
       {
         model:'Reviews'
-      }
+      },
+      onDelete:'CASCADE',
+      hook:true
     },
     url:{
       type: DataTypes.STRING,
