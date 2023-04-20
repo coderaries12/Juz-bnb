@@ -33,7 +33,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       references:{
         model:'Spots'
-      }
+      },
+      onDelete:'CASCADE',
+      hooks:true
 
     },
     userId:{

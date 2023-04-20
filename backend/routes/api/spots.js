@@ -22,11 +22,11 @@ const validateSpot = [
       .withMessage('Country is required'),
     check('lat')
       .exists({ checkFalsy: true })
-      .isLatLong({checkDMS:true})
+      .isInt().isLength({min:-90, max:+90})
       .withMessage('Latitude is not valid'),
     check('lng')
       .exists({ checkFalsy: true })
-      .isLatLong({checkDMS:true})
+      .isInt().isLength({min:-180, max:+180})
       .withMessage('Longitude is not valid'),  
     check('name')
       .exists({ checkFalsy: true })
