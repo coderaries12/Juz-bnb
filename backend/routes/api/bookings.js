@@ -48,7 +48,6 @@ return (res.json({Bookings}))
 
 })
    
-
 //Edit a Booking
 
 router.put('/:bookingId',requireAuth,async(req,res)=>{
@@ -141,4 +140,6 @@ router.delete('/:bookingsId',requireAuth,async(req,res)=>{
        "message": "Successfully deleted"
       })
 }) 
+
+//
 module.exports=router;
