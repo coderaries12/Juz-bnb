@@ -22,11 +22,11 @@ const validateSpot = [
       .withMessage('Country is required'),
     check('lat')
       .exists({ checkFalsy: true })
-      .isInt().isLength({min:-90, max:+90})
+      .isFloat({min:-90, max:+90})
       .withMessage('Latitude is not valid'),
     check('lng')
       .exists({ checkFalsy: true })
-      .isInt().isLength({min:-180, max:+180})
+      .isFloat({min:-180, max:+180})
       .withMessage('Longitude is not valid'),  
     check('name')
       .exists({ checkFalsy: true })
@@ -337,36 +337,45 @@ router.post('/:spotId/images',requireAuth,async(req,res)=>{
    const { user } = req;
    const id=user.dataValues.id
    const { startDate,endDate} = req.body; 
-  console.log(id)
-  //  const currUserSpot = await Spot.findByPk(req.params.spotId,{
-  //   where:{
-  //     ownerId:id
-  //   }
-  //  });  
-  //  if(currUserSpot) {
-  //    return res.status(404).json({
-  //      "message": "Spot must NOT belong to the current user"
-  //    })
-  //  }
+   let newStartdate=(new Date(startDate)).getTime()
+    let newendDate=(new Date(endDate)).getTime()
    const newSpot = await Spot.findByPk(req.params.spotId); 
    if(!newSpot){
     return res.status(404).json({
       "message": "Spot couldn't be found"
     })
    } 
-   const currUserBooking=await Booking.findAll({
+   const currUserBooking=await Booking.findOne({
     where:{
-      spotId:id
+      spotId:newSpot.id
     } 
    })
-  //  if(currUserBooking) {
-  //      return res.status(404).json({
-  //        "message": "Spot must NOT belong to the current user"
-  //      })
-  //    }
-
+   if(newSpot.ownerId===id){
+    return res.status(400).json({
+      "message":"Spot must NOT belong to the current user"
+    })
+   }
+   if(newendDate <= newStartdate){
+    return res.status(400).json({
+        "errors": {
+            "endDate": "endDate cannot come before startDate"
+          }
+        }) 
+      }
+      if(((currUserBooking.startDate).getTime() === newStartdate)|| ((currUserBooking.endDate).getTime() === newendDate))
+      {
+          return res.status(403).json({
+                  "message": "Sorry, this spot is already booked for the specified dates",
+                  "errors": {
+                    "startDate": "Start date conflicts with an existing booking",
+                    "endDate": "End date conflicts with an existing booking"
+                  }      
+          })
+      }
+           
    let spotIdBooking=await Booking.create({
        spotId:newSpot.id,
+       userId:newSpot.ownerId,
        startDate,
        endDate
      
