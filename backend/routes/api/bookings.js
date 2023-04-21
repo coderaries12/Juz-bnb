@@ -130,43 +130,41 @@ router.put('/:bookingId',requireAuth,async(req,res)=>{
 router.delete('/:bookingsId',requireAuth,async(req,res)=>{ 
     const { user } = req;
     const id=user.dataValues.id
-    console.log(req.user.id)
+   // console.log(req.user.id)
     const bookingToDelete=await Booking.findByPk(req.params.bookingsId)
     if(!bookingToDelete){
         return res.status(404).json({
           "message": "Booking couldn't be found"
         })
        }
-    if(bookingToDelete.userId !== id ){
-        return res.status(400).json({
-          "message":"Booking must belong to the current user"  
-        })
-       }
-       
-       const spot=await Spot.findOne({
+    console.log(bookingToDelete)
+    const spot=await Spot.findOne({
         where:{
             id:bookingToDelete.spotId
         }    
     })
-    if(spot.ownerId !== id){
-        return res.status(400).json({
-            "message":"The Spot must belong to the current user"  
-          })   
-    }   
-    
-    
-    
-    if((bookingToDelete.startDate).getTime() >= new Date().getTime()){
+    if((bookingToDelete.startDate).getTime() < new Date().getTime() && (bookingToDelete.endDate).getTime() >= new Date().getTime() ){
         return res.status(403).json({
             "message": "Bookings that have been started can't be deleted"
               
         })
     }
+    if((bookingToDelete.userId === id) ||(spot.ownerId === id)){
+        await bookingToDelete.destroy();
+        return res.json({
+            "message": "Successfully deleted"
+           })
+
+    }else {
+        return res.status(400).json({
+          "message":"Booking must belong to the current user or the Spot must belong to the current user"  
+        })
+       }
+       
     
-     await bookingToDelete.destroy();
-     return res.json({
-       "message": "Successfully deleted"
-      })
+    
+     
+     
 }) 
 
 //
