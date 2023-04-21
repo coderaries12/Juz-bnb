@@ -36,6 +36,14 @@ module.exports = {
       "review":'Average Spot!',
       "stars": 3
     },
+    { 
+      "spotId":4,
+      "userId":4,
+      "review":'Excellent Spot!',
+      "stars": 5 
+    },
+    
+
 
    ],{})
   },

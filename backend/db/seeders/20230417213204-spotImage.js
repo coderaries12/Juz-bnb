@@ -20,19 +20,25 @@ module.exports = {
    await queryInterface.bulkInsert(options,[
     {
       "spotId":1,
-      "url":'image1 url',
+      "url":'https://image/1',
       "preview":true
     },
     { 
       "spotId":2,
-      "url":'image2 url',
+      "url":'https://image/2',
       "preview":false
     },
     {  
       "spotId":3,
-      "url":'image3 url',
+      "url":'https://image/3',
       "preview":true
     },
+    {  
+      "spotId":4,
+      "url":'https://image/4',
+      "preview":true
+    },
+
 
    ],{})
   },
