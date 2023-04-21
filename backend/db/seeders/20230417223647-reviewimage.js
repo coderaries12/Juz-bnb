@@ -22,16 +22,22 @@ module.exports = {
    await queryInterface.bulkInsert(options,[
    {
     "reviewId":1,
-    "url":'image12 url'
+    "url":'https://image123/1',
+
    },
    {
     "reviewId":2,
-    "url":'image156 url'
+    "url":'https://image345/3'
    },
    {
     "reviewId":3,
-    "url":'image1343 url'
+    "url":'https://image567/4'
    },
+   {
+    "reviewId":4,
+    "url":'https://image678/4'
+   },
+
 
    ],{})
   },

@@ -55,6 +55,19 @@ module.exports = {
         "description": "Place full of surprises",
         "price": 164, 
       },
+      {
+        "ownerId":4,
+        "address": "3456 Chembur street",
+        "city": "Mumbai",
+        "state": "Maharastra",
+        "country": "India",
+        "lat": 45.031239,
+        "lng": -95.392021,
+        "name": "Harry Johson",
+        "description": "Place full of fun",
+        "price": 170, 
+      },
+      
 
    ],{})
 

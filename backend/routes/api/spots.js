@@ -197,6 +197,7 @@ router.get('/:spotId',async(req,res)=>{
         },
         {
             model:User,
+            as:"Owner",
             attributes:['id','firstName','lastName']
         },        
     ],
@@ -398,7 +399,7 @@ router.post('/:spotId/images',requireAuth,async(req,res)=>{
       where:{
         spotId:newSpot.id,
       }, 
-      attributes:['id','spotId','startDate','endDate'] 
+      attributes:['spotId','startDate','endDate'] 
     
     })
     return res.json({Bookings})

@@ -28,13 +28,14 @@ router.get('/current',requireAuth,async(req,res)=>{
         Bookings.push(currbooking.toJSON())
     }
     for(let booking of Bookings) {
-        let spotImage=await SpotImage.findOne({
+        let spotImage=await SpotImage.findAll({
             where:{
                 spotId:booking.Spot.id,
                 preview:true
             },      
         }) 
-        let image=spotImage.toJSON()   
+        for(let img of spotImage){
+        let image=img.toJSON()   
         if(!spotImage){
         booking.Spot.previewImage="no preview image"   
         }
@@ -43,6 +44,7 @@ router.get('/current',requireAuth,async(req,res)=>{
         } 
         
         }
+    }
             
 return (res.json({Bookings}))
 

@@ -46,20 +46,22 @@ router.get('/current',requireAuth,async(req,res)=>{
     Reviews.push(currreview.toJSON())
   }
   for(let review of Reviews){  
-  let spotImage=await SpotImage.findOne({
+  let spotImage=await SpotImage.findAll({
     where:{
         spotId:review.Spot.id,
         preview:true
     },
       
 }) 
-let image=spotImage.toJSON()   
+for(let img of spotImage){
+let image=img.toJSON()   
   if(!spotImage){
   review.Spot.previewImage="no preview image"   
   }
   if(image.preview===true){
   review.Spot.previewImage=image.url  
   } 
+}
   
 }
 return (res.json({Reviews}))
@@ -88,12 +90,17 @@ router.post('/:reviewId/images',requireAuth,async(req,res)=>{
             "message": "Review must belong to the current user"
           }) 
     } 
-    if((ReviewfindbyId.toJSON()).ReviewImages.length >= 10){
+    const reviewImages=await ReviewImage.findAll({
+      where:{
+        reviewId:ReviewfindbyId.id
+      }
+    })
+    if(reviewImages.length > 10){
         return res.status(403).json({
             "message": "Maximum number of images for this resource was reached"   
         })
     }
-    console.log((ReviewfindbyId.toJSON()).ReviewImages.length)
+   // console.log((ReviewfindbyId.toJSON()).ReviewImages.length)
     let newReviewImage=await ReviewImage.create({
         reviewId:ReviewfindbyId.id,
         url, 
