@@ -19,7 +19,12 @@ router.get('/current',requireAuth,async(req,res)=>{
             {
                 model:Spot,
                 attributes:{exclude:['createdAt','updatedAt']}  
-            },                   
+            }, 
+            {
+                model:User,
+                attributes:{exclude:['createdAt','updatedAt']}  
+            }, 
+                              
         ], 
               
     });
@@ -58,13 +63,7 @@ router.put('/:bookingId',requireAuth,async(req,res)=>{
     const id=user.dataValues.id
     let newStartdate=(new Date(startDate)).getTime()
     let newendDate=(new Date(endDate)).getTime()
-    if(newendDate <= newStartdate){
-    return res.status(400).json({
-        "errors": {
-            "endDate": "endDate cannot come before startDate"
-          }
-        })  
-    }
+    
     let bookingToEdit=await Booking.findByPk(req.params.bookingId)
     if(!bookingToEdit){
         return res.status(404).json({
@@ -73,29 +72,52 @@ router.put('/:bookingId',requireAuth,async(req,res)=>{
             }
         })
     }
+    if(bookingToEdit.userId!== id){
+        return res.status(404).json({
+           message:"Booking must belong to the current user"
+        })
+       }
+    
     if((bookingToEdit.endDate).getTime() <= new Date().getTime()){
         return res.status(403).json({
                 "message": "Past bookings can't be modified"
               
         })
     }
-    if(((bookingToEdit.startDate).getTime() === newStartdate)|| ((bookingToEdit.endDate).getTime() === newendDate))
+    if(newendDate <= newStartdate){
+        return res.status(400).json({
+            "errors": {
+                "endDate": "endDate cannot come before startDate"
+              }
+            })  
+        }
+    if(((bookingToEdit.startDate).getTime() <= newStartdate) && ((bookingToEdit.endDate).getTime() >= newendDate))
     {
         return res.status(403).json({
-                "message": "Sorry, this spot is already booked for the specified dates",
-                "errors": {
-                  "startDate": "Start date conflicts with an existing booking",
-                  "endDate": "End date conflicts with an existing booking"
-                }      
+          "message": "Sorry, this spot is already booked for the specified dates",
+          "errors": {
+            "startDate": "Start date conflicts with an existing booking",
+            "endDate": "End date conflicts with an existing booking"
+          }  
         })
     }
-    
-    if(bookingToEdit.userId!== id){
-     return res.status(404).json({
-        message:"Booking must belong to the current user"
-     })
-    }
-   
+    if((bookingToEdit.startDate).getTime() >= newStartdate && ((bookingToEdit.startDate).getTime() <= newendDate)) {
+      return res.status(403).json({
+        "message": "Sorry, this spot is already booked for the specified dates",
+        "errors": {
+          "startDate": "Start date conflicts with an existing booking",
+        }
+      })
+        
+    }   
+    if((bookingToEdit.endDate).getTime() >= newStartdate && ((bookingToEdit.endDate).getTime() <= newendDate)) {
+      return res.status(403).json({
+        "message": "Sorry, this spot is already booked for the specified dates",
+        "errors": {
+          "endDate": "End date conflicts with an existing booking",   
+    } 
+    })
+    }  
     bookingToEdit.userId=id
     bookingToEdit.startDate=startDate
     bookingToEdit.endDate=endDate
@@ -117,16 +139,25 @@ router.delete('/:bookingsId',requireAuth,async(req,res)=>{
           "message": "Booking couldn't be found"
         })
        }
-    const spot=await Spot.findOne({
+    if(bookingToDelete.userId !== id ){
+        return res.status(400).json({
+          "message":"Booking must belong to the current user"  
+        })
+       }
+       
+       const spot=await Spot.findOne({
         where:{
             id:bookingToDelete.spotId
         }    
     })
-    if(bookingToDelete.userId !== id || spot.ownerId !== id){
+    if(spot.ownerId !== id){
         return res.status(400).json({
-          "message":"Booking must belong to the current user or the Spot must belong to the current user"  
-        })
-       }
+            "message":"The Spot must belong to the current user"  
+          })   
+    }   
+    
+    
+    
     if((bookingToDelete.startDate).getTime() >= new Date().getTime()){
         return res.status(403).json({
             "message": "Bookings that have been started can't be deleted"

@@ -112,7 +112,7 @@ router.get('/',queryValidator,async(req,res)=>{
         pagination.offset = size * (page - 1);
   } 
 
-let spots=await Spot.findAll({
+let Spots=await Spot.findAll({
     ...pagination,
     raw:true
 });
@@ -122,7 +122,7 @@ let reviews=await Review.findAll({
      attributes:['spotId','stars'],
      raw:true
 })
-for(let spot of spots){
+for(let spot of Spots){
     let starSum=0;
     let spotReviews=reviews.filter(review=>review.spotId===spot.id)
     for(const spotReview of spotReviews){
@@ -144,7 +144,7 @@ for(let spot of spots){
     
 }
 
-return res.json({spots,page,size})
+return res.json({Spots,page,size})
 
 })
 
@@ -152,13 +152,13 @@ return res.json({spots,page,size})
 router.get('/current',requireAuth,async(req,res)=>{ 
     const { user } = req;
     const id=user.dataValues.id
-    let spots=await Spot.findAll({
+    let Spots=await Spot.findAll({
         where:{
             ownerId:id
         },
         raw:true
     });
-   for(let spot of spots){
+   for(let spot of Spots){
     let reviews=await Review.findAll({
         attributes:['stars'],
         where:{
@@ -184,7 +184,7 @@ if(spotImageUrl){
     spot.previewImage=spotImageUrl.url
 }
 }
-return (res.json({spots}))
+return (res.json({Spots}))
 
 })
 //Get details of a Spot from an id
@@ -420,7 +420,7 @@ router.post('/:spotId/images',requireAuth,async(req,res)=>{
       "message": "Spot couldn't be found"
     })
    } 
-   const currUserBooking=await Booking.findOne({
+   const currUserBookings=await Booking.findAll({
     where:{
       spotId:newSpot.id
     } 
@@ -437,22 +437,44 @@ router.post('/:spotId/images',requireAuth,async(req,res)=>{
           }
         }) 
       }
-      if(((currUserBooking.startDate).getTime() === newStartdate)|| ((currUserBooking.endDate).getTime() === newendDate))
+      for(let currbooking of currUserBookings){
+      if(((currbooking.startDate).getTime() <= newStartdate) && ((currbooking.endDate).getTime() >= newendDate))
       {
           return res.status(403).json({
-                  "message": "Sorry, this spot is already booked for the specified dates",
-                  "errors": {
-                    "startDate": "Start date conflicts with an existing booking",
-                    "endDate": "End date conflicts with an existing booking"
-                  }      
+            "message": "Sorry, this spot is already booked for the specified dates",
+            "errors": {
+              "startDate": "Start date conflicts with an existing booking",
+              "endDate": "End date conflicts with an existing booking"
+            }  
           })
       }
+      if((currbooking.startDate).getTime() >= newStartdate && ((currbooking.startDate).getTime() <= newendDate)) {
+        return res.status(403).json({
+          "message": "Sorry, this spot is already booked for the specified dates",
+          "errors": {
+            "startDate": "Start date conflicts with an existing booking",
+          }
+        })
+          
+      }   
+      if((currbooking.endDate).getTime() >= newStartdate && ((currbooking.endDate).getTime() <= newendDate)) {
+        return res.status(403).json({
+          "message": "Sorry, this spot is already booked for the specified dates",
+          "errors": {
+            "endDate": "End date conflicts with an existing booking",
+          
+      }   
+
+  })
+
+      }
+    }
            
    let spotIdBooking=await Booking.create({
        spotId:newSpot.id,
-       userId:newSpot.ownerId,
-       startDate,
-       endDate
+       userId:id,
+       startDate:newStartdate,
+       endDate:newendDate
      
     })
    return res.json(spotIdBooking) 
