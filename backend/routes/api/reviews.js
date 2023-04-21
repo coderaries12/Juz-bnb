@@ -18,6 +18,58 @@ const validateSpot = [
      handleValidationErrors
   ];
 
+//Get all Reviews of the Current User
+router.get('/current',requireAuth,async(req,res)=>{ 
+  const { user } = req;
+  const id=user.dataValues.id
+  let currentUserReviews=await Review.findAll({
+    where:{
+      userId:id
+    },
+    include:[
+      {
+        model:User,
+        attributes:['id','firstName','lastName']
+      },
+      {
+        model:Spot,
+        attributes:{exclude:['createdAt','updatedAt']}
+      },
+      {
+        model:ReviewImage,
+        attributes:['id','url'],
+      }
+    ]
+  })
+  let Reviews=[]
+  for (let currreview of currentUserReviews){
+    Reviews.push(currreview.toJSON())
+  }
+  for(let review of Reviews){  
+  let spotImage=await SpotImage.findOne({
+    where:{
+        spotId:review.Spot.id,
+        preview:true
+    },
+      
+}) 
+let image=spotImage.toJSON()   
+  if(!spotImage){
+  review.Spot.previewImage="no preview image"   
+  }
+  if(image.preview===true){
+  review.Spot.previewImage=image.url  
+  } 
+  
+}
+return (res.json({Reviews}))
+
+})
+
+
+
+
+
 //Add an Image to a Review based on the Review's id
 router.post('/:reviewId/images',requireAuth,async(req,res)=>{ 
     const { user } = req;

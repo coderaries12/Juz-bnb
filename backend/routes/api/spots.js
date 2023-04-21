@@ -2,7 +2,8 @@ const express = require('express')
 const { Spot,Review,User,SpotImage,ReviewImage,sequelize,Booking} = require('../../db/models');
 const spot = require('../../db/models/spot');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { check,body } = require('express-validator');
+const { check} = require('express-validator');
+//const {query}=require('express-validator')
 const { handleValidationErrors } = require('../../utils/validation');
 const booking = require('../../db/models/booking');
 const router = express.Router();
@@ -50,11 +51,69 @@ const validateSpot = [
   .withMessage("Stars must be an integer from 1 to 5"),
   handleValidationErrors
  ]; 
+ const queryValidator=[
+  check('page')
+  .isInt({min:1})
+  .optional()
+  .withMessage('Page must be greater than or equal to 1'),
+  check('size')
+  .isInt({min:1})
+  .optional()
+  .withMessage('Size must be greater than or equal to 1'),
+  check('maxLat')
+  .isFloat({max:90})
+  .optional()
+  .withMessage('Maximum latitude is invalid'),
+  check('minLat')
+  .isFloat({min:-90})
+  .optional()
+  .withMessage('Minimum latitude is invalid'),
+  check('minLng')
+  .isFloat({min:-180})
+  .optional()
+  .withMessage('Minimum longitude is invalid'),
+  check('maxLng')
+  .isFloat({max:180})
+  .optional()
+  .withMessage('Maximum longitude is invalid'),
+  check('minPrice')
+  .isInt({min:1})
+  .optional()
+  .withMessage('Minimum price must be greater than or equal to 0'),
+  check('maxPrice')
+  .isInt({min:1})
+  .optional()
+  .withMessage('Maximum price must be greater than or equal to 0'),
+  handleValidationErrors
+ ]; 
+
+
 
 
 //Get Spots
-router.get('/',async(req,res)=>{ 
+router.get('/',queryValidator,async(req,res)=>{ 
+  let {page,size}=req.query;
+  const where={}
+  const pagination={}
+  if(!page)  page=1;
+  if(!size)  size=20;
+  page=parseInt(page);
+  size=parseInt(size);
+    if (
+        Number.isInteger(page) && Number.isInteger(size) &&
+        page > 0 && size > 0 && size <= 20
+    ) {
+        pagination.limit = size;
+        pagination.offset = size * (page - 1);
+    } 
+  if(size > 20) {
+        size=20;
+        pagination.limit = size;
+        pagination.offset = size * (page - 1);
+  } 
+
 let spots=await Spot.findAll({
+    ...pagination,
     raw:true
 });
 
@@ -84,7 +143,8 @@ for(let spot of spots){
     }
     
 }
-return res.json({spots})
+
+return res.json({spots,page,size})
 
 })
 
@@ -182,6 +242,8 @@ return (res.json(newSpot))
 
 //### Edit a Spot
 router.put('/:spotId',validateSpot,async(req,res)=>{
+  const { user } = req;
+  const id=user.dataValues.id
 const { address,city,state, country, lat,lng,name,description,price } = req.body;
 let spotToEdit=await Spot.findByPk(req.params.spotId)
 if(!spotToEdit){
@@ -191,6 +253,14 @@ if(!spotToEdit){
         }
     })
 }
+if(spotToEdit.ownerId !== id){
+  return res.status(404).json({
+    error:{
+        message: "Spot must belong to the current user"
+    }
+})
+}
+spotToEdit.ownerId=id
 spotToEdit.address=address
 spotToEdit.city=city;
 spotToEdit.state=state
@@ -211,14 +281,15 @@ router.post('/:spotId/images',requireAuth,async(req,res)=>{
   const id=user.dataValues.id
   const { url,preview} = req.body; 
   //console.log(req.body)
-  const newSpot = await Spot.findByPk(req.params.spotId,{
-    where:{
-      ownerId:id
-    }
-  });  
+  const newSpot = await Spot.findByPk(req.params.spotId);  
   if(!newSpot) {
     return res.status(404).json({
       "message": "Spot couldn't be found"
+    })
+  }
+  if(newSpot.ownerId !== id){
+    return res.status(404).json({
+      "message": "Spot must belong to the current user"
     })
   }
   let newImage=await SpotImage.create({

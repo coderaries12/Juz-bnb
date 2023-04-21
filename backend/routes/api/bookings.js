@@ -24,25 +24,25 @@ router.get('/current',requireAuth,async(req,res)=>{
               
     });
    let Bookings=[]
-    for(let booking of currBooking){
-        booking=booking.toJSON()
-        Bookings.push(booking)
-        //console.log(bookingList)
-        let spotImages=await SpotImage.findAll({
-            where:{
-                spotId:Bookings[0].spotId,
-                //preview:true
-            },
-           raw:true       
-        }) 
-        for(let image of spotImages){
-        if(image.preview===0){
-                Bookings[0].Spot.previewImage=null   
-        }
-        if(image.preview===1)
-            Bookings[0].Spot.previewImage=image.url       
-        }
+    for(let currbooking of currBooking){
+        Bookings.push(currbooking.toJSON())
     }
+    for(let booking of Bookings) {
+        let spotImage=await SpotImage.findOne({
+            where:{
+                spotId:booking.Spot.id,
+                preview:true
+            },      
+        }) 
+        let image=spotImage.toJSON()   
+        if(!spotImage){
+        booking.Spot.previewImage="no preview image"   
+        }
+        if(image.preview===true){
+        booking.Spot.previewImage=image.url  
+        } 
+        
+        }
             
 return (res.json({Bookings}))
 
@@ -110,6 +110,11 @@ router.delete('/:bookingsId',requireAuth,async(req,res)=>{
     const id=user.dataValues.id
     console.log(req.user.id)
     const bookingToDelete=await Booking.findByPk(req.params.bookingsId)
+    if(!bookingToDelete){
+        return res.status(404).json({
+          "message": "Booking couldn't be found"
+        })
+       }
     const spot=await Spot.findOne({
         where:{
             id:bookingToDelete.spotId
@@ -126,11 +131,7 @@ router.delete('/:bookingsId',requireAuth,async(req,res)=>{
               
         })
     }
-    if(!bookingToDelete){
-     return res.status(404).json({
-       "message": "Booking couldn't be found"
-     })
-    }
+    
      await bookingToDelete.destroy();
      return res.json({
        "message": "Successfully deleted"
