@@ -22,7 +22,7 @@ router.get('/current',requireAuth,async(req,res)=>{
             }, 
             {
                 model:User,
-                attributes:{exclude:['createdAt','updatedAt']}  
+                attributes:{exclude:['createdAt','updatedAt','hashedPassword']}  
             }, 
                               
         ], 
@@ -49,10 +49,8 @@ router.get('/current',requireAuth,async(req,res)=>{
         } 
         
         }
-    }
-            
+    }            
 return (res.json({Bookings}))
-
 })
    
 //Edit a Booking
