@@ -40,5 +40,6 @@
   "devDependencies": {
     "install": "^0.13.0",
     "npm": "^9.6.6"
-  }
+  },
+  "proxy": "http://localhost:8000"
 }
