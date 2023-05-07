@@ -26,7 +26,7 @@ module.exports = {
     { 
       "spotId":2,
       "url":'https://res.cloudinary.com/dxrhf8ah9/image/upload/v1683437672/1_jts1jr.jpg',
-      "preview":false
+      "preview":true
     },
     {  
       "spotId":3,
