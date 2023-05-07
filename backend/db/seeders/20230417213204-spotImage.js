@@ -20,22 +20,22 @@ module.exports = {
    await queryInterface.bulkInsert(options,[
     {
       "spotId":1,
-      "url":'https://image/1',
+      "url":'https://res.cloudinary.com/dxrhf8ah9/image/upload/v1683437672/1_jts1jr.jpg',
       "preview":true
     },
     { 
       "spotId":2,
-      "url":'https://image/2',
+      "url":'https://res.cloudinary.com/dxrhf8ah9/image/upload/v1683437672/1_jts1jr.jpg',
       "preview":false
     },
     {  
       "spotId":3,
-      "url":'https://image/3',
+      "url":'https://res.cloudinary.com/dxrhf8ah9/image/upload/v1683437672/1_jts1jr.jpg',
       "preview":true
     },
     {  
       "spotId":4,
-      "url":'https://image/4',
+      "url":'https://res.cloudinary.com/dxrhf8ah9/image/upload/v1683437672/1_jts1jr.jpg',
       "preview":true
     },
 
