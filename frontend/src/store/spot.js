@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 
 //************************ Imports *******************//
 const LOAD_SPOTS = "spot/loadSpots";
+const LOAD_SINGLE_SPOT = "spot/loadSingleSpot"
 
 
 //************************ Action Creators *******************//
@@ -12,6 +13,17 @@ const loadSpots = (spots) => {
     payload: spots,
   };
 };
+
+const loadSingleSpot = (spot) => {
+  console.log("Inside the single spot action creator",spot)
+  return {
+    type: LOAD_SINGLE_SPOT,
+    spot
+    
+  };
+};
+
+
 
 //************************ Thunk Creators *******************//
 export const thunkloadspots = () => async (dispatch) => {
@@ -24,6 +36,19 @@ export const thunkloadspots = () => async (dispatch) => {
   }  
 };
 
+export const thunkloadsinglespot = (spotId) => async (dispatch) => {
+  console.log("Inside the single spot thunk",spotId)
+  const response = await csrfFetch(`/api/spots/${spotId}`)
+  if(response.ok) {
+    const spot = await response.json();
+    dispatch(loadSingleSpot(spot));
+    return spot
+    
+  }  
+};
+
+
+
 //************************ Reducer *******************//
 const initialState = { 
   allSpots:{},
@@ -31,13 +56,18 @@ const initialState = {
  };
 
 const spotReducer = (state = initialState, action) => {
-  let newState= { ...state }
+  const newState= { ...state, allSpots: {...state.allSpots}, singleSpot: {...state.singleSpot}}
   switch (action.type) {
     case LOAD_SPOTS:
       action.payload.Spots.map((spot) => {
        newState.allSpots[spot.id]=spot
       })
       return newState;
+      
+    case LOAD_SINGLE_SPOT:
+      console.log("Inside the single spot switch case")
+        newState.singleSpot = {...action.spot}
+        return newState
     
     default:
       return state;
