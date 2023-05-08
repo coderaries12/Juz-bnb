@@ -45,6 +45,7 @@ export const thunkloadsinglespot = (spotId) => async (dispatch) => {
     return spot
     
   }  
+  
 };
 
 

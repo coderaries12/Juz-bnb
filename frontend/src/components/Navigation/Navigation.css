@@ -1,11 +1,26 @@
 .hidden {
    display: none;
 }
-.header{
+.nav-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     border:2px solid lightgray;
     height: 70px;
     padding-left:20px ;
     padding-right: 20px;
+    margin-bottom: 2rem;
     align-items: center;
     cursor: pointer;
+}
+.logo-image{
+    width:6rem;
+}
+.open-menu-button{
+    gap:1rem;
+    width:7rem;
+    border-radius: 2rem;
+    padding:0.5rem;
+    border:2px solid black;
+
 }

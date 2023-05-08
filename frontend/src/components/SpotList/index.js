@@ -21,10 +21,8 @@ export default function SpotList(){
         <div className="card-spot">
         {
             spots.map((spot) => {
+                if(!Number.parseFloat(spots.avgRating).toFixed(2)) spot.avgRating="New"
              return(
-                
-               
-                    
                     <div className="spot-div">
                         <NavLink to={`/spots/${spot.id}`}>
                         <div className="img-text">
