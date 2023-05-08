@@ -1,0 +1,48 @@
+.spot-images-div{
+    display:grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap:1rem;
+    
+}
+.big-image{
+    padding:0px;
+    margin:0px;
+    
+}
+.small-images{
+   display:grid;
+   grid-template-columns: 1fr 1fr;
+   gap:1rem
+
+}
+.text-div{
+    display:flex;
+    gap:46rem;
+}
+.call-out-box{
+    
+    border:1px solid black;
+    padding:15px;
+    width:15rem;
+    border-radius: 5px;
+    
+}
+.reserve-button{
+    border:1px solid black;
+    padding:10px;
+    margin-left: 1.5rem;
+    
+    width:12rem;
+    background-color:red;
+    color:white;
+    align-content: center;
+    
+
+}
+.spot-night{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 1.5rem;
+}

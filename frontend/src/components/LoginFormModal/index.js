@@ -25,6 +25,17 @@ function LoginFormModal() {
     );
   };
 
+  const demouser1handleSubmit= (e) => {
+   e.preventDefault()
+   return dispatch(sessionActions.login({ credential:"Demo-lition", password:"password" }))
+    .then(closeModal)
+  }
+  const demouser2handleSubmit= (e) => {
+    e.preventDefault()
+    return dispatch(sessionActions.login({ credential:"FakeUser1", password:"password2" }))
+     .then(closeModal)
+   }
+
   return (
     <>
       <h1>Log In</h1>
@@ -48,7 +59,11 @@ function LoginFormModal() {
           />
         </label>
         {errors.credential && <p>{errors.credential}</p>}
-        <button type="submit">Log In</button>
+        <div>
+        <button onClick={demouser1handleSubmit}>Demo User 1</button>
+        <button onClick={demouser2handleSubmit}>Demo User 2</button>
+        </div>
+        
       </form>
     </>
   );
