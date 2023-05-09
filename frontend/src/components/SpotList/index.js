@@ -26,9 +26,9 @@ export default function SpotList(){
              return(
                     <div className="spot-div">
                         <NavLink to={`/spots/${spot.id}`}>
-                        <div class="tooltip">
+                        {/* <div class="tooltip">
                         <span class="tooltiptext">{spot.name}</span>
-                        </div> 
+                        </div>  */}
                         <div className="img-text">
                         <img src={spot.previewImage} alt={spot.name} height={220} width={220}   />
                         </div>

@@ -5,6 +5,7 @@ import { csrfFetch } from "./csrf";
 const LOAD_SPOTS = "spot/loadSpots";
 const LOAD_SINGLE_SPOT = "spot/loadSingleSpot"
 const CREATE_SPOT = 'spot/createSpot'
+const EDIT_SPOT = 'spot/editSpot'
 
 
 //************************ Action Creators *******************//
@@ -24,14 +25,23 @@ const loadSingleSpot = (spot) => {
   };
 };
 
-const createSpot = (newspot) => {
-  //console.log("Inside the single spot action creator",spot)
+const createSpot = (newSpot) => {
   return {
     type: CREATE_SPOT,
-    newspot
+    newSpot
     
   };
 };
+
+const editSpot = (editspot) => {
+  return {
+    type: EDIT_SPOT,
+    editspot
+    
+  };
+};
+
+
 
 
 
@@ -60,23 +70,57 @@ export const thunkloadsinglespot = (spotId) => async (dispatch) => {
   
 };
 
-export const thunkcreateanewspot = (newSpot) => async (dispatch) => {
+export const thunkcreateanewspot = (spot,images) => async (dispatch) => {
   //console.log("Inside the single spot thunk",spotId)
-  const response = await csrfFetch('/api/spots',{
+  let response = await csrfFetch('/api/spots',{
   method:'POST',
   headers:{ "Content-Type" : 'application/json' },
   body: 
-   JSON.stringify(newSpot)
+   JSON.stringify(spot)
   
   })
   if(response.ok) {
-    const newspot = await response.json();
-    dispatch(createSpot(newspot));
-    return newspot
+    const newSpot = await response.json();
+    //dispatch(createSpot(newSpot));
+    //let imageArray=[];
+    for(let i = 0; i < images.length; i++){
+      let imageObject = {
+        url:images[i],
+        preview:true
+      }
+      response = await csrfFetch (`/api/spots/${newSpot.id}/images`,{
+        method:'POST',
+        headers:{ "Content-Type" : 'application/json' },
+        body: 
+        JSON.stringify(imageObject)
+    })
     
-  }  
-  
+    const res = await csrfFetch (`/api/spots/${newSpot.id}`)
+    const newSpotEdit = await response.json();
+    //imageArray.push(newSpotImages)
+    dispatch(createSpot(newSpotEdit))
+    //console.log("Inside create thunk spotImagesArray",imageArray)
+    return newSpotEdit;
+  } 
+  }   
 };
+
+export const thunkeditnewspot = (spot) => async (dispatch) => {
+  //console.log("Inside the single spot thunk",spotId)
+  const response = await csrfFetch(`/api/spots/${spot.id}`,{
+  method:'PUT',
+  headers:{ "Content-Type" : 'application/json' },
+  body: 
+   JSON.stringify(spot)
+  
+  })
+  if(response.ok) {
+    const editSpot = await response.json();
+    dispatch(editSpot(editSpot))
+    return editSpot
+  }
+}
+
 
 
 
@@ -101,6 +145,9 @@ const spotReducer = (state = initialState, action) => {
         return newState
     case CREATE_SPOT:
       newState.allSpots[action.newSpot.id]=action.newSpot
+      return newState
+    case EDIT_SPOT:
+      newState.allSpots[action.editSpot.id]=action.editSpot
       return newState
     
     default:

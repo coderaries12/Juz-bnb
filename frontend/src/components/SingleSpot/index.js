@@ -23,7 +23,7 @@ export default function SingleSpot(){
         alert("Feature coming soon......")
     }
     
-    if(!spot.id || !SpotImages.length) return null;
+    if(!spot.id || (!SpotImages.id)) return null;
     
     return(
         <div>
