@@ -38,11 +38,7 @@ module.exports = {
       "url":'https://res.cloudinary.com/dxrhf8ah9/image/upload/v1683437672/1_jts1jr.jpg',
       "preview":true
     },
-    {
-      "spotId":1,
-      "url":'https://res.cloudinary.com/dxrhf8ah9/image/upload/v1683437672/1_jts1jr.jpg',
-      "preview":true
-    },
+    
 
     { 
       "spotId":2,

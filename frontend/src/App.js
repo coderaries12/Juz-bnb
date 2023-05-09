@@ -5,6 +5,8 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SpotList from "./components/SpotList";
 import SingleSpot from "./components/SingleSpot";
+import CreateSpot from "./components/CreateSpot";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +22,9 @@ function App() {
         
         <Route exact path='/'>
          <SpotList />
+        </Route>
+        <Route exact path='/spots'>
+         <CreateSpot />
         </Route>
         <Route exact path='/spots/:spotId'>
          <SingleSpot />

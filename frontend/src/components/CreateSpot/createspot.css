@@ -1,0 +1,7 @@
+form{
+    border:solid red 2px;
+    align-items: center;
+}
+label{
+    display:block;
+}

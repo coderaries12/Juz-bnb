@@ -4,6 +4,7 @@ import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import { Link } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -41,6 +42,9 @@ function ProfileButton({ user }) {
 
   return (
     <>
+    {
+      user? (<Link className="create-spot-button" to='/spots'>Create a new spot</Link> ) : (<></>)
+    }
       <button className="open-menu-button" onClick={openMenu}>
         <i className="fa-solid fa-bars fa-xl" />
         <i className="fas fa-user-circle fa-xl" />

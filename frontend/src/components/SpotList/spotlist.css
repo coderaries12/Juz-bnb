@@ -1,8 +1,10 @@
 .spot-div{
 float:left;
 width:25%;
+gap:8rem;
+padding-bottom: 2rem;
 }
-.city-state-rating-div {
-display: flex;
-gap:11rem;
+.city-state-rating-div{
+    display:flex;
+    gap:4rem;
 }
