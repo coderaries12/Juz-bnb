@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf";
 //************************ Imports *******************//
 const LOAD_SPOTS = "spot/loadSpots";
 const LOAD_SINGLE_SPOT = "spot/loadSingleSpot"
+const CREATE_SPOT = 'spot/createSpot'
 
 
 //************************ Action Creators *******************//
@@ -22,6 +23,17 @@ const loadSingleSpot = (spot) => {
     
   };
 };
+
+const createSpot = (newspot) => {
+  //console.log("Inside the single spot action creator",spot)
+  return {
+    type: CREATE_SPOT,
+    newspot
+    
+  };
+};
+
+
 
 
 
@@ -48,6 +60,24 @@ export const thunkloadsinglespot = (spotId) => async (dispatch) => {
   
 };
 
+export const thunkcreateanewspot = (newSpot) => async (dispatch) => {
+  //console.log("Inside the single spot thunk",spotId)
+  const response = await csrfFetch('/api/spots',{
+  method:'POST',
+  headers:{ "Content-Type" : 'application/json' },
+  body: 
+   JSON.stringify(newSpot)
+  
+  })
+  if(response.ok) {
+    const newspot = await response.json();
+    dispatch(createSpot(newspot));
+    return newspot
+    
+  }  
+  
+};
+
 
 
 //************************ Reducer *******************//
@@ -69,6 +99,9 @@ const spotReducer = (state = initialState, action) => {
       console.log("Inside the single spot switch case")
         newState.singleSpot = {...action.spot}
         return newState
+    case CREATE_SPOT:
+      newState.allSpots[action.newSpot.id]=action.newSpot
+      return newState
     
     default:
       return state;

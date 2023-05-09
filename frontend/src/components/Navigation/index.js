@@ -15,6 +15,7 @@ function Navigation({ isLoaded }){
           <img className='logo-image' src="https://res.cloudinary.com/dxrhf8ah9/image/upload/v1683567297/Airbnb_logo_PNG3_lasevv.png" alt='logo' /> 
           </NavLink>
     </div>
+    
     <div className='nav-right-div'>
       {isLoaded && (<ProfileButton user={sessionUser} />)}
     </div>

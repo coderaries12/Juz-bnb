@@ -21,20 +21,24 @@ export default function SpotList(){
         <div className="card-spot">
         {
             spots.map((spot) => {
-                if(!Number.parseFloat(spots.avgRating).toFixed(2)) spot.avgRating="New"
+                // if(!(Number.parseFloat(spots.avgRating).toFixed(2))) spot.avgRating="New"
+                if(!spot.avgRating) spot.avgRating="New"
              return(
                     <div className="spot-div">
                         <NavLink to={`/spots/${spot.id}`}>
+                        <div class="tooltip">
+                        <span class="tooltiptext">{spot.name}</span>
+                        </div> 
                         <div className="img-text">
-                        <img src={spot.previewImage} alt={spot.name} height={300} width={300}   />
+                        <img src={spot.previewImage} alt={spot.name} height={220} width={220}   />
                         </div>
                         </NavLink>
                         
                         <div className="city-state-rating-div">
-                            <p>{spot.city}, {spot.state}</p>
-                            <p>★{spot.avgRating}</p>
+                            <div className="spot-city-state">{spot.city}, {spot.state}</div>
+                            <div className="spot-avrRating">★{spot.avgRating}</div>
                         </div>
-                        <div><p>${spot.price} night</p></div>
+                        <div className="spot-price"><p>${spot.price} night</p></div>
                         
                         
                     </div>

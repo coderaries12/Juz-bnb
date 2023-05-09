@@ -5,20 +5,23 @@
     gap:1rem;
     
 }
-.big-image{
+.preview-image-on-the-left {
     padding:0px;
     margin:0px;
     
+    
+    
 }
-.small-images{
+.image-array-for-right-side{
+
    display:grid;
    grid-template-columns: 1fr 1fr;
-   gap:1rem
+   gap:0.5rem
 
-}
+} 
 .text-div{
     display:flex;
-    gap:46rem;
+    gap:25rem;
 }
 .call-out-box{
     

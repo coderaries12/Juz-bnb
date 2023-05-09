@@ -8,15 +8,11 @@ import './singleSpot.css'
 export default function SingleSpot(){
     const dispatch = useDispatch()
     const {spotId}=useParams()
-    //const spot = useSelector(state => state.spots.allSpots[spotId])
+    const spotobj = useSelector(state => state?.spots.allSpots[spotId])
     const spot=useSelector(state => state?.spots.singleSpot)
     const SpotImages = useSelector(state => state?.spots.singleSpot.SpotImages)
     const SpotUser = useSelector(state => state?.spots.singleSpot.Owner)
-   // const spot = Object.values(spotObj)
-    console.log("SingleSpots",spot.numReviews)
-    
-   // console.log(imagesArray)
-    
+   
     useEffect(() =>{
     dispatch(thunkloadsinglespot(spotId))
 
@@ -27,21 +23,27 @@ export default function SingleSpot(){
         alert("Feature coming soon......")
     }
     
-    if(!spot.id) return null;
+    if(!spot.id || !SpotImages.length) return null;
     
     return(
         <div>
             <div><h2>{spot.name}</h2></div>
             <div><p>{spot.city}, {spot.state}, {spot.country}</p></div>
-            <div className="spot-images-div">
-            {/* <div className="big-image"><img key={SpotImages[0].id} src={SpotImages[0].url} alt="spot-Images" height={420} width={600} /></div> */}
-            {/* <div className="small-images">
-            <div> <img key={SpotImages[1].id} src={SpotImages[1].url} alt="spot-Images" height={200} width={300} /></div>
-            <div> <img key={SpotImages[2].id} src={SpotImages[2].url} alt="spot-Images" height={200} width={300} /></div>
-            <div> <img key={SpotImages[3].id} src={SpotImages[3].url} alt="spot-Images" height={200} width={300} /></div>
-            <div> <img key={SpotImages[4].id} src={SpotImages[4].url} alt="spot-Images" height={200} width={300} /></div>
-        </div> */}
-        </div>
+            <div className="spot-images-div"> 
+            <div className="preview-image-on-the-left"><img key={spotobj.id} src={spotobj.previewImage} alt="spot-Images" height={410} width={500} />
+            </div>
+            <div className="image-array-for-right-side">
+                {
+                    SpotImages.map((image) => {
+                        return(
+                            <img key={image.id} src={image.url} alt="spot-Images" height={200} width={200} />
+                        )
+                           
+                    })
+                }
+            </div>
+            </div>
+
         <div className="text-div">
             <div>
                 <h2>Hosted by {SpotUser.firstName} {SpotUser.lastName}</h2>
