@@ -9,7 +9,7 @@ import spotReducer from './spot';
 const rootReducer = combineReducers({
     session: sessionReducer, 
     spots:spotReducer,
-    reviews:reviewReducer
+   // reviews:reviewReducer
 });
 
 let enhancer;
