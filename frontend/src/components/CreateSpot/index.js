@@ -1,19 +1,21 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { thunkcreateanewspot } from "../../store/spot";
 import { useDispatch } from "react-redux";
+import { thunkeditnewspot } from "../../store/spot";
 
 
 
-function CreateSpot() {
+function CreateSpot({spot,formType}) {
 	console.log("Hitting Create spot component")
 	const [country, setCountry] = useState("");
 	const [address, setAddress] = useState('');
 	const [city, setCity] = useState("");
 	const [state, setState] = useState("");
-    const [latitude, setLatitude] = useState("");
-	const [longitude, setLongitude] = useState('');
-	const [description, setDescription] = useState([]);
+    const [latitude, setLatitude] = useState();
+	const [longitude, setLongitude] = useState();
+	const [description, setDescription] = useState("");
 	const [name, setName] = useState("");
     const [price, setPrice] = useState();
 	const [previewimage, setPreviewimage] = useState('');
@@ -21,6 +23,7 @@ function CreateSpot() {
     const [url2, seturl2] = useState("");
     const [url3, seturl3] = useState("");
     const [url4, seturl4] = useState("");
+	const [preview, setPreview] = useState(false);
 	
 	const [errors, setErrors] = useState({});
 	const history = useHistory();
@@ -40,10 +43,10 @@ function CreateSpot() {
         if (state==="") {
 			errors.state = "State is required";
 		}
-        if (latitude==="") {
+        if (!latitude) {
 			errors.latitude = "Latitude is required";
 		}
-        if (longitude==="") {
+        if (!longitude) {
 			errors.longitude = "longitude is required";
 		}
         if (name==="") {
@@ -76,20 +79,33 @@ function CreateSpot() {
 			description,
 			name,
 			price,
-			url:previewimage,
+			previewImage:previewimage,
 			url1,
 			url2,
 			url3,
-			url4
+			url4,
+			
 		  };
+		  const images = [{url:previewimage,preview:true},{url:url1,preview},{url:url2,preview},{url:url3,preview},{url:url4,preview}]
+		  //let images=[];
+		  //images.push(previewimage)
+		//   if(url1) images.push(url1)
+		//   if(url2) images.push(url2)
+		//   if(url3) images.push(url3)
+		//   if(url4) images.push(url4)
+	    if(formType === "Update Spot"){
+			const updateSpot = thunkeditnewspot(spot)
+			spot=updateSpot
+			history.push(`/spots/${updateSpot.id}`);
+			
+		}
+		  let createdSpot= await dispatch(thunkcreateanewspot(payload,images));
+		  console.log("created Spot images array",images)
 	  
-		  let createdSpot= await dispatch(thunkcreateanewspot(payload));
-		  console.log("created Spot",createdSpot)
-	  
-		//   if (createdSpot) {
-		// 	history.push(`/spots/${createdSpot.id}`);
-		//   }
-		history.push("/");
+		  if (createdSpot) {
+			history.push(`/spots/${createdSpot.id}`);
+		  }
+		
 	};
 
 	return (

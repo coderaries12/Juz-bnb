@@ -5,6 +5,9 @@ import { csrfFetch } from "./csrf";
 const LOAD_SPOTS = "spot/loadSpots";
 const LOAD_SINGLE_SPOT = "spot/loadSingleSpot"
 const CREATE_SPOT = 'spot/createSpot'
+const EDIT_SPOT = 'spot/editSpot'
+const CURRENT_USER_SPOTS = 'spot/currentuserspot'
+const DELETE_SPOT = 'spot/deleteSpot'
 
 
 //************************ Action Creators *******************//
@@ -24,14 +27,37 @@ const loadSingleSpot = (spot) => {
   };
 };
 
-const createSpot = (newspot) => {
-  //console.log("Inside the single spot action creator",spot)
+const createSpot = (newSpot) => {
   return {
     type: CREATE_SPOT,
-    newspot
+    newSpot
     
   };
 };
+const currentuserspot = (spots) => {
+  return {
+    type : CURRENT_USER_SPOTS,
+    payload:spots
+  }
+}
+
+const editSpot = (editspot) => {
+  return {
+    type: EDIT_SPOT,
+    editspot
+    
+  };
+};
+const deleteSpot = (deleteid) => {
+  return {
+    type: DELETE_SPOT,
+    deleteid
+    
+  };
+};
+
+
+
 
 
 
@@ -60,23 +86,89 @@ export const thunkloadsinglespot = (spotId) => async (dispatch) => {
   
 };
 
-export const thunkcreateanewspot = (newSpot) => async (dispatch) => {
+export const thunkcreateanewspot = (spot,images) => async (dispatch) => {
   //console.log("Inside the single spot thunk",spotId)
   const response = await csrfFetch('/api/spots',{
   method:'POST',
   headers:{ "Content-Type" : 'application/json' },
   body: 
-   JSON.stringify(newSpot)
+   JSON.stringify(spot)
+  
+  })
+  let newSpot 
+  if(response.ok) {
+    newSpot = await response.json();
+    console.log("thunk new spot look",newSpot)
+    console.log("thunk Images",images)
+    //dispatch(createSpot(newSpot));
+    //let imageArray=[];
+    for(let i = 0; i < images.length; i++){
+      // let imageObject = {
+      //   url:images[i],
+      //   preview:true
+      // }
+      console.log("inside the create thunk",images[i])
+      const res = await csrfFetch (`/api/spots/${newSpot.id}/images`,{
+        method:'POST',
+        headers:{ "Content-Type" : 'application/json' },
+        body: 
+        JSON.stringify(images[i])
+    })
+    
+   // const res = await csrfFetch (`/api/spots/${newSpot.id}`)
+    //const newSpotEdit = await response.json();
+    //imageArray.push(newSpotImages)
+   // dispatch(createSpot(newSpot))
+    //console.log("Inside create thunk spotImagesArray",imageArray)
+    //return newSpot;
+  } 
+  } 
+  //const data = await response.json()
+  return newSpot;  
+};
+
+export const thunkcurrentuserspot = () => async (dispatch) => {
+  const response = await csrfFetch("/api/spots/current")
+  if(response.ok) {
+    const currentspots = await response.json();
+    dispatch(currentuserspot(currentspots));
+    return currentspots
+    
+  }  
+};
+
+
+
+
+export const thunkeditnewspot = (spot) => async (dispatch) => {
+  //console.log("Inside the single spot thunk",spotId)
+  const response = await csrfFetch(`/api/spots/${spot.id}`,{
+  method:'PUT',
+  headers:{ "Content-Type" : 'application/json' },
+  body: 
+   JSON.stringify(spot)
   
   })
   if(response.ok) {
-    const newspot = await response.json();
-    dispatch(createSpot(newspot));
-    return newspot
-    
-  }  
-  
-};
+    const Spottoedit = await response.json();
+    dispatch(editSpot(Spottoedit))
+    return editSpot
+  }
+}
+
+export const thunkdeletespot = (spotId) => async (dispatch) => {
+  //console.log("Inside the single spot thunk",spotId)
+  const response = await csrfFetch(`/api/spots/${spotId}`,{
+  method:'DELETE'
+  })
+  if(response.ok) {
+    const Spottodelete = await response.json();
+    dispatch(deleteSpot(Spottodelete.id))
+    return Spottodelete
+  }
+}
+
+
 
 
 
@@ -102,6 +194,22 @@ const spotReducer = (state = initialState, action) => {
     case CREATE_SPOT:
       newState.allSpots[action.newSpot.id]=action.newSpot
       return newState
+    case EDIT_SPOT:
+      newState.allSpots[action.editSpot.id]=action.editSpot
+      return newState
+    case CURRENT_USER_SPOTS:
+      const userState = {...state, allSpots:{},singleSpot:{}}
+      action.payload.Spots.map((spot) => {
+        userState.allSpots[spot.id]=spot
+        return userState
+        })
+    case DELETE_SPOT:
+      delete newState.allSpots[action.deleteid]
+      return newState;
+        
+
+  
+    
     
     default:
       return state;
