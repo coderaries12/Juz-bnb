@@ -8,9 +8,9 @@ import './singleSpot.css'
 export default function SingleSpot(){
     const dispatch = useDispatch()
     const {spotId}=useParams()
-    const spotobj = useSelector(state => state?.spots.allSpots[spotId])
+    //const spotobj = useSelector(state => state?.spots.allSpots[spotId])
     const spot=useSelector(state => state?.spots.singleSpot)
-    const SpotImages = useSelector(state => state?.spots.singleSpot.SpotImages)
+    //const SpotImages = useSelector(state => state?.spots.singleSpot.SpotImages)
     const SpotUser = useSelector(state => state?.spots.singleSpot.Owner)
    
     useEffect(() =>{
@@ -23,24 +23,20 @@ export default function SingleSpot(){
         alert("Feature coming soon......")
     }
     
-    if(!spot.id || (!SpotImages.id)) return null;
+    if(!spot.id ) return null;
     
     return(
         <div>
             <div><h2>{spot.name}</h2></div>
             <div><p>{spot.city}, {spot.state}, {spot.country}</p></div>
             <div className="spot-images-div"> 
-            <div className="preview-image-on-the-left"><img key={spotobj.id} src={spotobj.previewImage} alt="spot-Images" height={410} width={500} />
+            <div className="preview-image-on-the-left"><img  src={spot.SpotImages[0].url} alt="spot-Images" height={410} width={500} />
             </div>
             <div className="image-array-for-right-side">
-                {
-                    SpotImages.map((image) => {
-                        return(
-                            <img key={image.id} src={image.url} alt="spot-Images" height={200} width={200} />
-                        )
-                           
-                    })
-                }
+                <img  src={spot.SpotImages[1].url} alt="spot-Images" height={200} width={200} />
+                <img  src={spot.SpotImages[2].url} alt="spot-Images" height={200} width={200} />
+                <img  src={spot.SpotImages[3].url} alt="spot-Images" height={200} width={200} />
+                <img  src={spot.SpotImages[3].url} alt="spot-Images" height={200} width={200} />    
             </div>
             </div>
 

@@ -6,6 +6,8 @@ const LOAD_SPOTS = "spot/loadSpots";
 const LOAD_SINGLE_SPOT = "spot/loadSingleSpot"
 const CREATE_SPOT = 'spot/createSpot'
 const EDIT_SPOT = 'spot/editSpot'
+const CURRENT_USER_SPOTS = 'spot/currentuserspot'
+const DELETE_SPOT = 'spot/deleteSpot'
 
 
 //************************ Action Creators *******************//
@@ -32,6 +34,12 @@ const createSpot = (newSpot) => {
     
   };
 };
+const currentuserspot = (spots) => {
+  return {
+    type : CURRENT_USER_SPOTS,
+    payload:spots
+  }
+}
 
 const editSpot = (editspot) => {
   return {
@@ -40,6 +48,14 @@ const editSpot = (editspot) => {
     
   };
 };
+const deleteSpot = (deleteid) => {
+  return {
+    type: DELETE_SPOT,
+    deleteid
+    
+  };
+};
+
 
 
 
@@ -72,38 +88,57 @@ export const thunkloadsinglespot = (spotId) => async (dispatch) => {
 
 export const thunkcreateanewspot = (spot,images) => async (dispatch) => {
   //console.log("Inside the single spot thunk",spotId)
-  let response = await csrfFetch('/api/spots',{
+  const response = await csrfFetch('/api/spots',{
   method:'POST',
   headers:{ "Content-Type" : 'application/json' },
   body: 
    JSON.stringify(spot)
   
   })
+  let newSpot 
   if(response.ok) {
-    const newSpot = await response.json();
+    newSpot = await response.json();
+    console.log("thunk new spot look",newSpot)
+    console.log("thunk Images",images)
     //dispatch(createSpot(newSpot));
     //let imageArray=[];
     for(let i = 0; i < images.length; i++){
-      let imageObject = {
-        url:images[i],
-        preview:true
-      }
-      response = await csrfFetch (`/api/spots/${newSpot.id}/images`,{
+      // let imageObject = {
+      //   url:images[i],
+      //   preview:true
+      // }
+      console.log("inside the create thunk",images[i])
+      const res = await csrfFetch (`/api/spots/${newSpot.id}/images`,{
         method:'POST',
         headers:{ "Content-Type" : 'application/json' },
         body: 
-        JSON.stringify(imageObject)
+        JSON.stringify(images[i])
     })
     
-    const res = await csrfFetch (`/api/spots/${newSpot.id}`)
-    const newSpotEdit = await response.json();
+   // const res = await csrfFetch (`/api/spots/${newSpot.id}`)
+    //const newSpotEdit = await response.json();
     //imageArray.push(newSpotImages)
-    dispatch(createSpot(newSpotEdit))
+   // dispatch(createSpot(newSpot))
     //console.log("Inside create thunk spotImagesArray",imageArray)
-    return newSpotEdit;
+    //return newSpot;
   } 
-  }   
+  } 
+  //const data = await response.json()
+  return newSpot;  
 };
+
+export const thunkcurrentuserspot = () => async (dispatch) => {
+  const response = await csrfFetch("/api/spots/current")
+  if(response.ok) {
+    const currentspots = await response.json();
+    dispatch(currentuserspot(currentspots));
+    return currentspots
+    
+  }  
+};
+
+
+
 
 export const thunkeditnewspot = (spot) => async (dispatch) => {
   //console.log("Inside the single spot thunk",spotId)
@@ -115,11 +150,24 @@ export const thunkeditnewspot = (spot) => async (dispatch) => {
   
   })
   if(response.ok) {
-    const editSpot = await response.json();
-    dispatch(editSpot(editSpot))
+    const Spottoedit = await response.json();
+    dispatch(editSpot(Spottoedit))
     return editSpot
   }
 }
+
+export const thunkdeletespot = (spotId) => async (dispatch) => {
+  //console.log("Inside the single spot thunk",spotId)
+  const response = await csrfFetch(`/api/spots/${spotId}`,{
+  method:'DELETE'
+  })
+  if(response.ok) {
+    const Spottodelete = await response.json();
+    dispatch(deleteSpot(Spottodelete.id))
+    return Spottodelete
+  }
+}
+
 
 
 
@@ -149,6 +197,19 @@ const spotReducer = (state = initialState, action) => {
     case EDIT_SPOT:
       newState.allSpots[action.editSpot.id]=action.editSpot
       return newState
+    case CURRENT_USER_SPOTS:
+      const userState = {...state, allSpots:{},singleSpot:{}}
+      action.payload.Spots.map((spot) => {
+        userState.allSpots[spot.id]=spot
+        return userState
+        })
+    case DELETE_SPOT:
+      delete newState.allSpots[action.deleteid]
+      return newState;
+        
+
+  
+    
     
     default:
       return state;

@@ -39,6 +39,7 @@ module.exports = {
       "preview":true
     },
     
+    
 
     { 
       "spotId":2,

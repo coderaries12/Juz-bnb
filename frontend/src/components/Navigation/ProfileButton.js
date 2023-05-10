@@ -43,7 +43,7 @@ function ProfileButton({ user }) {
   return (
     <>
     {
-      user? (<Link className="create-spot-button" to='/spots'>Create a new spot</Link> ) : (<></>)
+      user? (<Link className="create-spot-button" to='/spots/new'>Create a new spot</Link> ) : (<></>)
     }
       <button className="open-menu-button" onClick={openMenu}>
         <i className="fa-solid fa-bars fa-xl" />
@@ -52,12 +52,12 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
-            <li>{user.email}</li>
-            <li>
+            <div> Hello, {user.username}</div>
+            <div>{user.email}</div>
+            <Link to='/spots/current'>Manage Spots</Link>
+            <div>
               <button onClick={logout}>Log Out</button>
-            </li>
+            </div>
           </>
         ) : (
           <>
