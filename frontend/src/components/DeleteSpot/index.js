@@ -8,13 +8,16 @@ import { useModal } from "../../context/Modal";
 
 
 
-function DeleteSpot () {
+function DeleteSpot ({spotId}) {
  const history = useHistory()
  const dispatch = useDispatch()
- const {spotId} = useParams();
+ //const {spotId} = useParams();
  const {closeModal} =  useModal();
+
  const deleteSpot = useSelector(state => state?.spots.allSpots[spotId])
- console.log("from delete spot component",deleteSpot)
+ const newspot = useSelector(state => state?.spots.allSpots)
+ console.log("from delete spot component1",newspot)
+ console.log("from delete spot component2",deleteSpot)
  if(deleteSpot === {})   return null;
 
 //  function handleSubmit(){

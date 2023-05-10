@@ -70,7 +70,7 @@ export default function CurrentUserSpotList(){
                             <button  className="update-button" onClick={()=> history.push(`/spots/${spot.id}/edit`)}>Update</button>
                              {/* <button  onClick={()=> history.push(`/spots/${spot.id}/delete`)}>Delete</button>  */}
                              <OpenModalButton 
-                             buttonText="Delete" modalComponent={<DeleteSpot />} 
+                             buttonText="Delete" modalComponent={<DeleteSpot spotId={spot.id} />} 
                              /> 
                         </div>
                         
