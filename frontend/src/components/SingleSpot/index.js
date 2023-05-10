@@ -24,6 +24,7 @@ export default function SingleSpot(){
     }
     
     if(!spot.id ) return null;
+    if(!spot.avgStarRating)  { spot.avgStarRating = "New"}
     
     return(
         <div>
@@ -33,10 +34,10 @@ export default function SingleSpot(){
             <div className="preview-image-on-the-left"><img  src={spot.SpotImages[0].url} alt="spot-Images" height={410} width={500} />
             </div>
             <div className="image-array-for-right-side">
-                <img  src={spot.SpotImages[1].url} alt="spot-Images" height={200} width={200} />
-                <img  src={spot.SpotImages[2].url} alt="spot-Images" height={200} width={200} />
-                <img  src={spot.SpotImages[3].url} alt="spot-Images" height={200} width={200} />
-                <img  src={spot.SpotImages[3].url} alt="spot-Images" height={200} width={200} />    
+                <img  src={spot.SpotImages[1]?.url} alt="spot-Images" height={200} width={200} />
+                <img  src={spot.SpotImages[2]?.url} alt="spot-Images" height={200} width={200} />
+                <img  src={spot.SpotImages[3]?.url} alt="spot-Images" height={200} width={200} />
+                <img  src={spot.SpotImages[3]?.url} alt="spot-Images" height={200} width={200} />    
             </div>
             </div>
 
@@ -54,10 +55,13 @@ export default function SingleSpot(){
                 <span> {spot.numReviews} reviews </span>
                 </div>               
                 
-                <button className="reserve-button" onClick={handlealert}>Reserve</button>
-                
-                
+                <button className="reserve-button" onClick={handlealert}>Reserve</button>    
             </div>
+        </div>
+        <div>_________________________________________________________________________________________________________________________________</div>
+        <div>
+            <p>★{spot.avgStarRating}</p>
+            <p>{spot.numReviews} reviews</p>
         </div>
         </div>
     )

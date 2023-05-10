@@ -268,8 +268,9 @@ spotToEdit.state=state
 spotToEdit.country=country;
 spotToEdit.lat=lat
 spotToEdit.lng=lng;
-spotToEdit.adress=name
-spotToEdit.city=description;
+spotToEdit.name=name;
+spotToEdit.description=description;
+spotToEdit.price=price
 
 await spotToEdit.save();
 

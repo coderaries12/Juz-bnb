@@ -4,13 +4,17 @@ import { thunkcurrentuserspot } from "../../store/spot";
 import { useDispatch, useSelector } from "react-redux";
 import './currentuserspotlist.css'
 import { NavLink,useHistory } from "react-router-dom";
+import { useModal } from "../../context/Modal";
+import DeleteSpot from "../DeleteSpot";
+import OpenModalButton from '../OpenModalButton/index'
 
 export default function CurrentUserSpotList(){
     const history= useHistory()
     const dispatch = useDispatch()
-   // const currentUserId = useSelector((state) => state?.session.user)
+    const currentUser = useSelector((state) => state?.session.user)
     const spotobj = useSelector((state) => state?.spots.allSpots)
     const spots = Object.values(spotobj)
+    // const {OpenModalButton} = useModal()
     // let CurrentUserSpotList=[];
     // for(let spot of spots){
     //     if(spot.ownerId===currentUserId){
@@ -22,10 +26,13 @@ export default function CurrentUserSpotList(){
     console.log("Inside the current user component",spotobj)
     
     useEffect(() =>{
-    dispatch(thunkcurrentuserspot())
+    //if(currentUser){
+        dispatch(thunkcurrentuserspot())
+
+    
 
     },[dispatch])
-    //if(!spots.id)  return null;
+   
     if(spots.length === 0) {
         return(
             <button onClick={()=>  history.push('/spots/new') }> Create a new spot
@@ -61,7 +68,10 @@ export default function CurrentUserSpotList(){
                         <div className="spot-price"><p>${spot.price} night</p></div>
                         <div className="current-user-spot-button">
                             <button  className="update-button" onClick={()=> history.push(`/spots/${spot.id}/edit`)}>Update</button>
-                            <button  onClick={()=> history.push(`/spots/${spot.id}/delete`)}>Delete</button>
+                             {/* <button  onClick={()=> history.push(`/spots/${spot.id}/delete`)}>Delete</button>  */}
+                             <OpenModalButton 
+                             buttonText="Delete" modalComponent={<DeleteSpot />} 
+                             /> 
                         </div>
                         
 
