@@ -118,7 +118,7 @@ export const thunkcreateanewspot = (spot,images) => async (dispatch) => {
    // const res = await csrfFetch (`/api/spots/${newSpot.id}`)
     //const newSpotEdit = await response.json();
     //imageArray.push(newSpotImages)
-   // dispatch(createSpot(newSpot))
+     dispatch(createSpot(newSpot))
     //console.log("Inside create thunk spotImagesArray",imageArray)
     //return newSpot;
   } 
@@ -141,7 +141,7 @@ export const thunkcurrentuserspot = () => async (dispatch) => {
 
 
 export const thunkeditnewspot = (spot) => async (dispatch) => {
-  //console.log("Inside the single spot thunk",spotId)
+console.log("Inside the single spot thunk",spot)
   const response = await csrfFetch(`/api/spots/${spot.id}`,{
   method:'PUT',
   headers:{ "Content-Type" : 'application/json' },
@@ -152,7 +152,8 @@ export const thunkeditnewspot = (spot) => async (dispatch) => {
   if(response.ok) {
     const Spottoedit = await response.json();
     dispatch(editSpot(Spottoedit))
-    return editSpot
+    console.log("inside the edit thunk",Spottoedit)
+    return Spottoedit
   }
 }
 
@@ -195,15 +196,17 @@ const spotReducer = (state = initialState, action) => {
       newState.allSpots[action.newSpot.id]=action.newSpot
       return newState
     case EDIT_SPOT:
-      newState.allSpots[action.editSpot.id]=action.editSpot
+      console.log("Inside the edit spot reducer",action.editspot)
+      newState.allSpots[action.editspot.id]=action.editspot
       return newState
     case CURRENT_USER_SPOTS:
-      const userState = {...state, allSpots:{},singleSpot:{}}
-      action.payload.Spots.map((spot) => {
+      const userState = {allSpots:{},singleSpot:{}}
+      action.payload.Spots.forEach((spot) => {
         userState.allSpots[spot.id]=spot
-        return userState
-        })
+      })
+      return userState
     case DELETE_SPOT:
+      console.log("inside the delete thunk",action.deleteid)
       delete newState.allSpots[action.deleteid]
       return newState;
         
