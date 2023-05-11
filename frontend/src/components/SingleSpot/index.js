@@ -95,13 +95,14 @@ export default function SingleSpot(){
                   <h3> {r.User.firstName} {r.User.lastName} </h3>
                   <p className="review-date">{months[r.createdAt.slice(5,7)]} {r.createdAt.slice(0,4)}</p>
                   <p> {r.review} </p>
-                  {(r.userId === SpotUser?.id)} &&
+                { (r.userId === SpotUser?.id) &&
                   
                   <div>
                     <OpenModalButton 
                              buttonText="Delete" modalComponent={<DeleteReview reviewId={r.id} />} 
                     /> 
                  </div>
+                }
                  </div>
                 )
                 })
