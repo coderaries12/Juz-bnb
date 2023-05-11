@@ -1,8 +1,11 @@
 import React from "react";
 import { useEffect } from "react";
-import { useParams,useHistory } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { thunkloadsinglespot } from "../../store/spot";
 import { useDispatch, useSelector } from "react-redux";
+import { thunkloadreviews } from "../../store/review";
+import OpenModalButton from '../OpenModalButton/index'
+import DeleteReview from "../DeleteReview";
 import './singleSpot.css'
 
 export default function SingleSpot(){
@@ -10,11 +13,31 @@ export default function SingleSpot(){
     const {spotId}=useParams()
     //const spotobj = useSelector(state => state?.spots.allSpots[spotId])
     const spot=useSelector(state => state?.spots.singleSpot)
+    const reviewsObj = useSelector((state) => state?.reviews.allReviews)
+    const reviews = Object.values(reviewsObj)
     //const SpotImages = useSelector(state => state?.spots.singleSpot.SpotImages)
     const SpotUser = useSelector(state => state?.spots.singleSpot.Owner)
+    console.log("reviews array",reviews)
+
+    let months = {
+        "01": "January",
+        "02": "Feburary",
+        "03": "March",
+        "04": "April",
+        "05": "May",
+        "06": "June",
+        "07": "July",
+        "08": "August",
+        "09": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    }
+    
    
     useEffect(() =>{
     dispatch(thunkloadsinglespot(spotId))
+    dispatch(thunkloadreviews(spotId))
 
     },[dispatch])
 
@@ -26,7 +49,7 @@ export default function SingleSpot(){
     if(!spot.id ) return null;
     if(!spot.avgStarRating)  { spot.avgStarRating = "New"}
     
-    return(
+    return reviewsObj.User ? null : (
         <div>
             <div><h2>{spot.name}</h2></div>
             <div><p>{spot.city}, {spot.state}, {spot.country}</p></div>
@@ -59,10 +82,32 @@ export default function SingleSpot(){
             </div>
         </div>
         <div>_________________________________________________________________________________________________________________________________</div>
-        <div>
-            <p>★{spot.avgStarRating}</p>
-            <p>{spot.numReviews} reviews</p>
+        <div className="down-rating-div">
+            <span className="down-avg-span">★{spot.avgStarRating}</span>
+            <span>{spot.numReviews} reviews</span>
         </div>
+        <div className="reviewslist-div">
+            <div>
+               {
+                reviews.map((r)=>{
+                return(
+                  <div className="reviews-info-div">
+                  <h3> {r.User.firstName} {r.User.lastName} </h3>
+                  <p className="review-date">{months[r.createdAt.slice(5,7)]} {r.createdAt.slice(0,4)}</p>
+                  <p> {r.review} </p>
+                  {(r.userId === SpotUser?.id)} &&
+                  
+                  <div>
+                    <OpenModalButton 
+                             buttonText="Delete" modalComponent={<DeleteReview reviewId={r.id} />} 
+                    /> 
+                 </div>
+                 </div>
+                )
+                })
+               } 
+            </div>
         </div>
+    </div>
     )
 }

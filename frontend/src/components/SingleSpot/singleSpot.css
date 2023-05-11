@@ -49,3 +49,14 @@
     justify-content: space-between;
     padding-bottom: 1.5rem;
 }
+.down-rating-div{
+    display:flex;
+    flex-direction: row;
+    padding-bottom:0.5rem;
+    padding-top: 0.5rem;
+    gap:2rem;    
+}
+.review-info-div{
+    display:flex;
+    padding-bottom: 1rem;
+}
