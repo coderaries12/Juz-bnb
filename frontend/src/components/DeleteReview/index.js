@@ -4,21 +4,22 @@ import { useParams } from "react-router-dom";
 import { thunkcurrentuserspot, thunkdeletespot } from "../../store/spot";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
+import { thunkdeletereview } from "../../store/review";
 
 
 
 
-function DeleteSpot ({spotId}) {
+function DeleteReview ({reviewId}) {
  const history = useHistory()
  const dispatch = useDispatch()
  //const {spotId} = useParams();
  const {closeModal} =  useModal();
 
- const deleteSpot = useSelector(state => state?.spots.allSpots[spotId])
+ const deleteReview = useSelector(state => state?.reviews.allReviews[reviewId])
 // const newspot = useSelector(state => state?.spots.allSpots)
 // console.log("from delete spot component1",newspot)
- console.log("from delete spot component2",deleteSpot)
- if(deleteSpot === {})   return null;
+ console.log("from delete spot component2",deleteReview)
+ if(deleteReview === {})   return null;
 
 //  function handleSubmit(){
 //     dispatch(thunkdeletespot(deleteSpot.id))
@@ -26,11 +27,11 @@ function DeleteSpot ({spotId}) {
 //     history.push('/')
 // }
 const handleSubmityes = async (e) => {
-const deletedSpot= await dispatch(thunkdeletespot(deleteSpot.id))
+const deletedReview= await dispatch(thunkdeletereview(deleteReview.id))
   e.preventDefault();
   await closeModal()
   // await dispatch(thunkcurrentuserspot())
-  if(deletedSpot){
+  if(deletedReview){
     history.push('/spots/current')
   }
   //
@@ -46,11 +47,11 @@ return(
     
         <div>
         <h1>Confirm Delete</h1>
-        <p>Are you sure you want to remove this spot from the listings?</p>
+        <p>Are you sure you want to delete this review?</p>
         <form>
-        <div className="delete-buttons">
-          <button  className="yes-button" onClick={handleSubmityes}>Yes (Delete Spot)</button>
-          <button  onClick={handleSubmitno}> No (Keep Spot)</button>
+        <div className="delete-review-buttons">
+          <button  className="yes-button" onClick={handleSubmityes}>Yes (Delete Review)</button>
+          <button  onClick={handleSubmitno}> No (Keep Review)</button>
           </div>
         </form>
                         
@@ -64,4 +65,4 @@ return(
 
 }
 
-export default DeleteSpot
+export default DeleteReview

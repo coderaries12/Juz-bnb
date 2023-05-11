@@ -60,6 +60,7 @@ function LoginFormModal() {
         </label>
         {errors.credential && <p>{errors.credential}</p>}
         <div>
+        <button onClick={handleSubmit}> Log In </button>
         <button onClick={demouser1handleSubmit}>Demo User 1</button>
         <button onClick={demouser2handleSubmit}>Demo User 2</button>
         </div>

@@ -4,15 +4,18 @@ import { thunkloadspots } from "../../store/spot";
 import { useDispatch, useSelector } from "react-redux";
 import './spotlist.css'
 import { NavLink } from "react-router-dom";
+//import { thunkloadreviews } from "../../store/review";
 
 export default function SpotList(){
     const dispatch = useDispatch()
     const spotsObj = useSelector((state) => state?.spots.allSpots)
+    
     const spots = Object.values(spotsObj)
     console.log("Spots in spotList component",spots)
     
     useEffect(() =>{
     dispatch(thunkloadspots())
+    
 
     },[dispatch])
     if(!spots) return null;
