@@ -1,0 +1,16 @@
+.star-rating-div .filled {
+    color : rgb(255, 255, 0);
+
+}
+.star-rating-div .empty {
+    color : rgb(160, 160, 164)
+    
+
+}
+
+
+.star-rating-div {
+display: flex;
+flex-direction: row;
+gap:2px;
+}

@@ -123,6 +123,7 @@ let reviews=await Review.findAll({
      raw:true
 })
 for(let spot of Spots){
+    
     let starSum=0;
     let spotReviews=reviews.filter(review=>review.spotId===spot.id)
     for(const spotReview of spotReviews){

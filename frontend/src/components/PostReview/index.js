@@ -4,6 +4,7 @@ import { useEffect,useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { thunkcreatenewReview } from "../../store/review";
+import "./postreview.css";
 
 export default function PostReview ({spotId}) {
 
@@ -62,28 +63,45 @@ if (!errors.length){
                 onChange = {e => setReviewText(e.target.value)}
                 >  </textarea>
             <div className="star-rating-div">
-                <span onClick={e => setRating(1)}  > 
-                <i className="fas fa-star " />
-                </span>
-            
-                <div onClick={e =>setRating(2)} >
-                <i className="fas fa-star " />
+                <div
+                className={rating >=1 ? "filled" :"empty"}
+                onClick={()=> setRating(1)}>
+                <i className="fa-solid fa-star fa-xl " /> 
+                </div>
+                
+                <div
+                className={rating >=2 ? "filled" :"empty"}
+                onClick={()=> setRating(2)}>
+
+                <i className="fa-solid fa-star fa-xl" /> 
+                                  
                 </div>
             
-                <div onClick={e =>setRating(3)}  >
-                <i className="fas fa-star  " />
+                <div
+                className={rating >=3 ? "filled" :"empty"}
+                onClick={()=> setRating(3)}>
+
+                <i className="fa-solid fa-star fa-xl " /> 
+                                  
                 </div>
             
             
-                <div onClick={e =>setRating(4)}  >
-                <i className="fas fa-star " />
+                <div
+                className={rating >=4 ? "filled" :"empty"}
+                onClick={()=> setRating(4)}>
+
+                <i className="fa-solid fa-star fa-xl" /> 
+                                  
                 </div>
             
             
-                <div onClick={e =>setRating(5)}  >
-                <i className="fas fa-star " />
+                <div
+                className={rating >=5 ? "filled" :"empty"}
+                onClick={()=> setRating(5)}>
+
+                <i className="fa-solid fa-star fa-xl " /> 
+                                  
                 </div>
-           
 
             </div>
 

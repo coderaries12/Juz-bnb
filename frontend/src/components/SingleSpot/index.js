@@ -15,7 +15,7 @@ export default function SingleSpot(){
     const spot=useSelector(state => state?.spots.singleSpot)
     const reviewsObj = useSelector((state) => state?.reviews.allReviews)
     const reviews = Object.values(reviewsObj)
-    const sortedReviews = reviews.sort((a,b) => new Date(a.updatedAt) - new Date(b.updatedAt))
+    const sortedReviews = reviews?.sort((a,b) => new Date(a.updatedAt) - new Date(b.updatedAt))
     const SpotUser = useSelector(state => state?.spots.singleSpot.Owner)
     const currentUser = useSelector(state => state.session.user)
     let reviewsLength = reviews.length 
@@ -23,7 +23,7 @@ export default function SingleSpot(){
     console.log("reviews array",reviews)
     console.log("Spot user detail",SpotUser)
     console.log("Current user detail",currentUser)
-    
+    console.log("inside the get spot by id average star rating",spot?.avgStarRating)
 
     let months = {
         "01": "January",
@@ -47,6 +47,8 @@ export default function SingleSpot(){
 
     },[dispatch])
 
+    
+
     // alert function
     function handlealert(){
         alert("Feature coming soon......")
@@ -56,15 +58,16 @@ export default function SingleSpot(){
         sum+=r.stars
     }
     let AvgRating = sum/reviews.length
-    AvgRating = AvgRating.toFixed(2)
+    //AvgRating = AvgRating.toFixed(2)
     console.log("avg rating",AvgRating)
    // console.log("total length",reviews.length)
     
     if(!spot.id ) return null;
-    if(!AvgRating)  { AvgRating = "New"}
+   // if(!AvgRating)  { AvgRating = "New"}
+   if(!SpotUser.id)   return null
+   //if(!reviewsObj.id) return null
 
-
-    const CurrentUserReview = reviews.map(r => r.userId === currentUser.id )
+    const CurrentUserReview = reviews.find(r => r.userId === currentUser.id )
     console.log("current user review",CurrentUserReview)
     
     return (
@@ -84,7 +87,7 @@ export default function SingleSpot(){
 
         <div className="text-div">
             <div>
-                <h2>Hosted by {SpotUser?.firstName} {SpotUser?.lastName}</h2>
+                <h2>Hosted by {SpotUser.firstName} {SpotUser.lastName}</h2>
                 <p>{spot.description}</p>
                 </div>
             
@@ -92,7 +95,7 @@ export default function SingleSpot(){
                 
                 <div className="spot-night">
                 <span> ${spot.price} night  </span>
-                <span> ★{AvgRating}  </span>        
+                <span> {!AvgRating ? "⭐️ New" : <span>⭐️ {Number.parseFloat(AvgRating).toFixed(1)}</span>} </span>        
                 <span> {reviewsLength} reviews </span>
                 </div>               
                 
@@ -101,14 +104,9 @@ export default function SingleSpot(){
         </div>
         <div>_________________________________________________________________________________________________________________________________</div>
         <div className="down-rating-div">
-            <span className="down-avg-span">★{AvgRating}</span>
+            <span className="down-avg-span">{!AvgRating ? "⭐️ New" : <span>⭐️ {Number.parseFloat(AvgRating).toFixed(1)}</span>}</span>
             <span>{reviewsLength} reviews</span>
-            {/* {
-                (currentUser && (currentUser.id !== SpotUser.id) && (reviews.length===0)) && 
-                <p>Be the first to post a review ! </p> 
-                
-                
-            } */}
+            
         </div>
         
             {
@@ -117,8 +115,13 @@ export default function SingleSpot(){
                         <OpenModalButton 
                              buttonText="Post Your Review" modalComponent={<PostReview  spotId={spotId} />} 
                     /> 
-                    </div>
-                    
+                    </div>      
+            }
+            {
+                !reviews.length && currentUser.id !== SpotUser.id ?
+                (<div>
+                    <p>Be the first to post a review</p>
+                </div>) : <></>
             }
         
         
@@ -128,7 +131,7 @@ export default function SingleSpot(){
                 sortedReviews.map((r)=>{
                 return(
                 <div className="reviews-info-div">
-                
+                 
                   
                   <h3> {r.User.firstName} {r.User.lastName} </h3>
                   <p className="review-date">{months[r.createdAt.slice(5,7)]} {r.createdAt.slice(0,4)}</p>
@@ -139,7 +142,7 @@ export default function SingleSpot(){
                     <OpenModalButton 
                              buttonText="Delete" modalComponent={<DeleteReview reviewId={r.id} spotId={spotId} />} 
                     /> 
-                 </div>
+                  </div>
                 }
                 
                  </div>

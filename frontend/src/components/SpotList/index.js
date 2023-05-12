@@ -13,6 +13,7 @@ export default function SpotList(){
     const spots = Object.values(spotsObj)
     console.log("Spots in spotList component",spots)
     
+    
     useEffect(() =>{
     dispatch(thunkloadspots())
     
@@ -25,9 +26,12 @@ export default function SpotList(){
         {
             spots.map((spot) => {
                 // if(!(Number.parseFloat(spots.avgRating).toFixed(2))) spot.avgRating="New"
-                if(!spot.avgRating) spot.avgRating="New"
+                //if(!spot.avgRating) spot.avgRating="New"
              return(
                     <div className="spot-div">
+                        {
+                            console.log("Inside the get all spots comp- avg Rating",spot.avgRating)
+                        }
                         <NavLink to={`/spots/${spot.id}`}>
                         {/* <div class="tooltip">
                         <span class="tooltiptext">{spot.name}</span>
@@ -39,7 +43,7 @@ export default function SpotList(){
                         
                         <div className="city-state-rating-div">
                             <div className="spot-city-state">{spot.city}, {spot.state}</div>
-                            <div className="spot-avrRating">★{spot.avgRating}</div>
+                            <div className="spot-avrRating">{!spot.avgRating ? "⭐️ New" : <span>⭐️ {Number.parseFloat(spot.avgRating).toFixed(1)}</span>}</div>
                         </div>
                         <div className="spot-price"><p>${spot.price} night</p></div>
                         
