@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { thunkcreateanewspot } from "../../store/spot";
 import { useDispatch } from "react-redux";
-import { thunkeditnewspot } from "../../store/spot";
+
 
 
 
@@ -99,133 +99,130 @@ function CreateSpot({spot,formType}) {
 		
 	};
 
-	
-	
-
 	return (
-		<div className="spot-form-div">
+	<div className="spot-form-div">
 		<form className="spot-form" onSubmit={onSubmit}>
             <h1>Create a new Spot</h1>
 			<h2>Where's your place located?</h2>
             <p>Guests will only get your exact address once they booked a reservation.</p>
-			<div>
-			<label>
-              <div> Country    <span className="errors"> {errors.country} </span></div>
+			<div className="spot-form-to-fill">
 				<div>
-				<input
+					<label> Country    <span className="errors"> {errors.country} </span> </label>
+					<input
 				    placeholder="Country"
 					type="text"
 					name="country"
 					value={country}
 					onChange={(e) => setCountry(e.target.value)}
-				/></div>
-			</label>
-			</div>
-			<div>
-			<label>
-                <div> Street Address    <span className="errors">{errors.address} </span> </div>
+					/>
+				</div>
+			
 				<div>
-                  <input
-				  placeholder="Address"
+				   <label> Street Address    <span className="errors">{errors.address} </span> </label>
+                   <input
+				   placeholder="Address"
 					type="text"
 					name="address"
 					value={address}
 					onChange={(e) => setAddress(e.target.value)}
-				/></div>
-			</label></div>
-			<div>
-            <label> 
-				<span>
-				<div> City    <span className="errors">{errors.city} </span> </div>
-			
-			<input
-			    placeholder="City"
-				type="text"
-				name="city"
-				value={city}
-				onChange={(e) => setCity(e.target.value)}
-			/>  
+					/>
+				</div>
+
+				<div>
+					<label> City    <span className="errors">{errors.city} </span> </label>
+					<input
+					placeholder="City"
+					type="text"
+					name="city"
+					value={city}
+					onChange={(e) => setCity(e.target.value)}
+					/>  
+				</div>
 				
-				<div> State   <span className="errors">{errors.state} </span> </div>
-				<input
+				<div> 
+					<label>State   <span className="errors">{errors.state} </span> </label>
+					<input
 				    placeholder="State"
 					type="text"
 					name="state"
 					value={state}
 					onChange={(e) => setState(e.target.value)}
-				/>  	
-				</span>
-			</label>
-			</div>
-			<label>
-                <div> Latitude   <span className="errors">{errors.latitude} </span> </div>
+					/>  	
+				</div>
+
 				<div>
-                  <input
-				  placeholder="Latitude"
-					type="number"
-					name="latitude"
-					value={latitude}
-					onChange={(e) => setLatitude(e.target.value)}
-				/></div>
-			</label>
-			<label>
-                <div> Longitude   <span className="errors">{errors.longitude} </span> </div>
+					<label> Latitude  <span className="errors">{errors.latitude} </span> </label> 
+					<input
+						placeholder="Latitude"
+						type="number"
+						name="latitude"
+						value={latitude}
+						onChange={(e) => setLatitude(e.target.value)}
+					/>
+				</div>
+			
 				<div>
-                  <input
-				  placeholder="Longitude"
-					type="number"
-					name="longitude"
-					value={longitude}
-					onChange={(e) => setLongitude(e.target.value)}
-				/></div>
-			</label>
-			<label>
-                <h4>  Describe your place to guests  </h4>
-				<p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
-                  <textarea
-				   placeholder="Description"
+					<label> Longitude   <span className="errors">{errors.longitude} </span> </label>
+				    <input
+						placeholder="Longitude"
+						type="number"
+						name="longitude"
+						value={longitude}
+						onChange={(e) => setLongitude(e.target.value)}
+					/>
+				</div>
+			
+			<div>
+				<label>
+					<h4>  Describe your place to guests  </h4>
+					<p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
+				</label>
+                <textarea
+					placeholder="Description"
 					type=""
 					name="description"
 					value={description}
 					onChange={(e) => setDescription(e.target.value)}
 				/>
-			</label>
-			<p className="errors">{errors.description} </p>
+			    	<p className="errors">{errors.description} </p>
+			</div>
 
-
-			<label>
-			    <h4>  Create a title for your spot  </h4>
-				<p>Catch guest's attention with a spot title that highlights what makes your place special.</p>
-				<div>
+            <div>
+				<label>
+					<h4>  Create a title for your spot  </h4>
+					<p>Catch guest's attention with a spot title that highlights what makes your place special.</p>
+				</label>
                   <input
-				  placeholder="Name of your spot"
-					type="text"
-					name="name"
-					value={name}
-					onChange={(e) => setName(e.target.value)}
-				/></div>
-			</label>
-			<p className="errors">{errors.name} </p>
+						placeholder="Name of your spot"
+						type="text"
+						name="name"
+						value={name}
+						onChange={(e) => setName(e.target.value)}
+					/>
+				<p className="errors">{errors.name} </p>
+			</div>
 
-			<label>
-                <h4>  Set a base price for your spot  </h4>
-				<p>Competitive pricing can help your listing stand out and rank high in search results.</p>
-
+			<div>	
+				<label>
+					<h4>  Set a base price for your spot  </h4>
+					<p>Competitive pricing can help your listing stand out and rank high in search results.</p>
+				</label>
 				
-                  $<input
+                $<input
 				    placeholder="Price per night(USD)"
 					type="number"
 					name="price"
 					value={price}
 					onChange={(e) => setPrice(e.target.value)}
 				/>
-			</label>
-			<p className="errors">{errors.price} </p>
+				<p className="errors">{errors.price} </p>
+			</div>
 			
-			<label>
-			   <h4> Liven up your spot with photos </h4>
-				<p>Submit a link to at least one photo to publish your spot.</p>
-				
+			<div>
+				<label>
+					<h4> Liven up your spot with photos </h4>
+					<p>Submit a link to at least one photo to publish your spot.</p>
+				</label>
                   <input
 					type="url"
 					name="previewImage"
@@ -233,61 +230,62 @@ function CreateSpot({spot,formType}) {
 					value={previewimage}
 					onChange={(e) => setPreviewimage(e.target.value)}
 				/>
-			</label>
-			<p className="errors">{errors.previewimage} </p>
-			<label>
+				<p className="errors">{errors.previewimage} </p>
+			</div>
                 
-				<div>
-                  <input
-				  placeholder="Image URL"
+			<div>
+                <input
+				    placeholder="Image URL"
 					type="url"
 					name="image1"
 					value={url1}
 					onChange={(e) => seturl1(e.target.value)}
-				/></div>
-			</label>
+				/>
+			</div>
 			<p className="errors">{errors.url1} </p>
            
-			<label>
-				<div>
-                  <input
-				  placeholder="Image URL"
+			
+			<div>
+                <input
+				    placeholder="Image URL"
 					type="url"
 					name="image2"
 					value={url2}
 					onChange={(e) => seturl2(e.target.value)}
-				/></div>
-			</label>
-			<label>
-				<div>
-                  <input
-				  placeholder="Image URL"
+				/>
+			</div>
+			
+			
+			<div>
+                <input
+				    placeholder="Image URL"
 					type="url"
 					name="image3"
 					value={url3}
 					onChange={(e) => seturl3(e.target.value)}
-				/></div>
-			</label>
-			<label>
-				<div>
-                  <input
-				  placeholder="Image URL"
+				/>
+			</div>
+			
+			
+			<div>
+                <input
+				    placeholder="Image URL"
 					type="url"
 					name="image4"
 					value={url4}
 					onChange={(e) => seturl4(e.target.value)}
-				/></div>
-			</label>
-
-			
-			
-
+				/>
+			</div>
+		
 			<div>
-			<button type="submit" disabled={!!Object.values(errors).length}>
-				Create Spot
-			</button></div>
-		</form>
+				<button type="submit" disabled={!!Object.values(errors).length}>
+					Edit Spot
+				</button>
+			</div>
 		</div>
+	</form>
+</div>
+		
 	);
 }
 

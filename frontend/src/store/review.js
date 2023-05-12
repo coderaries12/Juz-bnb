@@ -67,7 +67,7 @@ export const thunkcreatenewReview = (review,spotId) => async (dispatch) => {
     
     if(response.ok) {
     const  newReview = await response.json();
-    dispatch(createReview(newReview))
+    dispatch(thunkloadreviews(spotId))
     return newReview;  
 
     }

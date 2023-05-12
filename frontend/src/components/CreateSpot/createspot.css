@@ -1,7 +1,12 @@
-form{
-    border:solid red 2px;
-    align-items: center;
+
+form > label{
+    color: red;
 }
-label{
-    display:block;
+.spot-form-to-div > form{
+    border:solid red 2px;
+    display:flex;
+    flex-direction: column;
+}
+.spot-form {
+    border : solid red 2px;
 }
