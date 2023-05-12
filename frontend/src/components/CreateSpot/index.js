@@ -87,19 +87,7 @@ function CreateSpot({spot,formType}) {
 			
 		  };
 		  const images = [{url:previewimage,preview:true},{url:url1,preview},{url:url2,preview},{url:url3,preview},{url:url4,preview}]
-		  //let images=[];
-		  //images.push(previewimage)
-		//   if(url1) images.push(url1)
-		//   if(url2) images.push(url2)
-		//   if(url3) images.push(url3)
-		//   if(url4) images.push(url4)
-
-		// if(formType === "Update Spot"){
-		// 	const updateSpot = dispatch(thunkeditnewspot(spot))
-		// 	spot=updateSpot
-		// 	history.push(`/spots/${updateSpot.id}`);
-			
-		// }
+		 
 		
 	    
 		  let createdSpot= await dispatch(thunkcreateanewspot(payload,images));
@@ -112,22 +100,7 @@ function CreateSpot({spot,formType}) {
 	};
 
 	
-	// useEffect (() => {
-	// 	if(spot)
-	// 	{
-	// 		setCountry(spot.country)
-	// 		setAddress(spot.address)
-	// 		setState(spot.state)
-	// 		setCity(spot.city)
-	// 		setName(spot.name)
-	// 		setDescription(spot.description)
-	// 		setLatitude(spot.lat)
-	// 		setLongitude(spot.lng)
-	// 		setPrice(spot.price)
-	// 		setPreviewimage(spot.previewImage)
-			
-	// 	}
-	// },[spot])
+	
 
 	return (
 		<div className="spot-form-div">

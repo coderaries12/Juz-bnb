@@ -11,6 +11,7 @@ import EditSpot from "./components/EditSpot";
 import DeleteSpot from "./components/DeleteSpot";
 import ReviewList from "./components/ReviewList";
 import DeleteReview from "./components/DeleteReview";
+import PostReview from "./components/PostReview";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,9 @@ function App() {
         
         <Route exact path='/reviews'>
          <ReviewList />
+        </Route>
+        <Route exact path='/reviews/new'>
+         <PostReview />
         </Route>
         <Route exact path='/reviews/:reviewId/delete'>
          <DeleteReview />
