@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf";
 //************************ Imports *******************//
 const LOAD_REVIEWS = "spot/loadreviews";
 const DELETE_REVIEW = "review/deleteReview"
+const CREATE_REVIEW = "review/createReview"
 
 
 
@@ -21,6 +22,13 @@ const deleteReview = (deletereviewid) => {
       
     };
   };
+const createReview = (newReview) => {
+    return {
+      type: CREATE_REVIEW,
+      newReview
+      
+    };
+  };
 
 //************************ Thunk Creators *******************//
 
@@ -35,26 +43,35 @@ export const thunkloadreviews = (spotId) => async (dispatch) => {
   };
 
 export const thunkdeletereview = (reviewId) => async (dispatch) => {
-    //console.log("Inside the single spot thunk",spotId)
+    console.log("Inside the delete review thunk",reviewId)
     const response = await csrfFetch(`/api/reviews/${reviewId}`,{
     method:'DELETE'
     })
     if(response.ok) {
-      const Reviewtodelete = await response.json();
-      dispatch(deleteReview(Reviewtodelete.id))
-      return Reviewtodelete
+      const deletedresponse = await response.json();
+      console.log("inside the delete thunk- show review to delete",deletedresponse)
+      dispatch(deleteReview(reviewId))
+      return deletedresponse
     }
   }
 
+export const thunkcreatenewReview = (review,spotId) => async (dispatch) => {
+    //console.log("Inside the single spot thunk",spotId)
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`,{
+    method:'POST',
+    headers:{ "Content-Type" : 'application/json' },
+    body: 
+     JSON.stringify(review)
+    
+    })
+    
+    if(response.ok) {
+    const  newReview = await response.json();
+    dispatch(createReview(newReview))
+    return newReview;  
 
-
-
-
-
-
-
-
-
+    }
+}
 
 
 const initialState = { 
@@ -72,10 +89,12 @@ const reviewReducer = (state = initialState, action) => {
         })
         return newState;
       case DELETE_REVIEW:
-        console.log("inside the delete review thunk",action.deletereviewid)
-        delete newState.allSpots[action.deletereviewid]
+        console.log("inside the delete review reducer",action.deletereviewid)
+        delete newState.allReviews[action.deletereviewid]
         return newState; 
-
+      case CREATE_REVIEW:
+        newState.allReviews[action.newReview.id]=action.newReview
+        return newState
         default:
         return state;
             

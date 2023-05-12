@@ -60,3 +60,11 @@
     display:flex;
     padding-bottom: 1rem;
 }
+.post-review-button{
+    display:flex;
+    flex-direction: column;
+}
+.post-review-modal-button{
+    display:flex;
+    flex-direction: column;
+}
