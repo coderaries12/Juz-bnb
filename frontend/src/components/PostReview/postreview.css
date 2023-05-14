@@ -3,14 +3,41 @@
 
 }
 .star-rating-div .empty {
-    color : rgb(160, 160, 164)
+    color : rgb(224, 224, 237); 
     
-
 }
 
 
 .star-rating-div {
 display: flex;
 flex-direction: row;
-gap:2px;
+justify-content: center;
+gap:6px;
+}
+div#modal-content{
+    margin:2rem;
+    border:solid black 4px;
+    padding:2rem;
+
+}
+h2{
+    text-align: center;
+    padding:1rem;
+}
+textarea.review-textarea{
+    border:solid black 2px;
+    margin-bottom: 1rem;
+}
+.post-review-button{
+    border:solid black 3px;
+    width:25rem;
+    text-align: center;
+    align-self: center;
+    padding:1rem;
+    color:white;
+    background-color: rgb(221, 67, 40);
+    box-shadow: 5px 3px 3px black;
+}
+button.post-review-button{
+    padding-left:10rem;
 }

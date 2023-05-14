@@ -1,3 +1,38 @@
-form{
-    border: solid red 2px;
+#modal-content{
+    border:solid whitesmoke 2px;
+    border-radius: 12px;
 }
+#signup-heading{
+    text-align: center;
+}
+#signup-form{
+    display:flex;
+    flex-direction: column;
+    padding:1rem;
+    margin:0.5rem;
+    gap:1rem;
+}
+.signup-modal-div{
+    display:flex;
+    flex-direction: column;
+}
+label{
+    display:flex;
+    flex-direction: column;
+}
+input{
+    border:solid black 2px;
+    width:23rem;
+    background-color: lightsteelblue;
+    padding:0.5rem;
+}
+.signup-button{
+    border:solid black 3px;
+    padding:1rem;
+    color:white;
+    background-color: rgb(221, 67, 40);
+    box-shadow: 5px 3px 3px black;
+}
+#signup-form > p{
+    color:red;
+    }

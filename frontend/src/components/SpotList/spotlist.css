@@ -1,10 +1,35 @@
 .spot-div{
 float:left;
 width:25%;
-gap:8rem;
-padding-bottom: 2rem;
+
 }
 .city-state-rating-div{
     display:flex;
     gap:4rem;
+    margin-top:1rem;
 }
+.spot-price-night{
+    margin-top:1rem;
+    display:flex;
+    flex-direction: row;
+    gap:0.3rem;
+}
+.spot-price {
+    font-weight: bold;
+}
+.land-page-images{
+    border: solid whitesmoke 1px;
+    border-radius: 0.8rem;
+}
+.tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: rgb(61, 55, 55);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+}
+.img-text:hover .tooltip {
+    visibility: visible;
+  }

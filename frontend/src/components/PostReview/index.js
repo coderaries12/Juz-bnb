@@ -6,7 +6,7 @@ import { useModal } from "../../context/Modal";
 import { thunkcreatenewReview } from "../../store/review";
 import "./postreview.css";
 
-export default function PostReview ({spotId}) {
+export default function PostReview ({spotId,spot}) {
 
 const [rating, setRating] = useState(0)	
 const [reviewText, setReviewText] = useState("")	
@@ -51,7 +51,7 @@ if (!errors.length){
 
     return(
     <div className="review-modal">
-            <h2>Rate your Stay</h2>
+            <h2>How was your stay at {spot.name}</h2>
         <form className="create-review-form"  >
                 <textarea 
                 className = "review-textarea"
@@ -105,7 +105,7 @@ if (!errors.length){
 
             </div>
 
-        <button onClick={handleSubmit}> Submit</button>
+        <button className="post-review-button" onClick={handleSubmit}> Submit</button>
         </form>
     </div>
     )

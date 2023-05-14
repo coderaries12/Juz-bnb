@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { thunkcurrentuserspot, thunkdeletespot } from "../../store/spot";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
+import './deletespot.css'
 
 
 
@@ -44,13 +45,13 @@ closeModal()
 
 return(
     
-        <div>
+        <div className="spot-to-delete">
         <h1>Confirm Delete</h1>
         <p>Are you sure you want to remove this spot from the listings?</p>
         <form>
         <div className="delete-buttons">
           <button  className="yes-button" onClick={handleSubmityes}>Yes (Delete Spot)</button>
-          <button  onClick={handleSubmitno}> No (Keep Spot)</button>
+          <button  className="no-button" onClick={handleSubmitno}> No (Keep Spot)</button>
           </div>
         </form>
                         

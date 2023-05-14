@@ -4,56 +4,49 @@ import { thunkloadspots } from "../../store/spot";
 import { useDispatch, useSelector } from "react-redux";
 import './spotlist.css'
 import { NavLink } from "react-router-dom";
-//import { thunkloadreviews } from "../../store/review";
+
 
 export default function SpotList(){
     const dispatch = useDispatch()
     const spotsObj = useSelector((state) => state?.spots.allSpots)
-    
     const spots = Object.values(spotsObj)
-    console.log("Spots in spotList component",spots)
-    
     
     useEffect(() =>{
     dispatch(thunkloadspots())
-    
-
     },[dispatch])
+
     if(!spots) return null;
 
     return(
         <div className="card-spot">
-        {
+            {
             spots.map((spot) => {
-                // if(!(Number.parseFloat(spots.avgRating).toFixed(2))) spot.avgRating="New"
-                //if(!spot.avgRating) spot.avgRating="New"
+                
              return(
-                    <div className="spot-div">
-                        {
+                <div className="spot-div">
+                    {
                             console.log("Inside the get all spots comp- avg Rating",spot.avgRating)
-                        }
-                        <NavLink to={`/spots/${spot.id}`}>
-                        {/* <div class="tooltip">
-                        <span class="tooltiptext">{spot.name}</span>
-                        </div>  */}
-                        <div className="img-text">
-                        <img src={spot.previewImage} alt={spot.name} height={220} width={220}   />
-                        </div>
-                        </NavLink>
+                    }
+                    <NavLink to={`/spots/${spot.id}`}>
                         
-                        <div className="city-state-rating-div">
-                            <div className="spot-city-state">{spot.city}, {spot.state}</div>
-                            <div className="spot-avrRating">{!spot.avgRating ? "⭐️ New" : <span>⭐️ {Number.parseFloat(spot.avgRating).toFixed(1)}</span>}</div>
-                        </div>
-                        <div className="spot-price"><p>${spot.price} night</p></div>
-                        
+                    <div className="img-text">
+                        <div class="tooltip">{spot.name}</div> 
+                        <img className="land-page-images" src={spot.previewImage} alt={spot.name} height={240} width={240}   />
                         
                     </div>
-
-                
+                    </NavLink>
+                        
+                    <div className="city-state-rating-div">
+                            <div className="spot-city-state">{spot.city}, {spot.state}</div>
+                            <div className="spot-avrRating">{!spot.avgRating ? "★ New" : <span>★ {Number.parseFloat(spot.avgRating).toFixed(1)}</span>}</div>
+                    </div>
+                   <div className="spot-price-night"><div className="spot-price" >${spot.price}  </div><div>night</div></div>
+                                
+                </div>
+  
              )
             })
-        }
+            }
         </div>
     )
 

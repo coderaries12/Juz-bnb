@@ -3,6 +3,7 @@ import { useSelector,useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { thunkdeletereview } from "../../store/review";
+import './deleteReview.css'
 
 function DeleteReview ({reviewId,spotId}) {
  const history = useHistory()
@@ -36,13 +37,13 @@ closeModal()
 
 return(
     
-    <div>
+    <div className="review-to-delete">
         <h1>Confirm Delete</h1>
         <p>Are you sure you want to delete this review?</p>
         <form>
         <div className="delete-review-buttons">
           <button  className="yes-button" onClick={handleSubmityes}>Yes (Delete Review)</button>
-          <button  onClick={handleSubmitno}> No (Keep Review)</button>
+          <button  className="no-button" onClick={handleSubmitno}> No (Keep Review)</button>
           </div>
         </form>
                         
