@@ -4,10 +4,12 @@
     grid-template-rows: 1fr;
     gap:1rem;
     
+    
 }
 .preview-image-on-the-left {
     padding:0px;
     margin:0px;
+   
     
     
     
@@ -16,7 +18,8 @@
 
    display:grid;
    grid-template-columns: 1fr 1fr;
-   gap:0.5rem
+   gap:0.5rem;
+   
 
 } 
 .text-div{

@@ -12,7 +12,7 @@ function Navigation({ isLoaded }){
     <div className='nav-div'>
     <div className='nav-left-div'>
         <NavLink exact to="/" className="logo-nav">
-          <img className='logo-image' src="https://res.cloudinary.com/dxrhf8ah9/image/upload/v1683567297/Airbnb_logo_PNG3_lasevv.png" alt='logo' /> 
+          <img className='logo-image' src=" https://res.cloudinary.com/dxrhf8ah9/image/upload/v1684096377/Airbnb-images/Logo_hxslbp.png" alt='logo' /> 
           </NavLink>
     </div>
     

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { thunkcreateanewspot } from "../../store/spot";
 import { useDispatch } from "react-redux";
-
+import './createspot.css'
 
 
 
@@ -100,7 +100,7 @@ function CreateSpot({spot,formType}) {
 	};
 
 	return (
-	<div className="spot-form-div">
+	<div id="spot-form-div">
 		<form className="spot-form" onSubmit={onSubmit}>
             <h1>Create a new Spot</h1>
 			<h2>Where's your place located?</h2>
@@ -174,11 +174,14 @@ function CreateSpot({spot,formType}) {
 			
 			<div>
 				<label>
+					<div>_____________________________________________________________</div>
 					<h4>  Describe your place to guests  </h4>
-					<p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
+					<p id="p-description">Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
 				</label>
-                <textarea
+                <textarea id="description-textarea-editform"
 					placeholder="Description"
+					cols={55}
+					rows={8}
 					type=""
 					name="description"
 					value={description}
@@ -189,6 +192,7 @@ function CreateSpot({spot,formType}) {
 
             <div>
 				<label>
+					<div>___________________________________________________________</div>
 					<h4>  Create a title for your spot  </h4>
 					<p>Catch guest's attention with a spot title that highlights what makes your place special.</p>
 				</label>
@@ -204,6 +208,7 @@ function CreateSpot({spot,formType}) {
 
 			<div>	
 				<label>
+					<div>__________________________________________________________</div>
 					<h4>  Set a base price for your spot  </h4>
 					<p>Competitive pricing can help your listing stand out and rank high in search results.</p>
 				</label>
@@ -220,6 +225,7 @@ function CreateSpot({spot,formType}) {
 			
 			<div>
 				<label>
+					<div>________________________________________________________</div>
 					<h4> Liven up your spot with photos </h4>
 					<p>Submit a link to at least one photo to publish your spot.</p>
 				</label>
@@ -278,8 +284,8 @@ function CreateSpot({spot,formType}) {
 			</div>
 		
 			<div>
-				<button type="submit" disabled={!!Object.values(errors).length}>
-					Edit Spot
+				<button  className="createbutton-spot" type="submit" disabled={!!Object.values(errors).length}>
+					Create Spot
 				</button>
 			</div>
 		</div>

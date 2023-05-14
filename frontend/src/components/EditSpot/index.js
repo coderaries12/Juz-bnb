@@ -1,9 +1,9 @@
 import { useSelector,useDispatch} from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-//import CreateSpot from "../CreateSpot";
 import { thunkeditnewspot } from "../../store/spot";
 import { useState, useEffect} from "react";
-import { thunkloadsinglespot } from "../../store/spot";
+import './editSpot.css'
+
 
 
 
@@ -107,8 +107,8 @@ export default function EditSpot () {
 
 
 return(
-    <div className="spot-form-div">
-		<form className="spot-form" onSubmit={onSubmit}>
+    <div id="spot-editform-div">
+		<form className="spot-editform" onSubmit={onSubmit}>
             <h1>Create a new Spot</h1>
 			<h2>Where's your place located?</h2>
             <p>Guests will only get your exact address once they booked a reservation.</p>
@@ -184,10 +184,13 @@ return(
 				/></div>
 			</label>
 			<label>
+				<div>______________________________________________________________</div>
                 <h4>  Describe your place to guests  </h4>
 				<p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
                   <textarea
 				   placeholder="Description"
+				    cols={55}
+					rows={8}
 					type=""
 					name="description"
 					value={description}
@@ -198,6 +201,7 @@ return(
 
 
 			<label>
+				<div>_____________________________________________________________ </div>
 			    <h4>  Create a title for your spot  </h4>
 				<p>Catch guest's attention with a spot title that highlights what makes your place special.</p>
 				<div>
@@ -212,10 +216,9 @@ return(
 			<p className="errors">{errors.name} </p>
 
 			<label>
+				<div>___________________________________________________________</div>
                 <h4>  Set a base price for your spot  </h4>
 				<p>Competitive pricing can help your listing stand out and rank high in search results.</p>
-
-				
                   $<input
 				    placeholder="Price per night(USD)"
 					type="number"
@@ -225,8 +228,8 @@ return(
 				/>
 			</label>
             <div>
-			<button type="submit" onClick={onSubmit}>
-				Create Spot
+			<button className="editform-button" type="submit" onClick={onSubmit}>
+				Edit Spot
 			</button></div>
         </form>
     </div>

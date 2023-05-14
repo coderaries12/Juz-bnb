@@ -15,7 +15,7 @@ export default function SingleSpot(){
     const spot=useSelector(state => state?.spots.singleSpot)
     const reviewsObj = useSelector((state) => state?.reviews.allReviews)
     const reviews = Object.values(reviewsObj)
-    const sortedReviews = reviews?.sort((a,b) => new Date(a.updatedAt) - new Date(b.updatedAt))
+    const sortedReviews = reviews?.sort((a,b) => new Date(b.updatedAt) - new Date(a.updatedAt))
     const SpotUser = useSelector(state => state?.spots.singleSpot.Owner)
     const currentUser = useSelector(state => state.session.user)
     let reviewsLength = reviews.length 
@@ -58,14 +58,10 @@ export default function SingleSpot(){
         sum+=r.stars
     }
     let AvgRating = sum/reviews.length
-    //AvgRating = AvgRating.toFixed(2)
     console.log("avg rating",AvgRating)
-   // console.log("total length",reviews.length)
-    
     if(!spot.id ) return null;
-   // if(!AvgRating)  { AvgRating = "New"}
-   if(!SpotUser.id)   return null
-   //if(!reviewsObj.id) return null
+    if(!SpotUser.id)   return null
+   
 
     const CurrentUserReview = reviews.find(r => r.userId === currentUser.id )
     console.log("current user review",CurrentUserReview)
@@ -75,21 +71,21 @@ export default function SingleSpot(){
             <div><h2>{spot.name}</h2></div>
             <div><p>{spot.city}, {spot.state}, {spot.country}</p></div>
             <div className="spot-images-div"> 
-            <div className="preview-image-on-the-left"><img  src={spot.SpotImages[0].url} alt="spot-Images" height={410} width={500} />
+                <div className="preview-image-on-the-left"><img  src={spot.SpotImages[0].url} alt="spot-Images" height={410} width={500} />
             </div>
             <div className="image-array-for-right-side">
                 <img  src={spot.SpotImages[1]?.url} alt="spot-Images" height={200} width={200} />
                 <img  src={spot.SpotImages[2]?.url} alt="spot-Images" height={200} width={200} />
                 <img  src={spot.SpotImages[3]?.url} alt="spot-Images" height={200} width={200} />
-                <img  src={spot.SpotImages[3]?.url} alt="spot-Images" height={200} width={200} />    
+                <img  src={spot.SpotImages[4]?.url} alt="spot-Images" height={200} width={200} />    
             </div>
-            </div>
+        </div>
 
         <div className="text-div">
             <div>
                 <h2>Hosted by {SpotUser.firstName} {SpotUser.lastName}</h2>
                 <p>{spot.description}</p>
-                </div>
+            </div>
             
             <div className="call-out-box">
                 
@@ -113,7 +109,7 @@ export default function SingleSpot(){
                     (currentUser && (currentUser.id !== SpotUser.id) && (!CurrentUserReview)) && 
                     <div>
                         <OpenModalButton 
-                             buttonText="Post Your Review" modalComponent={<PostReview  spotId={spotId} />} 
+                             buttonText="Post Your Review" modalComponent={<PostReview  spotId={spotId} spot={spot} />} 
                     /> 
                     </div>      
             }

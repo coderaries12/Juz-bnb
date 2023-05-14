@@ -81,9 +81,13 @@ const initialState = {
 
 
 const reviewReducer = (state = initialState, action) => {
-    const newState= { ...state, allReviews: {...state.allReviews}, singleReview: {...state.singleReview}}
+    let newState= { ...state, allReviews: {...state.allReviews}, singleReview: {...state.singleReview}}
     switch (action.type) {
       case LOAD_REVIEWS:
+        newState= { 
+          allReviews:{},
+          singleReview:{}
+         };
         action.payload.Reviews.map((review) => {
          newState.allReviews[review.id]=review
         })
