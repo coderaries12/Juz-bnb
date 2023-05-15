@@ -91,3 +91,13 @@ h2#spot-name{
     display:flex;
     flex-direction: column;
 }
+.new{
+    display:flex;
+    flex-direction: row;
+    gap:0.5rem;
+
+}
+.new > h4{
+    
+    margin-top: 1px;
+}
