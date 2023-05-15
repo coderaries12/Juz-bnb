@@ -16,12 +16,7 @@ const dispatch = useDispatch();
 const {closeModal} =  useModal();
 console.log("review text length",reviewText.length)
 
-// useEffect(() => {
-	
-//     },[rating,reviewText])
-
-const handleSubmit = async (e) => {
-    e.preventDefault();
+useEffect(() => {
 	const errors = {};
 	    if (reviewText.length < 10) {
 			errors.reviewText = "Comment should have more than 10 characters";
@@ -30,6 +25,11 @@ const handleSubmit = async (e) => {
 			errors.rating = "Stars must be selected";
 		}
     setErrors(errors);
+    },[rating,reviewText])
+
+const handleSubmit = async (e) => {
+    e.preventDefault();
+	
 	const payload = {
         review:reviewText,
 		stars:rating,
