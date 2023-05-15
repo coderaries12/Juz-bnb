@@ -65,10 +65,15 @@ export default function SingleSpot(){
 
     const CurrentUserReview = reviews.find(r => r.userId === currentUser.id )
     console.log("current user review",CurrentUserReview)
+    const reviewNum = (num) => {
+       // if (num === 0) return <></>
+         if (num === 1) return "review"
+        else if(num > 1) return "reviews"
+    }
     
     return (
         <div>
-            <div><h2>{spot.name}</h2></div>
+            <div><h2 id="spot-name">{spot.name}</h2></div>
             <div><p>{spot.city}, {spot.state}, {spot.country}</p></div>
             <div className="spot-images-div"> 
                 <div className="preview-image-on-the-left"><img  src={spot.SpotImages[0].url} alt="spot-Images" height={410} width={500} />
@@ -82,8 +87,8 @@ export default function SingleSpot(){
         </div>
 
         <div className="text-div">
-            <div>
-                <h2>Hosted by {SpotUser.firstName} {SpotUser.lastName}</h2>
+            <div className="h2-spot-description">
+                <h2 className="spot-user-heading">Hosted by {SpotUser.firstName} {SpotUser.lastName}</h2>
                 <p>{spot.description}</p>
             </div>
             
@@ -91,8 +96,8 @@ export default function SingleSpot(){
                 
                 <div className="spot-night">
                 <span> ${spot.price} night  </span>
-                <span> {!AvgRating ? "⭐️ New" : <span>⭐️ {Number.parseFloat(AvgRating).toFixed(1)}</span>} </span>        
-                <span> {reviewsLength} reviews </span>
+                <span> {!AvgRating ? "★ New" : <span> ★ {Number.parseFloat(AvgRating).toFixed(1)}</span>} </span> <span> . </span>       
+                <span> {reviewsLength} {reviewNum(reviewsLength)} </span>
                 </div>               
                 
                 <button className="reserve-button" onClick={handlealert}>Reserve</button>    
@@ -100,8 +105,8 @@ export default function SingleSpot(){
         </div>
         <div>_________________________________________________________________________________________________________________________________</div>
         <div className="down-rating-div">
-            <span className="down-avg-span">{!AvgRating ? "⭐️ New" : <span>⭐️ {Number.parseFloat(AvgRating).toFixed(1)}</span>}</span>
-            <span>{reviewsLength} reviews</span>
+            <span className="down-avg-span">{!AvgRating ? "★ New" : <span>★ {Number.parseFloat(AvgRating).toFixed(1)}</span>}</span>
+            <span>{reviewsLength} {reviewNum(reviewsLength)} </span>
             
         </div>
         
