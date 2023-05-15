@@ -28,7 +28,7 @@ module.exports = {
         "lat": 43.505875,
         "lng": -116.372627,
         "name": "Oasis By The Sea",
-        "description": "Unwind and breathe in the fresh ocean air as you enjoy scenic views of the Puget Sound. This quiet oceanfront getaway is the perfect retreat for rest and relaxation. ",
+        "description": "Unwind and breathe in the fresh ocean air as you enjoy scenic views of the Puget Sound. ",
         "price": 720, 
       },
       {
@@ -40,7 +40,7 @@ module.exports = {
         "lat": 43.505875,
         "lng": -116.372627,
         "name": "Coastal Vista Getaway",
-        "description": "Coastal Vista Getaway is located on the west side of Port Angeles, with a breathtaking view of the Straits of Juan de Fuca. This beautiful vacation rental is the upper unit of a 2-story house and boasts stunning water views.",
+        "description": "Coastal Vista Getaway is located on the west side of Port Angeles, with a breathtaking view of the Straits of Juan de Fuca. ",
         "price": 256, 
       },
       {
@@ -63,7 +63,7 @@ module.exports = {
         "lat": 43.505875,
         "lng": -116.372627,
         "name": "Mortlake",
-        "description": "One small single bedroom/ box room. It is a cosy bedroom in a family home. Decor....shabby chic...we have a dog and 2 cats. We are a very friendly family.",
+        "description": "One small single bedroom/ box room. It is a cosy bedroom in a family home.",
         "price": 650, 
       },
       {
@@ -75,7 +75,7 @@ module.exports = {
         "lat": 43.505875,
         "lng": -116.372627,
         "name": "Clook Room",
-        "description": "Our Place has a classic and contemporary feel to it. Relaxing lighting once we do not like ceiling lights. It's cozy and spacious.",
+        "description": "Our Place has a classic and contemporary feel to it.",
         "price": 156, 
       },
 
@@ -89,7 +89,7 @@ module.exports = {
         "lat": 33.692253,
         "lng": -117.734627,
         "name": "Copacabana",
-        "description": "You will be enchanted by this cozy bedroom suite. Great location, air, wifi 250 Megas Walking: Copa beach, Siqueira Campos Subway, Shop.Antiquários, Copacabana Palace.",
+        "description": "You will be enchanted by this cozy bedroom suite. Great location, air and wifi.",
         "price": 900, 
       },
       {
@@ -126,7 +126,7 @@ module.exports = {
         "lat": 33.692253,
         "lng": -117.734627,
         "name": "Satori Suite",
-        "description": "Start the day with a coffee on the private balcony and take in one of Rome's most spectacular views, or wander around nearby St Peter's Square.",
+        "description": "Start the day with a coffee on the private balcony and take in one of Rome's most spectacular views.",
         "price": 275, 
       },
       {
@@ -138,7 +138,7 @@ module.exports = {
         "lat": 33.692253,
         "lng": -117.734627,
         "name": "The Granary",
-        "description": "The house is Grade II listed building, dated around 1600. It has full of character, with beautiful garden. Recently refurbished space with charming decor",
+        "description": "The house is Grade II listed building, dated around 1600. It has full of character, with beautiful garden. ",
         "price": 750, 
       },
       
@@ -151,7 +151,7 @@ module.exports = {
         "lat": 38.031239,
         "lng": -87.392021,
         "name": "Stuart Manor Bed and Breakfast",
-        "description": "Welcome to Stuart Manor, a mid-1800's Brick Italianate Home constructed by John Stuart, an early Cumberland County Judge. The home was fully restored 2016-2019.",
+        "description": "Welcome to Stuart Manor, a mid-1800's Brick Italianate Home constructed by John Stuart, an early Cumberland County Judge.",
         "price": 890, 
       },
       {
@@ -163,7 +163,7 @@ module.exports = {
         "lat": 38.031239,
         "lng": -87.392021,
         "name": "Clook Room",
-        "description": "Our Place has a classic and contemporay feel to it. Relaxing lighgthing once we do not like ceilling lights. Its cozy and spacious. ",
+        "description": "Our Place has a classic and contemporay feel to it. Relaxing lighgthing once we do not like ceilling lights. ",
         "price": 750, 
       },
       {
@@ -175,7 +175,7 @@ module.exports = {
         "lat": 38.031239,
         "lng": -87.392021,
         "name": "Cedar River Trail",
-        "description": "The Cedar River Trail is just a stone's throw away from Koi Story Cabin, providing the perfect opportunity to immerse yourself in nature.",
+        "description": "The Cedar River Trail is just a stone's throw away from Koi Story Cabin .",
         "price": 500, 
       },
       {
@@ -187,7 +187,7 @@ module.exports = {
         "lat": 38.031239,
         "lng": -87.392021,
         "name": "Historic Georgian Home",
-        "description": "We look forward to welcoming you to our home. Your room is on the second (U.S. 3rd) floor, with the best views on the house over the Firth of Forth to Fife. ",
+        "description": "We look forward to welcoming you to our home. Your room is on the second floor . ",
         "price": 590, 
       },
       {
@@ -199,7 +199,7 @@ module.exports = {
         "lat": 38.031239,
         "lng": -87.392021,
         "name": "Cacao Place",
-        "description": "Enjoy the simplicity of this peaceful, quiet, and centrally-located home. It is a private room inside an industrial style apartment, very cozy and super well located in a traditional Mexican neighborhood.",
+        "description": "Enjoy the simplicity of this peaceful, quiet, and centrally-located home. ",
         "price": 350, 
       },
 
@@ -212,7 +212,7 @@ module.exports = {
         "lat": 45.031239,
         "lng": -95.392021,
         "name": "Botafogo Room",
-        "description": "The room (very large) is completely renovated to receive guests (1 or 2 guests), has everything new, 43-inch TV, with more than 200 national and foreign channels, king size bed, with new sheets, new pillowcases, pillows new ones made of viscoelastic material, blanket for cold days and air conditioning .",
+        "description": "The room (very large) is completely renovated to receive guests.",
         "price": 170, 
       },
       {
@@ -224,7 +224,7 @@ module.exports = {
         "lat": 45.031239,
         "lng": -95.392021,
         "name": "West LA Architectural Gem",
-        "description": "The bedroom is located in our home's back wing. It's not above the shared living room. 200 sq. ft. private bedroom with backyard garden view. King-size bed & luxury linens. Wi-Fi & streaming TV. Adjacent private bathroom with rain shower. Designed by architect Neil Denari, our home has been featured in The NY Times & Vogue. ",
+        "description": "The bedroom is located in our home's back wing.  ",
         "price": 850, 
       },
       {
@@ -236,7 +236,7 @@ module.exports = {
         "lat": 45.031239,
         "lng": -95.392021,
         "name": "Lovely apartment",
-        "description": "PNice apartment with a very cozy living room, a large terrace, an equipped kitchen, two bedrooms and a bathroom. The house is very bright thanks to the large windows. It is located in a quiet area where several means of transport that connect it both to the center of the city in 15/20min and to the airport of Milan in 15 min.",
+        "description": "PNice apartment with a very cozy living room, a large terrace, an equipped kitchen, two bedrooms and a bathroom. ",
         "price": 900, 
       },
       {
@@ -248,7 +248,7 @@ module.exports = {
         "lat": 45.031239,
         "lng": -95.392021,
         "name": "Antebellum",
-        "description": "Historic Greek Revival, near the edge of the French Quarter. This beautiful home is dressed out in period style, ornamental plaster, marble fireplaces and antique furnishings. The crowning glory of this property is a gorgeous courtyard. Lush and private with fountains, ornamental fish pound and hot tub and beautiful gardens.",
+        "description": "Historic Greek Revival, near the edge of the French Quarter. This beautiful home is dressed out in period style.",
         "price": 1500, 
       },
       {
