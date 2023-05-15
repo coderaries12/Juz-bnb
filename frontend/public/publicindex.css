@@ -1,5 +1,6 @@
 body{
     width:1000px;
     margin:1.5rem;
-    /* padding:0; */
+    justify-content: center;
+     padding-left:1.5rem; 
 }

@@ -79,10 +79,10 @@ export default function SingleSpot(){
                 <div className="preview-image-on-the-left"><img  src={spot.SpotImages[0].url} alt="spot-Images" height={410} width={500} />
             </div>
             <div className="image-array-for-right-side">
-                <img  src={spot.SpotImages[1]?.url} alt="spot-Images" height={200} width={200} />
-                <img  src={spot.SpotImages[2]?.url} alt="spot-Images" height={200} width={200} />
-                <img  src={spot.SpotImages[3]?.url} alt="spot-Images" height={200} width={200} />
-                <img  src={spot.SpotImages[4]?.url} alt="spot-Images" height={200} width={200} />    
+                <img  src={spot.SpotImages[1]?.url || "https://res.cloudinary.com/dxrhf8ah9/image/upload/v1684121802/Airbnb-images/ET-IMAGE-COMING-SOON-1000_ys87xr.jpg"} alt="Image is coming soon" height={200} width={200} placeholder="Image coming soon"/>
+                <img  src={spot.SpotImages[2]?.url || "https://res.cloudinary.com/dxrhf8ah9/image/upload/v1684121802/Airbnb-images/ET-IMAGE-COMING-SOON-1000_ys87xr.jpg" } alt="spot-Images" height={200} width={200} />
+                <img  src={spot.SpotImages[3]?.url || "https://res.cloudinary.com/dxrhf8ah9/image/upload/v1684121802/Airbnb-images/ET-IMAGE-COMING-SOON-1000_ys87xr.jpg"} alt="spot-Images" height={200} width={200} />
+                <img  src={spot.SpotImages[4]?.url || "https://res.cloudinary.com/dxrhf8ah9/image/upload/v1684121802/Airbnb-images/ET-IMAGE-COMING-SOON-1000_ys87xr.jpg"} alt="spot-Images" height={200} width={200} />    
             </div>
         </div>
 
@@ -96,8 +96,12 @@ export default function SingleSpot(){
                 
                 <div className="spot-night">
                 <span> ${spot.price} night  </span>
-                <span> {!AvgRating ? "★ New" : <span> ★ {Number.parseFloat(AvgRating).toFixed(1)}</span>} </span>     
-                <span> {reviewNum(reviewsLength)} </span>
+                {!AvgRating ? <div className="new">
+                    <i class="fa-sharp fa-solid fa-star"></i>
+                    <h4 >New</h4>
+                </div> : 
+                ( <div><span> ★ {Number.parseFloat(AvgRating).toFixed(1)}  </span>   
+                <span> {reviewNum(reviewsLength)} </span></div> )}
                 </div>               
                 
                 <button className="reserve-button" onClick={handlealert}>Reserve</button>    
@@ -105,8 +109,12 @@ export default function SingleSpot(){
         </div>
         <div>_________________________________________________________________________________________________________________________________</div>
         <div className="down-rating-div">
-            <span className="down-avg-span">{!AvgRating ? "★ New" : <span>★ {Number.parseFloat(AvgRating).toFixed(1)}</span>}</span>
-            <span>{reviewNum(reviewsLength)} </span>
+            {!AvgRating ? <div className="new">
+            <i class="fa-sharp fa-solid fa-star"></i>
+            <h4>New</h4>
+            </div> : 
+            (<div><span>★ {Number.parseFloat(AvgRating).toFixed(1)} </span>
+            <span>{reviewNum(reviewsLength)} </span></div> )}
             
         </div>
         

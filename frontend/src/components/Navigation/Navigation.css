@@ -1,10 +1,32 @@
 .hidden {
    display: none;
 }
+.profile-button-container{
+    display: flex;
+    flex-direction: row;
+    padding:0px;
+    margin:0px;
+    
+
+}
+.main-menu-container{
+    display:flex;
+    flex-direction: row; 
+    
+    padding:0px;
+    margin:0px;
+    /* margin-top: 1.5rem; */
+
+}
 /* .nav-right-div{
     margin:0;
     padding:0;
 } */
+div.menu-button{
+    margin-top: 2rem;
+    gap:0px;
+
+}
 .nav-div{
     display: flex;
     flex-direction: row;
@@ -14,7 +36,7 @@
     height: 70px;
     padding-left:10px ;
     padding-right: 10px;
-    margin-top:1rem;
+    margin-top:1.5rem;
     margin-bottom: 2rem;
     align-items: center;
     cursor: pointer;
@@ -24,19 +46,22 @@
     width:8rem;
 }
 .open-menu-button{
+    /* display:flex;
+    flex-direction: row; */
     gap:2rem;
     width:5rem;
     border-radius: 2rem;
-    padding:0.7rem;
     border:2px solid black;
-    margin-bottom:0.2em;
-    margin-top:0.3em;
+    padding:0.7rem;
+    margin-top: 0.3rem;
+   margin-bottom: 2.6rem;
 
 }
 .open-menu-button > i {
     padding:0.2rem;
 }
 .create-spot-button{
+    margin-top: 1.7rem;
     padding: 1rem;
     text-decoration: none;
     color:#4682b4;
@@ -48,7 +73,15 @@
     /* gap:0.4rem; */
     border:solid black 3px;
     text-align: center;
-    padding:0.2rem;
+    padding:1px;
+    height:7rem;
+}
+user-logout-div{
+    margin-bottom: 15px;
+    
+    
+    
+
 }
 .manage-spot-div{
     border-bottom: solid black 2px;
@@ -66,7 +99,8 @@
 .user-logout-button{
     border:solid black 2px;
     border-radius: 2rem;
-    padding:0.4rem;
+    padding-top: 5px;
+    margin-top: 1rem;
     background-color: #696969;
     color: white;
 }
