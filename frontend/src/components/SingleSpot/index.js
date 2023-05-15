@@ -66,7 +66,7 @@ export default function SingleSpot(){
     const CurrentUserReview = reviews.find(r => r.userId === currentUser.id )
     console.log("current user review",CurrentUserReview)
     const reviewNum = (num) => {
-        if (num === 0) return "New"
+        if (num === 0) return "★ New"
         else if (num === 1) return " . 1 review"
         else if(num > 1) return `. ${num} reviews`
     }
