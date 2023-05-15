@@ -66,9 +66,9 @@ export default function SingleSpot(){
     const CurrentUserReview = reviews.find(r => r.userId === currentUser.id )
     console.log("current user review",CurrentUserReview)
     const reviewNum = (num) => {
-       // if (num === 0) return <></>
-         if (num === 1) return "review"
-        else if(num > 1) return "reviews"
+        if (num === 0) return "New"
+        else if (num === 1) return " . 1 review"
+        else if(num > 1) return `. ${num} reviews`
     }
     
     return (
@@ -96,8 +96,8 @@ export default function SingleSpot(){
                 
                 <div className="spot-night">
                 <span> ${spot.price} night  </span>
-                <span> {!AvgRating ? "★ New" : <span> ★ {Number.parseFloat(AvgRating).toFixed(1)}</span>} </span> <span> . </span>       
-                <span> {reviewsLength} {reviewNum(reviewsLength)} </span>
+                <span> {!AvgRating ? "★ New" : <span> ★ {Number.parseFloat(AvgRating).toFixed(1)}</span>} </span>     
+                <span> {reviewNum(reviewsLength)} </span>
                 </div>               
                 
                 <button className="reserve-button" onClick={handlealert}>Reserve</button>    
@@ -106,7 +106,7 @@ export default function SingleSpot(){
         <div>_________________________________________________________________________________________________________________________________</div>
         <div className="down-rating-div">
             <span className="down-avg-span">{!AvgRating ? "★ New" : <span>★ {Number.parseFloat(AvgRating).toFixed(1)}</span>}</span>
-            <span>{reviewsLength} {reviewNum(reviewsLength)} </span>
+            <span>{reviewNum(reviewsLength)} </span>
             
         </div>
         
