@@ -1,21 +1,37 @@
-.spot-div{
-float:left;
-width:25%;
-
+.card-spot{
+    display:flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    width:100%;
+    gap:0.5rem;
+    text-decoration: none;
 }
+#navlink-text{
+    text-decoration: none;
+}
+.spot-city-state{
+    width:8rem;
+}
+
 .city-state-rating-div{
     display:flex;
     gap:4rem;
     margin-top:1rem;
+    text-decoration: none;
+    color:black;
 }
 .spot-price-night{
     margin-top:1rem;
     display:flex;
     flex-direction: row;
     gap:0.3rem;
+    text-decoration: none;
+    color:black;
 }
 .spot-price {
     font-weight: bold;
+    text-decoration: none;
+    color:none;
 }
 .land-page-images{
     border: solid whitesmoke 1px;
@@ -23,13 +39,16 @@ width:25%;
 }
 .tooltip {
     visibility: hidden;
-    width: 120px;
+    width: 240px;
     background-color: rgb(61, 55, 55);
     color: #fff;
     text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
+    /* border-radius: 6px;
+    padding: 5px 0; */
 }
 .img-text:hover .tooltip {
     visibility: visible;
+  }
+  div.spot-city-state{
+    text-decoration: none;
   }

@@ -18,11 +18,14 @@ h1{
    /* margin:0.5rem;  */
    /* margin-bottom:0.5px; */
    margin:0px;
+   text-align: left;
    
 }
 h2{
     margin-top:0.8rem;
-    margin-bottom: 0.1rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    padding:0px;
 
 }
 h4{

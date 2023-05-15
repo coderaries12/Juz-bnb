@@ -14,6 +14,7 @@ const [errors, setErrors] = useState({});
 const history = useHistory();
 const dispatch = useDispatch();
 const {closeModal} =  useModal();
+console.log("review text length",reviewText.length)
 
 // useEffect(() => {
 	
@@ -21,20 +22,21 @@ const {closeModal} =  useModal();
 
 const handleSubmit = async (e) => {
     e.preventDefault();
-	const submitErrors = {};
+	const errors = {};
 	    if (reviewText.length < 10) {
-			submitErrors.reviewText = "Comment should have more than 10 characters";
+			errors.reviewText = "Comment should have more than 10 characters";
 		}
         if (rating === 0) {
-			submitErrors.rating = "Stars must be selected";
+			errors.rating = "Stars must be selected";
 		}
-    setErrors(submitErrors);
+    setErrors(errors);
 	const payload = {
         review:reviewText,
 		stars:rating,
 				
 	};
 console.log("Rating",rating)
+console.log("errors length",errors.length)
 if (!errors.length){
     let createdReview= await dispatch(thunkcreatenewReview(payload,spotId));
     console.log("created Review",createdReview)
@@ -56,10 +58,11 @@ if (!errors.length){
                 <textarea 
                 className = "review-textarea"
                 name = "review-text"
+                type = "text"
                 rows = "9"
                 cols = "50"
                 value = {reviewText}
-                placeholder = "Write your review here"
+                placeholder = "Write your review here...."
                 onChange = {e => setReviewText(e.target.value)}
                 >  </textarea>
             <div className="star-rating-div">
@@ -100,12 +103,12 @@ if (!errors.length){
                 onClick={()=> setRating(5)}>
 
                 <i className="fa-solid fa-star fa-xl " /> 
-                                  
+                 <span id="stars-span">{"stars"}</span>                 
                 </div>
 
             </div>
 
-        <button className="post-review-button" onClick={handleSubmit}> Submit</button>
+        <button className="post-review-button" onClick={handleSubmit} disabled={!!Object.values(errors).length}> Submit</button>
         </form>
     </div>
     )

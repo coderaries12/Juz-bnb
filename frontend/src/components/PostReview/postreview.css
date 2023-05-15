@@ -20,6 +20,9 @@ div#modal-content{
     padding:2rem;
 
 }
+#stars-span{
+    color:black;
+}
 h2{
     text-align: center;
     padding:1rem;

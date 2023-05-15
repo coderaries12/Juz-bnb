@@ -22,16 +22,35 @@
    
 
 } 
+.h2-spot-description{
+    text-align: left;
+    width:40rem;
+    padding:0px;
+    margin:0px;
+
+}
+.spot-user-heading{
+    margin-left: 0px;
+    width:15rem;
+    padding:0px;
+    margin-bottom: 2rem;
+}
+h2#spot-name{
+    padding-left: 0.5px;
+    text-align: left;
+}
+
 .text-div{
     display:flex;
-    gap:25rem;
+    gap:0.5rem;
+    margin-top: 1rem;
 }
 .call-out-box{
     
-    border:1px solid black;
+    border:4px solid black;
     padding:15px;
     width:15rem;
-    border-radius: 5px;
+    border-radius: 8px;
     
 }
 .reserve-button{
@@ -51,6 +70,7 @@
     flex-direction: row;
     justify-content: space-between;
     padding-bottom: 1.5rem;
+    font-weight: bolder;
 }
 .down-rating-div{
     display:flex;

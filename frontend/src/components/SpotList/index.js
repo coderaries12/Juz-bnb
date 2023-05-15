@@ -27,21 +27,22 @@ export default function SpotList(){
                     {
                             console.log("Inside the get all spots comp- avg Rating",spot.avgRating)
                     }
-                    <NavLink to={`/spots/${spot.id}`}>
+                    <NavLink id="navlink-text" to={`/spots/${spot.id}`}>
                         
                     <div className="img-text">
-                        <div class="tooltip">{spot.name}</div> 
+                        <p class="tooltip">{spot.name}</p> 
                         <img className="land-page-images" src={spot.previewImage} alt={spot.name} height={240} width={240}   />
                         
                     </div>
-                    </NavLink>
-                        
                     <div className="city-state-rating-div">
                             <div className="spot-city-state">{spot.city}, {spot.state}</div>
                             <div className="spot-avrRating">{!spot.avgRating ? "★ New" : <span>★ {Number.parseFloat(spot.avgRating).toFixed(1)}</span>}</div>
                     </div>
                    <div className="spot-price-night"><div className="spot-price" >${spot.price}  </div><div>night</div></div>
                                 
+                    </NavLink>
+                        
+                    
                 </div>
   
              )

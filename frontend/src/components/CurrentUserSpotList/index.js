@@ -45,18 +45,18 @@ export default function CurrentUserSpotList(){
     return(
         
         <div className="card-spot">
-            <div><h1>Manage Spots</h1></div>
+            <h1 id="manage-spot-heading">Manage Spots</h1>
         {
             spots.map((spot) => {
                 // if(!(Number.parseFloat(spots.avgRating).toFixed(2))) spot.avgRating="New"
                 if(!spot.avgRating) spot.avgRating="New"
              return(
                     <div key={spot.id} className="spot-div">
-                        <NavLink  to={`/spots/${spot.id}`}>
+                        <NavLink className="navlink-image" to={`/spots/${spot.id}`}>
                         {/* <div class="tooltip">
                         <span class="tooltiptext">{spot.name}</span>
                         </div>  */}
-                        <div className="img-text">
+                        <div id="img-text">
                         <img src={spot.previewImage} alt={spot.name} height={220} width={220}   />
                         </div>
                         </NavLink>
