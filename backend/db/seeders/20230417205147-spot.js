@@ -53,6 +53,7 @@ module.exports = {
         "lng": -116.372627,
         "name": "Dream Hideaway",
         "description": "Our newly refurbished hideaway is perfect for a small family or a few friends on vacation. ",
+        "price": 740,
       },
       {
         "ownerId":1,
