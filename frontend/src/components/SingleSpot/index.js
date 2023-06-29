@@ -19,11 +19,7 @@ export default function SingleSpot(){
     const SpotUser = useSelector(state => state?.spots.singleSpot.Owner)
     const currentUser = useSelector(state => state.session.user)
     let reviewsLength = reviews.length 
-    console.log("sorted reviews",sortedReviews)
-    console.log("reviews array",reviews)
-    console.log("Spot user detail",SpotUser)
-    console.log("Current user detail",currentUser)
-    console.log("inside the get spot by id average star rating",spot?.avgStarRating)
+    
 
     let months = {
         "01": "January",
@@ -58,13 +54,13 @@ export default function SingleSpot(){
         sum+=r.stars
     }
     let AvgRating = sum/reviews.length
-    console.log("avg rating",AvgRating)
-    if(!spot.id ) return null;
+    
+    if(!spot?.id ) return null;
     if(!SpotUser.id)   return null
    
 
     const CurrentUserReview = reviews.find(r => r.userId === currentUser.id )
-    console.log("current user review",CurrentUserReview)
+    
     const reviewNum = (num) => {
         if (num === 0) return "★ New"
         else if (num === 1) return " . 1 review"
@@ -72,7 +68,7 @@ export default function SingleSpot(){
     }
     
     return (
-        <div>
+        <div style={{marginLeft:"1rem"}}>
             <div><h2 id="spot-name">{spot.name}</h2></div>
             <div><p>{spot.city}, {spot.state}, {spot.country}</p></div>
             <div className="spot-images-div"> 

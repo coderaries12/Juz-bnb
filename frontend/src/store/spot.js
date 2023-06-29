@@ -19,7 +19,7 @@ const loadSpots = (spots) => {
 };
 
 const loadSingleSpot = (spot) => {
-  console.log("Inside the single spot action creator",spot)
+  
   return {
     type: LOAD_SINGLE_SPOT,
     spot
@@ -75,7 +75,6 @@ export const thunkloadspots = () => async (dispatch) => {
 };
 
 export const thunkloadsinglespot = (spotId) => async (dispatch) => {
-  console.log("Inside the single spot thunk",spotId)
   const response = await csrfFetch(`/api/spots/${spotId}`)
   if(response.ok) {
     const spot = await response.json();
@@ -87,7 +86,6 @@ export const thunkloadsinglespot = (spotId) => async (dispatch) => {
 };
 
 export const thunkcreateanewspot = (spot,images) => async (dispatch) => {
-  //console.log("Inside the single spot thunk",spotId)
   const response = await csrfFetch('/api/spots',{
   method:'POST',
   headers:{ "Content-Type" : 'application/json' },
@@ -98,8 +96,7 @@ export const thunkcreateanewspot = (spot,images) => async (dispatch) => {
   let newSpot 
   if(response.ok) {
     newSpot = await response.json();
-    console.log("thunk new spot look",newSpot)
-    console.log("thunk Images",images)
+    
     //dispatch(createSpot(newSpot));
     //let imageArray=[];
     for(let i = 0; i < images.length; i++){
@@ -107,7 +104,6 @@ export const thunkcreateanewspot = (spot,images) => async (dispatch) => {
       //   url:images[i],
       //   preview:true
       // }
-      console.log("inside the create thunk",images[i])
       const res = await csrfFetch (`/api/spots/${newSpot.id}/images`,{
         method:'POST',
         headers:{ "Content-Type" : 'application/json' },
@@ -119,7 +115,7 @@ export const thunkcreateanewspot = (spot,images) => async (dispatch) => {
     //const newSpotEdit = await response.json();
     //imageArray.push(newSpotImages)
      dispatch(createSpot(newSpot))
-    //console.log("Inside create thunk spotImagesArray",imageArray)
+    
     //return newSpot;
   } 
   } 
@@ -141,7 +137,7 @@ export const thunkcurrentuserspot = () => async (dispatch) => {
 
 
 export const thunkeditnewspot = (spot) => async (dispatch) => {
-console.log("Inside the single spot thunk",spot)
+
   const response = await csrfFetch(`/api/spots/${spot.id}`,{
   method:'PUT',
   headers:{ "Content-Type" : 'application/json' },
@@ -152,13 +148,13 @@ console.log("Inside the single spot thunk",spot)
   if(response.ok) {
     const Spottoedit = await response.json();
     dispatch(editSpot(Spottoedit))
-    console.log("inside the edit thunk",Spottoedit)
+    
     return Spottoedit
   }
 }
 
 export const thunkdeletespot = (spotId) => async (dispatch) => {
-  //console.log("Inside the single spot thunk",spotId)
+  
   const response = await csrfFetch(`/api/spots/${spotId}`,{
   method:'DELETE'
   })
@@ -180,23 +176,24 @@ const initialState = {
  };
 
 const spotReducer = (state = initialState, action) => {
-  const newState= { ...state, allSpots: {...state.allSpots}, singleSpot: {...state.singleSpot}}
+  let newState= { ...state, allSpots: {...state.allSpots}, singleSpot: {...state.singleSpot}}
   switch (action.type) {
     case LOAD_SPOTS:
+     
       action.payload.Spots.map((spot) => {
        newState.allSpots[spot.id]=spot
       })
       return newState;
       
     case LOAD_SINGLE_SPOT:
-      console.log("Inside the single spot switch case")
+      
         newState.singleSpot = {...action.spot}
         return newState
     case CREATE_SPOT:
       newState.allSpots[action.newSpot.id]=action.newSpot
       return newState
     case EDIT_SPOT:
-      console.log("Inside the edit spot reducer",action.editspot)
+      
       newState.allSpots[action.editspot.id]=action.editspot
       return newState
     case CURRENT_USER_SPOTS:
@@ -206,7 +203,7 @@ const spotReducer = (state = initialState, action) => {
       })
       return userState
     case DELETE_SPOT:
-      console.log("inside the delete thunk",action.deleteid)
+      
       delete newState.allSpots[action.deleteid]
       return newState;
         

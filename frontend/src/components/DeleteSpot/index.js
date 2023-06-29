@@ -17,8 +17,7 @@ function DeleteSpot ({spotId}) {
 
  const deleteSpot = useSelector(state => state?.spots.allSpots[spotId])
 // const newspot = useSelector(state => state?.spots.allSpots)
-// console.log("from delete spot component1",newspot)
- console.log("from delete spot component2",deleteSpot)
+
  if(deleteSpot === {})   return null;
 
 //  function handleSubmit(){

@@ -8,7 +8,7 @@ import './createspot.css'
 
 
 function CreateSpot({spot,formType}) {
-	console.log("Hitting Create spot component")
+	
 	const [country, setCountry] = useState("");
 	const [address, setAddress] = useState('');
 	const [city, setCity] = useState("");
@@ -91,7 +91,7 @@ function CreateSpot({spot,formType}) {
 		
 	    
 		  let createdSpot= await dispatch(thunkcreateanewspot(payload,images));
-		  console.log("created Spot images array",images)
+		  
 	  
 		  if (createdSpot) {
 			history.push(`/spots/${createdSpot.id}`);
@@ -107,16 +107,18 @@ function CreateSpot({spot,formType}) {
             <p>Guests will only get your exact address once they booked a reservation.</p>
 			<div className="spot-form-to-fill">
 				<div>
-					<label> Country    <span className="errors"> {errors.country} </span> </label>
-					<input
+					<label> Country   {errors.country && (<p className="errors"> {errors.country} </p>)} </label>
+					<input 
 				    placeholder="Country"
 					type="text"
 					name="country"
 					value={country}
 					onChange={(e) => setCountry(e.target.value)}
 					/>
+					  
+					
 				</div>
-			
+				 
 				<div>
 				   <label> Street Address    <span className="errors">{errors.address} </span> </label>
                    <input

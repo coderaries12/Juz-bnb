@@ -14,7 +14,6 @@ const [errors, setErrors] = useState({});
 const history = useHistory();
 const dispatch = useDispatch();
 const {closeModal} =  useModal();
-console.log("review text length",reviewText.length)
 
 useEffect(() => {
 	const errors = {};
@@ -35,11 +34,10 @@ const handleSubmit = async (e) => {
 		stars:rating,
 				
 	};
-console.log("Rating",rating)
-console.log("errors length",errors.length)
+
 if (!errors.length){
     let createdReview= await dispatch(thunkcreatenewReview(payload,spotId));
-    console.log("created Review",createdReview)
+    
     
     
 	  

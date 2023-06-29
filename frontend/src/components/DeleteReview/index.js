@@ -12,13 +12,13 @@ function DeleteReview ({reviewId,spotId}) {
 
  const deleteReview = useSelector(state => state?.reviews.allReviews[reviewId])
 
- console.log("from delete spot component2",deleteReview)
+ 
  if(deleteReview === {})   return null;
 
 
 const handleSubmityes = async (e) => {
      e.preventDefault(); 
-console.log("Inside the yes delete handler")
+
 const deletedReview= await dispatch(thunkdeletereview(deleteReview.id))
   
   if(deletedReview){

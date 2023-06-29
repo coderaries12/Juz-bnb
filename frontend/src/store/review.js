@@ -43,20 +43,20 @@ export const thunkloadreviews = (spotId) => async (dispatch) => {
   };
 
 export const thunkdeletereview = (reviewId) => async (dispatch) => {
-    console.log("Inside the delete review thunk",reviewId)
+    
     const response = await csrfFetch(`/api/reviews/${reviewId}`,{
     method:'DELETE'
     })
     if(response.ok) {
       const deletedresponse = await response.json();
-      console.log("inside the delete thunk- show review to delete",deletedresponse)
+      
       dispatch(deleteReview(reviewId))
       return deletedresponse
     }
   }
 
 export const thunkcreatenewReview = (review,spotId) => async (dispatch) => {
-    //console.log("Inside the single spot thunk",spotId)
+    
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`,{
     method:'POST',
     headers:{ "Content-Type" : 'application/json' },
@@ -93,7 +93,7 @@ const reviewReducer = (state = initialState, action) => {
         })
         return newState;
       case DELETE_REVIEW:
-        console.log("inside the delete review reducer",action.deletereviewid)
+        
         delete newState.allReviews[action.deletereviewid]
         return newState; 
       case CREATE_REVIEW:
