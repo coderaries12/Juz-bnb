@@ -22,8 +22,6 @@ export default function CurrentUserSpotList(){
     //     }
     // }
     
-    //console.log("id of current user",currentUserId)
-    console.log("Inside the current user component",spotobj)
     
     useEffect(() =>{
     //if(currentUser){

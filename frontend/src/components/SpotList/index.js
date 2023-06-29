@@ -9,6 +9,7 @@ import { NavLink } from "react-router-dom";
 export default function SpotList(){
     const dispatch = useDispatch()
     const spotsObj = useSelector((state) => state?.spots.allSpots)
+    
     const spots = Object.values(spotsObj)
     
     useEffect(() =>{
@@ -25,7 +26,7 @@ export default function SpotList(){
              return(
                 <div className="spot-div">
                     {
-                            console.log("Inside the get all spots comp- avg Rating",spot.avgRating)
+                            
                     }
                     <NavLink id="navlink-text" to={`/spots/${spot.id}`}>
                         

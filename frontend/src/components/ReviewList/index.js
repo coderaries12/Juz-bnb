@@ -9,7 +9,7 @@ export default function ReviewList(){
     const dispatch = useDispatch()
     const reviewsObj = useSelector((state) => state?.reviews.allReviews)
     const reviews = Object.values(reviewsObj)
-    console.log("Reviews in reviewlist component",reviews)
+    
     
     useEffect(() =>{
     dispatch(thunkloadreviews(reviewsObj.spotId))

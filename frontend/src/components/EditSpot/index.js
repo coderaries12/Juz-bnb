@@ -14,7 +14,6 @@ export default function EditSpot () {
  
  const editspot = useSelector(state => state?.spots.allSpots[spotId])
  
- //console.log("from edit spot component",editspot)
  
     const [country, setCountry] = useState("");
 	const [address, setAddress] = useState('');
@@ -77,12 +76,10 @@ export default function EditSpot () {
 			name,
 			price,	
 		  };
-        console.log("new price",price)
-         console.log("inside the edit comp edit spot",payload)
+        
          const updateSpot = await dispatch(thunkeditnewspot(payload))
         //const singleSpot = await dispatch(thunkloadsinglespot(updateSpot.id))
-         console.log("Inside the edit spot component updatedSpot",updateSpot)
-        // console.log("Inside the edit spot component SingleSpot",singleSpot)
+         
          if(updateSpot)
 		  history.push(`/spots/${updateSpot.id}`);
         }
