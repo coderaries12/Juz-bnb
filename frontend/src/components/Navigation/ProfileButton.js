@@ -46,7 +46,7 @@ function ProfileButton({ user }) {
   return (
     <div className="profile-button-container">
     {
-      user? (<Link className="create-spot-button" to='/spots/new'>Create a new spot</Link> ) : (<></>)
+      user? (<Link className="create-spot-button" to='/spots/new'>Juzbnb your home</Link> ) : (<></>)
     }
      <div className="main-menu-container">
       <div className="menu-button">
