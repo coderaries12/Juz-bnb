@@ -55,7 +55,7 @@ export default function CurrentUserSpotList(){
                         <span class="tooltiptext">{spot.name}</span>
                         </div>  */}
                         <div id="img-text">
-                        <img src={spot.previewImage} alt={spot.name} height={220} width={220}   />
+                        <img src={spot.previewImage} alt={spot.name} height={220} />
                         </div>
                         </NavLink>
                         

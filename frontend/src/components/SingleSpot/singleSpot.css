@@ -2,14 +2,15 @@
     display:grid;
     grid-template-columns: 1fr 0.5fr 1fr;
     grid-template-rows: 1fr;
-    /* gap:1rem; */
+    
+    gap:0.8rem; 
     
     
 }
 .preview-image-on-the-left {
     padding:0px;
     margin:0px;
-   
+    object-fit: contain;
     
     
     
@@ -19,12 +20,14 @@
    display:grid;
    grid-template-columns: 1fr 1fr;
    gap:0.5rem;
+   object-fit:cover;
+
    
 
 } 
 .h2-spot-description{
     text-align: left;
-    width:40rem;
+    width:60rem; 
     padding:0px;
     margin:0px;
 
@@ -43,13 +46,16 @@ h2#spot-name{
 .text-div{
     display:flex;
     gap:0.5rem;
+    width:77rem;  
     margin-top: 1rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid black;
 }
 .call-out-box{
     
     border:4px solid black;
     padding:15px;
-    width:15rem;
+    width:27rem;
     border-radius: 8px;
     
 }
@@ -58,7 +64,7 @@ h2#spot-name{
     padding:10px;
     margin-left: 1.5rem;
     
-    width:12rem;
+    width:20rem;
     background-color:red;
     color:white;
     align-content: center;

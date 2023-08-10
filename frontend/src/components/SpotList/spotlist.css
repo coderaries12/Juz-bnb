@@ -4,14 +4,15 @@
     justify-content: center;
     flex-wrap: wrap;
     width:100%;
-    gap:0.5rem;
+    gap:1rem;
     text-decoration: none;
+    
 }
 #navlink-text{
     text-decoration: none;
 }
 .spot-city-state{
-    width:8rem;
+    width:12rem;
 }
 
 .city-state-rating-div{
@@ -52,4 +53,7 @@
   }
   div.spot-city-state{
     text-decoration: none;
+  }
+  .img-text{
+    object-fit: contain;
   }
