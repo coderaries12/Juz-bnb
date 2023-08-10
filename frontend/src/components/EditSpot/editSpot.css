@@ -1,7 +1,9 @@
 div#spot-editform-div{
     display:flex;
     flex-direction: column;
-    margin-left: 15rem;
+    align-items: center;
+    /* margin-left: 15rem; */
+
 
     
 }

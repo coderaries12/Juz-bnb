@@ -32,7 +32,7 @@ export default function SpotList(){
                         
                     <div className="img-text">
                         <p class="tooltip">{spot.name}</p> 
-                        <img className="land-page-images" src={spot.previewImage} alt={spot.name} height={240} width={240}   />
+                        <img className="land-page-images" src={spot.previewImage} alt={spot.name} height={230} />
                         
                     </div>
                     <div className="city-state-rating-div">

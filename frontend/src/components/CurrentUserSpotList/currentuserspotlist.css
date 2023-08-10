@@ -1,6 +1,7 @@
 .card-spot{
   display:flex;
-  flex-direction: row;  
+  flex-direction: row; 
+  margin-left: 2rem; 
     
 }
  /* #image-text{
@@ -23,13 +24,16 @@ div.spot-div{
 } */
 
 .update-button{
+    width:8rem;
     margin:1rem;
     background-color: rgb(93, 89, 89);
     color:white;
     padding:0.5rem;
     
+    
 }
 button{
+    width:8rem;
     margin:1rem;
     background-color: rgb(93, 89, 89);
     color:white;

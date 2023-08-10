@@ -81,7 +81,7 @@ export default function EditSpot () {
         //const singleSpot = await dispatch(thunkloadsinglespot(updateSpot.id))
          
          if(updateSpot)
-		  history.push(`/spots/${updateSpot.id}`);
+		  history.push(`/spots/${updateSpot?.id}`);
         }
           useEffect (() => {
             if(editspot)

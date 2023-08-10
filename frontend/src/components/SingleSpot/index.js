@@ -68,17 +68,17 @@ export default function SingleSpot(){
     }
     
     return (
-        <div style={{marginLeft:"1rem"}}>
+        <div style={{marginLeft:"7rem"}}>
             <div><h2 id="spot-name">{spot.name}</h2></div>
-            <div><p>{spot.city}, {spot.state}, {spot.country}</p></div>
+            <div style={{marginBottom:"1rem"}}><p>{spot.city}, {spot.state}, {spot.country}</p></div>
             <div className="spot-images-div"> 
-                <div className="preview-image-on-the-left"><img  src={spot.SpotImages[0].url} alt="spot-Images" height={410} width={500} />
+                <div className="preview-image-on-the-left"><img  src={spot.SpotImages[0].url} alt="spot-Images" height={410} />
             </div>
             <div className="image-array-for-right-side">
-                <img  src={spot.SpotImages[1]?.url || "https://res.cloudinary.com/dxrhf8ah9/image/upload/v1684121802/Airbnb-images/ET-IMAGE-COMING-SOON-1000_ys87xr.jpg"} alt="Image is coming soon" height={200} width={200} placeholder="Image coming soon"/>
-                <img  src={spot.SpotImages[2]?.url || "https://res.cloudinary.com/dxrhf8ah9/image/upload/v1684121802/Airbnb-images/ET-IMAGE-COMING-SOON-1000_ys87xr.jpg" } alt="spot-Images" height={200} width={200} />
-                <img  src={spot.SpotImages[3]?.url || "https://res.cloudinary.com/dxrhf8ah9/image/upload/v1684121802/Airbnb-images/ET-IMAGE-COMING-SOON-1000_ys87xr.jpg"} alt="spot-Images" height={200} width={200} />
-                <img  src={spot.SpotImages[4]?.url || "https://res.cloudinary.com/dxrhf8ah9/image/upload/v1684121802/Airbnb-images/ET-IMAGE-COMING-SOON-1000_ys87xr.jpg"} alt="spot-Images" height={200} width={200} />    
+                <img  src={spot.SpotImages[1]?.url || "https://res.cloudinary.com/dxrhf8ah9/image/upload/v1684121802/Airbnb-images/ET-IMAGE-COMING-SOON-1000_ys87xr.jpg"} alt="Image is coming soon" height={200}  placeholder="Image coming soon"/>
+                <img  src={spot.SpotImages[2]?.url || "https://res.cloudinary.com/dxrhf8ah9/image/upload/v1684121802/Airbnb-images/ET-IMAGE-COMING-SOON-1000_ys87xr.jpg" } alt="spot-Images" height={200} />
+                <img  src={spot.SpotImages[3]?.url || "https://res.cloudinary.com/dxrhf8ah9/image/upload/v1684121802/Airbnb-images/ET-IMAGE-COMING-SOON-1000_ys87xr.jpg"} alt="spot-Images" height={200}  />
+                <img  src={spot.SpotImages[4]?.url || "https://res.cloudinary.com/dxrhf8ah9/image/upload/v1684121802/Airbnb-images/ET-IMAGE-COMING-SOON-1000_ys87xr.jpg"} alt="spot-Images" height={200} />    
             </div>
         </div>
 
@@ -103,7 +103,7 @@ export default function SingleSpot(){
                 <button className="reserve-button" onClick={handlealert}>Reserve</button>    
             </div>
         </div>
-        <div>_________________________________________________________________________________________________________________________________</div>
+        
         <div className="down-rating-div">
             {!AvgRating ? <div className="new">
             <i class="fa-sharp fa-solid fa-star"></i>
