@@ -12,6 +12,7 @@ import DeleteSpot from "./components/DeleteSpot";
 import ReviewList from "./components/ReviewList";
 import DeleteReview from "./components/DeleteReview";
 import PostReview from "./components/PostReview";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -60,6 +61,9 @@ function App() {
 
        
         </Switch>}
+        <div className="footer-container">
+        <Footer isLoaded={isLoaded} />
+      </div>
     </>
   );
 }
