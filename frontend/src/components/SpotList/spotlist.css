@@ -38,12 +38,15 @@
 .land-page-images{
     border: solid whitesmoke 1px;
     border-radius: 0.8rem;
+    height:220px;
+    width:100%;
 }
 .tooltip {
     visibility: hidden;
-    width: 240px;
-    background-color: rgb(61, 55, 55);
-    color: #fff;
+    width: 300px;
+    /* background-color: rgb(61, 55, 55); */
+    color:black;
+    font-size: x-large;
     text-align: center;
     /* border-radius: 6px;
     padding: 5px 0; */
@@ -56,4 +59,6 @@
   }
   .img-text{
     object-fit: contain;
+    
+    
   }
