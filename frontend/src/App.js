@@ -13,6 +13,7 @@ import ReviewList from "./components/ReviewList";
 import DeleteReview from "./components/DeleteReview";
 import PostReview from "./components/PostReview";
 import Footer from "./components/Footer";
+import { SearchFilter } from "./context/SearchFilter";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <>
+     <SearchFilter>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && <Switch>
         
@@ -60,9 +62,12 @@ function App() {
 
 
        
-        </Switch>}
+        </Switch>
+        }
+        </SearchFilter>
         <div className="footer-container">
         <Footer isLoaded={isLoaded} />
+  
       </div>
     </>
   );
