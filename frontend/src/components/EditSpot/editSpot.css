@@ -58,8 +58,8 @@ textarea#description-textarea{
 }
 input{
     margin:3px;
-    margin-top: 1px;
-    margin-bottom:2px;
+    margin-top: 4px;
+    margin-bottom:4px;
 }
 span.errors{
     color:red;
@@ -69,7 +69,7 @@ span.errors{
 button.editform-button{
     border:solid black 3px;
     padding:0.5rem;
-    width:10rem;
+    width:15rem;
     color:white;
     background-color: rgb(221, 67, 40);
     box-shadow: 5px 3px 3px black;

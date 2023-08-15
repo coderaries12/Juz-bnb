@@ -2,7 +2,8 @@
     display:grid;
     grid-template-columns: 1fr 0.5fr 1fr;
     grid-template-rows: 1fr;
-    
+    /* border: solid whitesmoke 1px;
+    border-radius: 0.8rem; */
     gap:0.8rem; 
     
     
@@ -21,6 +22,8 @@
    grid-template-columns: 1fr 1fr;
    gap:0.5rem;
    object-fit:cover;
+   border: solid whitesmoke 1px;
+    border-radius: 0.8rem;
 
    
 
@@ -60,14 +63,17 @@ h2#spot-name{
     
 }
 .reserve-button{
-    border:1px solid black;
-    padding:10px;
+    /* border:1px solid black; */
+    padding:12px;
     margin-left: 1.5rem;
     
     width:20rem;
     background-color:red;
     color:white;
     align-content: center;
+    border-radius: 0.5rem;
+    border:none;
+
     
 
 }

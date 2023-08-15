@@ -8,10 +8,10 @@ function Footer({ isLoaded }) {
         <div className="about-grid-one">
           <div>
             <p>Sheena Gupta</p>
-            <a href="https://github.com/coderaries12">
+            <a href="https://github.com/coderaries12" target="_blank" rel="noreferrer">
               <i className="fa-brands fa-github"></i>
             </a>
-            <a href="https://www.linkedin.com/in/sheena1204/">
+            <a href="https://www.linkedin.com/in/sheena1204/" target="_blank" rel="noreferrer">
               <i className="fa-brands fa-linkedin"></i>
             </a>
           </div>
