@@ -7,6 +7,7 @@ import SpotList from "./components/SpotList";
 import SingleSpot from "./components/SingleSpot";
 import CreateSpot from "./components/CreateSpot";
 import CurrentUserSpotList from "./components/CurrentUserSpotList";
+import CurrentUserBookingList from "./components/CurrentUserBookingList";
 import EditSpot from "./components/EditSpot";
 import DeleteSpot from "./components/DeleteSpot";
 import ReviewList from "./components/ReviewList";
@@ -33,6 +34,9 @@ function App() {
         </Route>
         <Route exact path='/spots/current'>
          <CurrentUserSpotList />
+        </Route>
+        <Route exact path='/bookings/current'>
+         <CurrentUserBookingList />
         </Route>
         <Route exact path='/spots/new'>
          <CreateSpot />
