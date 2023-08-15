@@ -222,7 +222,7 @@ router.get('/:spotId',async(req,res)=>{
     starSum=starSum+review.stars
    }
    spotbyId.numReviews=reviews.length;
-   console.log(reviews.length)
+   
    spotbyId.avgStarRating=(starSum/reviews.length)
        
 return(res.json(spotbyId))
@@ -283,7 +283,6 @@ router.post('/:spotId/images',requireAuth,async(req,res)=>{
   const { user } = req;
   const id=user.dataValues.id
   const { url,preview} = req.body; 
-   console.log("Inside the backend",req.body)
   const newSpot = await Spot.findByPk(req.params.spotId);  
   if(!newSpot) {
     return res.status(404).json({
@@ -309,7 +308,7 @@ router.post('/:spotId/images',requireAuth,async(req,res)=>{
     const newSpot=await Spot.findByPk(req.params.spotId,{
       raw:true
     });
-    //console.log(newSpot)
+    
     if(!newSpot){
       return res.status(404).json({
         "message": "Spot couldn't be found"

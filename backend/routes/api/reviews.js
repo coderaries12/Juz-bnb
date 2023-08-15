@@ -100,7 +100,7 @@ router.post('/:reviewId/images',requireAuth,async(req,res)=>{
             "message": "Maximum number of images for this resource was reached"   
         })
     }
-   // console.log((ReviewfindbyId.toJSON()).ReviewImages.length)
+   
     let newReviewImage=await ReviewImage.create({
         reviewId:ReviewfindbyId.id,
         url, 
