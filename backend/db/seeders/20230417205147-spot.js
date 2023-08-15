@@ -151,7 +151,7 @@ module.exports = {
         "country": "United States of America",
         "lat": 38.031239,
         "lng": -87.392021,
-        "name": "Stuart Manor Bed and Breakfast",
+        "name": "Stuart Manor",
         "description": "Welcome to Stuart Manor, a mid-1800's Brick Italianate Home constructed by John Stuart, an early Cumberland County Judge.",
         "price": 890, 
       },

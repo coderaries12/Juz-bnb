@@ -8,7 +8,7 @@ const router = express.Router();
  
 //Get all of the Current User's Bookings
 router.get('/current',requireAuth,async(req,res)=>{ 
-    console.log("hello")
+    
     const { user } = req;
     const id=user.dataValues.id
     let currBooking=await Booking.findAll({
@@ -130,14 +130,14 @@ router.put('/:bookingId',requireAuth,async(req,res)=>{
 router.delete('/:bookingsId',requireAuth,async(req,res)=>{ 
     const { user } = req;
     const id=user.dataValues.id
-   // console.log(req.user.id)
+   
     const bookingToDelete=await Booking.findByPk(req.params.bookingsId)
     if(!bookingToDelete){
         return res.status(404).json({
           "message": "Booking couldn't be found"
         })
        }
-    console.log(bookingToDelete)
+    
     const spot=await Spot.findOne({
         where:{
             id:bookingToDelete.spotId

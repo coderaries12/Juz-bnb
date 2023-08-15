@@ -11,7 +11,7 @@ const router = express.Router();
 router.delete('/:imageId',requireAuth,async(req,res)=>{ 
     const { user } = req;
     const id=user.dataValues.id
-    console.log(req.user.id)
+    
     const imageToDelete=await SpotImage.findByPk(req.params.imageId)
     if(!imageToDelete){
         return res.status(404).json({
