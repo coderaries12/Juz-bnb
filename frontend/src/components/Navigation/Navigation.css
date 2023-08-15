@@ -34,7 +34,7 @@ div.menu-button{
 .nav-div{
     display: flex;
     flex-direction: row;
-    gap:20rem;
+    gap:18rem;
     /* justify-content: space-between; */
     /* border-top:2px solid lightgray; */
     border-bottom:2px solid lightgray;
@@ -82,7 +82,7 @@ div.menu-button{
     padding: 1px;
     /* height: 7rem; */
     /* margin-right: -2rem; */
-    right: 2rem;
+    right: 4rem;
 }
 user-logout-div{
     margin-bottom: 15px;

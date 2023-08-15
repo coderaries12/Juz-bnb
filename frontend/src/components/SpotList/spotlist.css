@@ -39,7 +39,7 @@
     border: solid whitesmoke 1px;
     border-radius: 0.8rem;
     height:220px;
-    width:100%;
+    width: 320px;
 }
 .tooltip {
     visibility: hidden;

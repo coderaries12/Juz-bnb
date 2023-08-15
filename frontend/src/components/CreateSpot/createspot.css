@@ -1,13 +1,13 @@
 div#spot-form-div{
     display:flex;
     flex-direction: column;
-    margin-left: 15rem;
+    
 }
 form.spot-form{
     border:solid black 2px;
     display:flex;
     flex-direction: column;
-   
+   align-self: center;
     padding:1.5rem;
     width:30rem;
 }
@@ -59,7 +59,7 @@ span.errors{
 button.createbutton-spot{
     border:solid black 3px;
     padding:0.5rem;
-    width:10rem;
+    width:15rem;
     color:white;
     background-color: rgb(221, 67, 40);
     box-shadow: 5px 3px 3px black;

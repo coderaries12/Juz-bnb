@@ -1,7 +1,7 @@
 .card-spot{
   display:flex;
   flex-direction: row; 
-  margin-left: 2rem; 
+  /* margin-left: 2rem;  */
     
 }
  /* #image-text{
@@ -38,8 +38,10 @@ button{
     background-color: rgb(93, 89, 89);
     color:white;
     padding:0.5rem;
+    border-radius: 0.5rem;
 }
 h1#manage-spot-heading{
     width:100%;
     text-align: left;
+    margin-left: 2.5rem;
 }

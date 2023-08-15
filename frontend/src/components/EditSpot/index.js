@@ -190,6 +190,7 @@ return(
 					rows={8}
 					type=""
 					name="description"
+					style={{resize:"none"}}
 					value={description}
 					onChange={(e) => setDescription(e.target.value)}
 				/>
