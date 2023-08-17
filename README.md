@@ -16,8 +16,12 @@ Check out [Juzbnb](https://authenticate-me-4sxd.onrender.com)
 
 ## List of Spots
 
+<img width="1464" alt="Juz-bnb-listofspots-page" src="https://github.com/coderaries12/API-project/assets/30429957/560a2672-97ce-488d-8605-a5afaf782f6a">
+
 
 ## Spot Information and reviews
+
+<img width="1458" alt="Juz-bnb-spotdetail-page" src="https://github.com/coderaries12/API-project/assets/30429957/6ff1f409-d2a7-4403-b761-c930b68619c9">
 
 
 # Features 
