@@ -17,10 +17,10 @@ Check out [Juzbnb](https://authenticate-me-4sxd.onrender.com)
 ## Splash Page
 
 
-## Spots
+## List of Spots
 
 
-## One spot page and reviews
+## Spot Information and reviews
 
 
 # Features 
