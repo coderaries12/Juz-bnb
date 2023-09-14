@@ -24,6 +24,7 @@ function CreateSpot({spot,formType}) {
     const [url3, seturl3] = useState("");
     const [url4, seturl4] = useState("");
 	const [preview, setPreview] = useState(false);
+	const [hasSubmitted, setHasSubmitted] = useState(false);
 	
 	const [errors, setErrors] = useState({});
 	const history = useHistory();
@@ -69,6 +70,7 @@ function CreateSpot({spot,formType}) {
 
 	 const onSubmit = async (e) => {
 		e.preventDefault();
+		setHasSubmitted(true);
 		const payload = {
 			country,
 			address,
@@ -100,14 +102,14 @@ function CreateSpot({spot,formType}) {
 	};
 
 	return (
-	<div id="spot-form-div">
+	<div className="spot-form-div">
 		<form className="spot-form" onSubmit={onSubmit}>
             <h1>Create a new Spot</h1>
 			<h2>Where's your place located?</h2>
             <p>Guests will only get your exact address once they booked a reservation.</p>
 			<div className="spot-form-to-fill">
-				<div>
-					<label> Country   {errors.country && (<p className="errors"> {errors.country} </p>)} </label>
+				<div style={{marginBottom:"2px"}}>
+					<label> Country   {hasSubmitted && (<p className="errors"> {errors.country} </p>)} </label>
 					<input 
 				    placeholder="Country"
 					type="text"
@@ -120,7 +122,7 @@ function CreateSpot({spot,formType}) {
 				</div>
 				 
 				<div>
-				   <label> Street Address    <span className="errors">{errors?.address} </span> </label>
+				   <label> Street Address    <span className="errors">{hasSubmitted && errors?.address} </span> </label>
                    <input
 				   placeholder="Address"
 					type="text"
@@ -131,7 +133,7 @@ function CreateSpot({spot,formType}) {
 				</div>
 
 				<div>
-					<label> City    <span className="errors">{errors.city} </span> </label>
+					<label> City    <span className="errors">{hasSubmitted && errors.city} </span> </label>
 					<input
 					placeholder="City"
 					type="text"
@@ -142,7 +144,7 @@ function CreateSpot({spot,formType}) {
 				</div>
 				
 				<div> 
-					<label>State   <span className="errors">{errors.state} </span> </label>
+					<label>State   <span className="errors">{hasSubmitted && errors.state} </span> </label>
 					<input
 				    placeholder="State"
 					type="text"
@@ -153,7 +155,7 @@ function CreateSpot({spot,formType}) {
 				</div>
 
 				<div>
-					<label> Latitude  <span className="errors">{errors.latitude} </span> </label> 
+					<label> Latitude  <span className="errors">{hasSubmitted && errors.latitude} </span> </label> 
 					<input
 						placeholder="Latitude"
 						type="number"
@@ -164,7 +166,7 @@ function CreateSpot({spot,formType}) {
 				</div>
 			
 				<div>
-					<label> Longitude   <span className="errors">{errors.longitude} </span> </label>
+					<label> Longitude   <span className="errors">{hasSubmitted && errors.longitude} </span> </label>
 				    <input
 						placeholder="Longitude"
 						type="number"
@@ -190,7 +192,7 @@ function CreateSpot({spot,formType}) {
 					value={description}
 					onChange={(e) => setDescription(e.target.value)}
 				/>
-			    	<p className="errors">{errors?.description} </p>
+			    	<p className="errors">{hasSubmitted && errors?.description} </p>
 			</div>
 
             <div>
@@ -206,7 +208,7 @@ function CreateSpot({spot,formType}) {
 						value={name}
 						onChange={(e) => setName(e.target.value)}
 					/>
-				<p className="errors">{errors.name} </p>
+				<p className="errors">{hasSubmitted && errors.name} </p>
 			</div>
 
 			<div>	
@@ -223,7 +225,7 @@ function CreateSpot({spot,formType}) {
 					value={price}
 					onChange={(e) => setPrice(e.target.value)}
 				/>
-				<p className="errors">{errors.price} </p>
+				<p className="errors">{hasSubmitted && errors.price} </p>
 			</div>
 			
 			<div>
@@ -239,7 +241,7 @@ function CreateSpot({spot,formType}) {
 					value={previewimage}
 					onChange={(e) => setPreviewimage(e.target.value)}
 				/>
-				<p className="errors">{errors.previewimage} </p>
+				<p className="errors">{hasSubmitted && errors.previewimage} </p>
 			</div>
                 
 			<div>
@@ -251,7 +253,7 @@ function CreateSpot({spot,formType}) {
 					onChange={(e) => seturl1(e.target.value)}
 				/>
 			</div>
-			<p className="errors">{errors.url1} </p>
+			<p className="errors">{hasSubmitted && errors.url1} </p>
            
 			
 			<div>

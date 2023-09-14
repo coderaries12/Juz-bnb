@@ -1,4 +1,4 @@
-div#spot-form-div{
+.spot-form-div{
     display:flex;
     flex-direction: column;
     
@@ -12,6 +12,7 @@ form.spot-form{
     width:33rem;
 }
 h1{
+    
    padding:0.5px;
    /* margin:0.5rem;  */
    /* margin-bottom:0.5px; */
@@ -50,7 +51,8 @@ textarea{
     border: solid 2px;
 }
 input{
-    margin:3px;
+    margin:1px;
+    margin-bottom: 10px;
 }
 span.errors{
     color:red;
