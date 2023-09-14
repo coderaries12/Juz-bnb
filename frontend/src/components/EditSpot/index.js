@@ -104,20 +104,22 @@ export default function EditSpot () {
 
 
 return(
-    <div id="spot-editform-div">
-		<form className="spot-editform" onSubmit={onSubmit}>
-            <h1>Create a new Spot</h1>
+    <div className="spot-form-div">
+		<form className="spot-form" onSubmit={onSubmit}>
+            <h1>Update your Spot</h1>
 			<h2>Where's your place located?</h2>
             <p>Guests will only get your exact address once they booked a reservation.</p>
-			<div>
+			<div className="spot-form-to-fill">
 			<label>
               <div> Country    <span className="errors"> {errors.country} </span></div>
+			  
 				<div>
 				<input
 				    placeholder="Country"
 					type="text"
 					name="country"
 					value={country}
+					
 					onChange={(e) => setCountry(e.target.value)}
 				/></div>
 			</label>
@@ -180,28 +182,32 @@ return(
 					onChange={(e) => setLongitude(e.target.value)}
 				/></div>
 			</label>
+			<div>
 			<label>
-				<div>______________________________________________________________</div>
+			<div style={{"borderBottom":"solid 1px", marginTop:"1rem"}}></div>
                 <h4>  Describe your place to guests  </h4>
 				<p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
+
                   <textarea
 				   placeholder="Description"
 				    cols={55}
 					rows={8}
 					type=""
-					name="description"
 					style={{resize:"none"}}
+					name="description"
+					
 					value={description}
 					onChange={(e) => setDescription(e.target.value)}
 				/>
 			</label>
 			<p className="errors">{errors.description} </p>
-
+			</div>
 
 			<label>
-				<div>_____________________________________________________________ </div>
+			<div style={{"borderBottom":"solid 1px", marginTop:"1rem"}}></div>
 			    <h4>  Create a title for your spot  </h4>
 				<p>Catch guest's attention with a spot title that highlights what makes your place special.</p>
+				{errors.name && <p className="errors">{errors.name}</p>}
 				<div>
                   <input
 				  placeholder="Name of your spot"
@@ -211,12 +217,13 @@ return(
 					onChange={(e) => setName(e.target.value)}
 				/></div>
 			</label>
-			<p className="errors">{errors.name} </p>
-
+			{/* <p className="errors">{errors.name} </p> */}
+        <div>
 			<label>
-				<div>___________________________________________________________</div>
+			<div style={{"borderBottom":"solid 1px", marginTop:"1rem"}}></div>
                 <h4>  Set a base price for your spot  </h4>
 				<p>Competitive pricing can help your listing stand out and rank high in search results.</p>
+			</label>
                   $<input
 				    placeholder="Price per night(USD)"
 					type="number"
@@ -224,9 +231,10 @@ return(
 					value={price}
 					onChange={(e) => setPrice(e.target.value)}
 				/>
-			</label>
+		</div>
+			
             <div>
-			<button className="editform-button" type="submit" onClick={onSubmit}>
+			<button className="createbutton-spot" type="submit" onClick={onSubmit}>
 				Edit Spot
 			</button></div>
         </form>
