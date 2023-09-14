@@ -46,6 +46,19 @@ div.menu-button{
     align-items: center;
     cursor: pointer;
 }
+.nav-div-nologin{
+    display: flex;
+    flex-direction: row;
+    gap:22rem;
+    border-bottom:2px solid lightgray;
+    height: 70px;
+    padding-left:10px ;
+    padding-right: 10px;
+    margin-top:1.5rem;
+    margin-bottom: 2rem;
+    align-items: center;
+    cursor: pointer;
+}
 
 .logo-image{
     width:8rem;
