@@ -33,6 +33,7 @@ input{
     color:white;
     background-color: rgb(221, 67, 40);
     box-shadow: 5px 3px 3px black;
+    align-self: center;
 }
 button.demo-user1{
     border:none;
