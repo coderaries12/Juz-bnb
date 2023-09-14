@@ -52,7 +52,8 @@ function Navigation({ isLoaded }){
 	  }, [history])
 
   return (
-    <div className='nav-div'>
+    <div className={sessionUser ? 'nav-div':"nav-div-nologin"}>
+		
     <div className='nav-left-div'>
         <NavLink exact to="/" className="logo-nav">
           <img className='logo-image' src=" https://res.cloudinary.com/dxrhf8ah9/image/upload/v1684096377/Airbnb-images/Logo_hxslbp.png" alt='logo' /> 
