@@ -120,7 +120,7 @@ function CreateSpot({spot,formType}) {
 				</div>
 				 
 				<div>
-				   <label> Street Address    <span className="errors">{errors.address} </span> </label>
+				   <label> Street Address    <span className="errors">{errors?.address} </span> </label>
                    <input
 				   placeholder="Address"
 					type="text"
@@ -190,7 +190,7 @@ function CreateSpot({spot,formType}) {
 					value={description}
 					onChange={(e) => setDescription(e.target.value)}
 				/>
-			    	<p className="errors">{errors.description} </p>
+			    	<p className="errors">{errors?.description} </p>
 			</div>
 
             <div>

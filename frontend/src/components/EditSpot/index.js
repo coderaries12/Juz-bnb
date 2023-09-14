@@ -181,7 +181,7 @@ return(
 				/></div>
 			</label>
 			<label>
-				<div>______________________________________________________________</div>
+			<div style={{"borderBottom":"solid 1px", marginTop:"1rem"}}></div>
                 <h4>  Describe your place to guests  </h4>
 				<p>Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
                   <textarea
@@ -199,7 +199,7 @@ return(
 
 
 			<label>
-				<div>_____________________________________________________________ </div>
+			<div style={{"borderBottom":"solid 1px", marginTop:"1rem"}}></div>
 			    <h4>  Create a title for your spot  </h4>
 				<p>Catch guest's attention with a spot title that highlights what makes your place special.</p>
 				<div>
@@ -212,11 +212,12 @@ return(
 				/></div>
 			</label>
 			<p className="errors">{errors.name} </p>
-
+        <div>
 			<label>
-				<div>___________________________________________________________</div>
+			<div style={{"borderBottom":"solid 1px", marginTop:"1rem"}}></div>
                 <h4>  Set a base price for your spot  </h4>
 				<p>Competitive pricing can help your listing stand out and rank high in search results.</p>
+			</label>
                   $<input
 				    placeholder="Price per night(USD)"
 					type="number"
@@ -224,7 +225,8 @@ return(
 					value={price}
 					onChange={(e) => setPrice(e.target.value)}
 				/>
-			</label>
+		</div>
+			
             <div>
 			<button className="editform-button" type="submit" onClick={onSubmit}>
 				Edit Spot

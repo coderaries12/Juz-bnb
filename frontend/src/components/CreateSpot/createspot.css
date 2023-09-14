@@ -34,7 +34,7 @@ p{
     margin-bottom: 0.5rem;
     /* margin:0.5px; */
 }
-p.errors{
+.errors{
     color:red;
     display:flex;
     flex-direction: row;
@@ -47,6 +47,7 @@ p#p-description{
 }
 textarea{
     background-color:lightsteelblue;
+    border: solid 2px;
 }
 input{
     margin:3px;
