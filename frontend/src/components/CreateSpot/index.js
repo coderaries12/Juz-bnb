@@ -176,7 +176,7 @@ function CreateSpot({spot,formType}) {
 			
 			<div>
 				<label>
-					<div>______________________________________________________________</div>
+				<div style={{"borderBottom":"solid 1px", marginTop:"1rem"}}></div>
 					<h4>  Describe your place to guests  </h4>
 					<p id="p-description">Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</p>
 				</label>
@@ -195,7 +195,7 @@ function CreateSpot({spot,formType}) {
 
             <div>
 				<label>
-					<div>_____________________________________________________________</div>
+				<div style={{"borderBottom":"solid 1px", marginTop:"1rem"}}></div>
 					<h4>  Create a title for your spot  </h4>
 					<p>Catch guest's attention with a spot title that highlights what makes your place special.</p>
 				</label>
@@ -211,7 +211,7 @@ function CreateSpot({spot,formType}) {
 
 			<div>	
 				<label>
-					<div>_____________________________________________________________</div>
+				<div style={{"borderBottom":"solid 1px", marginTop:"1rem"}}></div>
 					<h4>  Set a base price for your spot  </h4>
 					<p>Competitive pricing can help your listing stand out and rank high in search results.</p>
 				</label>
@@ -228,7 +228,7 @@ function CreateSpot({spot,formType}) {
 			
 			<div>
 				<label>
-					<div>________________________________________________________</div>
+					<div style={{"borderBottom":"solid 1px", marginTop:"1rem"}}></div>
 					<h4> Liven up your spot with photos </h4>
 					<p>Submit a link to at least one photo to publish your spot.</p>
 				</label>
