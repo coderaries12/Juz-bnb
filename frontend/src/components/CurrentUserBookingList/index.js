@@ -9,21 +9,23 @@ import PostReview from "../PostReview"
 import OpenModalButton from '../OpenModalButton/index'
 import { thunkloadspots } from "../../store/spot";
 import { thunkloadcurrentuserreviews } from "../../store/review";
+import PastBooking from "./PastBooking";
 
 export default function CurrentUserBookingList(){
     const history= useHistory()
     const dispatch = useDispatch()
     // let bookingspotreview
-    //let userSpotReview = Object.values(useSelector((state) => state?.reviews?.allCurrentUserReviews))
-    
+    //let userSpotReview = useSelector((state) => state?.reviews?.allCurrentUserReviews)
+    let spotReviewlength
     const allBookings = Object.values(useSelector(state => state?.bookings?.allBookings))
-    //console.log("all current user reviews", userSpotReview)
-    
+    // console.log("all current user reviews", userSpotReview)
+    // let userSpotReviewArray
+    // if (userSpotReview.length)  userSpotReviewArray =  Object.values(userSpotReview)
     
     useEffect(() =>{
 
         dispatch(thunkloadbookings())
-        dispatch(thunkloadspots()).then(dispatch(thunkloadcurrentuserreviews()))
+        // dispatch(thunkloadcurrentuserreviews())
         
 
     },[dispatch])
@@ -117,28 +119,8 @@ export default function CurrentUserBookingList(){
                 <div>
                     {BookingsPast.map(booking => {
                         return (
-                        <div style={{display:"flex"}}>
-                           <NavLink to={`/spots/${booking.Spot?.id}`} style={{textDecoration:"none", color:"black", fontSize:"18px"}}>
-                                <div>
-                                <img style={{borderRadius:"0.8rem", height:"200px", width:"300px"}} src={booking.Spot?.previewImage} alt="spot"  />
-                                </div>
-                                <div>
-                                <div style={{marginTop:"0.8rem"}}>{booking.Spot?.name}</div>
-                                <div style={{color:"darkgray", marginTop:"0.4rem"}}>
-                                    {formatDate(booking.startDate)} to{" "}
-                                    {formatDate(booking.endDate)}
-                                </div>
-                                </div>
-                        </NavLink> 
-                        {/* { userSpotReview=userSpotReview.filter((review) => review.spotId === booking.spotId)}
-                        {console.log("review length", userSpotReview)}
-                        {!userSpotReview.length && (<div >
-
-                            <OpenModalButton buttonText="Post your Review"
-                                modalComponent={<PostReview spotId={booking.Spot.id} spot={booking.Spot} />}
-                                style={{ fontSize: '10px', height: '1.5rem', borderRadius: '6px' }}
-                            />
-                            </div>)}  */}
+                            <div key={booking.id}>
+                            <PastBooking booking={booking} />
 
                         </div>)
                     })}
