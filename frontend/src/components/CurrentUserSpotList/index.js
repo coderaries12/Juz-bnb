@@ -14,21 +14,9 @@ export default function CurrentUserSpotList(){
     const currentUser = useSelector((state) => state?.session.user)
     const spotobj = useSelector((state) => state?.spots.allSpots)
     const spots = Object.values(spotobj)
-    // const {OpenModalButton} = useModal()
-    // let CurrentUserSpotList=[];
-    // for(let spot of spots){
-    //     if(spot.ownerId===currentUserId){
-    //         CurrentUserSpotList.push(spot)
-    //     }
-    // }
-    
-    
+
     useEffect(() =>{
-    //if(currentUser){
         dispatch(thunkcurrentuserspot())
-
-    
-
     },[dispatch])
    
     if(spots.length === 0) {
@@ -46,14 +34,11 @@ export default function CurrentUserSpotList(){
             <h1 id="manage-spot-heading">Manage Spots</h1>
         {
             spots.map((spot) => {
-                // if(!(Number.parseFloat(spots.avgRating).toFixed(2))) spot.avgRating="New"
+                
                 if(!spot.avgRating) spot.avgRating="New"
              return(
                     <div key={spot.id} className="spot-div">
                         <NavLink className="navlink-image" to={`/spots/${spot.id}`}>
-                        {/* <div class="tooltip">
-                        <span class="tooltiptext">{spot.name}</span>
-                        </div>  */}
                         <div id="img-text">
                         <img style={{width:"300px",height:"220px", borderRadius:"0.8rem"}} src={spot.previewImage} alt={spot.name}  />
                         </div>

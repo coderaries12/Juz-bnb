@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import './CurrentUserBookingList.css'
 import { NavLink,useHistory } from "react-router-dom";
@@ -14,31 +14,22 @@ import PastBooking from "./PastBooking";
 export default function CurrentUserBookingList(){
     const history= useHistory()
     const dispatch = useDispatch()
-    // let bookingspotreview
-    //let userSpotReview = useSelector((state) => state?.reviews?.allCurrentUserReviews)
-    let spotReviewlength
+    const [loading, setLoading] = useState(true);
     const allBookings = Object.values(useSelector(state => state?.bookings?.allBookings))
-    // console.log("all current user reviews", userSpotReview)
-    // let userSpotReviewArray
-    // if (userSpotReview.length)  userSpotReviewArray =  Object.values(userSpotReview)
+    //let userSpotReview = Object.values(useSelector((state) => state?.reviews.allCurrentUserReviews))
+    
     
     useEffect(() =>{
 
-        dispatch(thunkloadbookings())
-        // dispatch(thunkloadcurrentuserreviews())
-        
-
+        dispatch(thunkloadbookings()).then(() => {
+            setLoading(false)})
     },[dispatch])
-    // useEffect(() =>{
+    useEffect(() =>{
 
-        
-    //     dispatch(thunkloadspots()).then(dispatch(thunkloadcurrentuserreviews()))
-
-    // },[dispatch])
-
-
-    if(allBookings === {}) return <></>
-    if(allBookings === null || allBookings === undefined) return <></>
+        dispatch(thunkloadcurrentuserreviews())
+    },[dispatch])
+    
+    if(loading)   return <div>Loading...</div>
    
     let currentDate = new Date(new Date().setHours(0, 0, 0, 0))
     let BookingsFuture = allBookings
@@ -52,7 +43,7 @@ export default function CurrentUserBookingList(){
             return aStart - bStart
         })
 
-    console.log("future bookings", BookingsFuture)
+   
 
     let BookingsPast = allBookings
         .filter(booking => {
@@ -66,11 +57,6 @@ export default function CurrentUserBookingList(){
         });
 
         function formatDate(dateString) {
-            // const date = new Date(dateString);
-            // const day = (date.getDate() + 1).toString();
-            // const month = (date.getMonth() + 1).toString();
-            // const year = date.getFullYear().toString();
-            // return `${month}/${day}/${year}`;
             const date= new Date(dateString).toLocaleDateString("en-US", {
                 month: "long",
                 day: "numeric",

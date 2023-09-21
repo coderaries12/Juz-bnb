@@ -1,0 +1,71 @@
+* {
+    background-color: none;
+}
+
+.date-input {
+    font-family: "Manjari", sans-serif;
+    font-size: 11px;
+    padding: .2rem;
+    padding-left: 10px;
+    background-color: white;
+    color: #51636D;
+    border-radius: 7px;
+    border: #51636d71 1px solid;
+    height: 2rem;
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.inside {
+    position: relative;
+}
+
+
+.react-datepicker {
+    font-family: 'Manjari', sans-serif;
+    display: inline-flex;
+    background-color: none;
+    color: #51636D !important;
+}
+
+.react-datepicker__month-text,
+.react-datepicker__current-month,
+.react-datepicker__quarter-text,
+.react-datepicker__year-text,
+.react-datepicker__month-year-option {
+    font-family: 'Manjari', sans-serif;
+    color: #51636D !important;
+}
+
+.react-datepicker__day,
+.react-datepicker__day-name,
+.react-datepicker__time-name {
+    font-family: 'Manjari', sans-serif;
+    color: #51636D !important;
+}
+
+.react-datepicker__day--selected {
+    background-color: #51636D !important;
+    color: white !important;
+}
+
+.react-datepicker__day-name {
+    color: #51636D !important;
+}
+
+.react-datepicker__navigation {
+    width: 1rem;
+    height: 1rem;
+    box-shadow: none;
+}
+
+.fa-calendar {
+    position: absolute;
+    /* top: 30%; */
+    right: 10px;
+    top: 2.1rem;
+    transform: translateY(-50%);
+    cursor: pointer;
+}

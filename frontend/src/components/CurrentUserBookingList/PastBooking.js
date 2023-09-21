@@ -5,6 +5,7 @@ import { thunkloadcurrentuserreviews } from "../../store/review";
 import { NavLink,useHistory } from "react-router-dom";
 import OpenModalButton from '../OpenModalButton/index'
 import PostReview from "../PostReview"
+import { thunkloadreviews } from "../../store/review";
 import { thunkloadspots } from "../../store/spot";
 import './CurrentUserBookingList.css'
 
@@ -12,10 +13,10 @@ export default function PastBooking({booking}){
     const history= useHistory()
     const dispatch = useDispatch()
     useEffect(() =>{
-         dispatch(thunkloadcurrentuserreviews())
+    dispatch(thunkloadcurrentuserreviews())
         },[dispatch])
+    //let userSpotReview = Object.values(useSelector((state) => state?.reviews.allCurrentUserReviews))
     
-    let userSpotReview = Object.values(useSelector((state) => state?.reviews?.allCurrentUserReviews))
     function formatDate(dateString) {
             const date= new Date(dateString).toLocaleDateString("en-US", {
                 month: "long",
@@ -24,8 +25,8 @@ export default function PastBooking({booking}){
           })
           return date;
         } 
-    let bookingReview
-        bookingReview=userSpotReview?.filter((review) => review.spotId === booking.spotId)       
+    // let bookingReview
+    //     bookingReview=userSpotReview?.filter((review) => review.spotId === booking.spotId)       
     return(
         <div style={{display:"flex"}}>
                            <NavLink to={`/spots/${booking.Spot?.id}`} style={{textDecoration:"none", color:"black", fontSize:"18px"}}>
@@ -42,13 +43,13 @@ export default function PastBooking({booking}){
                         </NavLink> 
                         
                         
-                        { !bookingReview?.length && (<div >
+                        {/* { !bookingReview?.length && (<div >
 
                             <OpenModalButton buttonText="Post your Review"
                                 modalComponent={<PostReview spotId={booking.Spot.id} spot={booking.Spot} />}
                                 style={{ fontSize: '10px', height: '1.5rem', borderRadius: '6px' }}
                             />
-                            </div>)}  
+                            </div>)}   */}
 
                         </div>) 
     
