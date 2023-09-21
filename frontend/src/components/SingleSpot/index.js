@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams} from "react-router-dom";
 import { thunkloadsinglespot } from "../../store/spot";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,18 +7,41 @@ import { thunkloadreviews } from "../../store/review";
 import OpenModalButton from '../OpenModalButton/index'
 import DeleteReview from "../DeleteReview";
 import PostReview from "../PostReview";
+import CurrentUserBookingList from "../CurrentUserBookingList";
+import { useModal } from "../../context/Modal";
+import LoginFormModal from '../LoginFormModal';
+import ReserveSpotModal from "../ReserveSpotModal"; 
+
 import './singleSpot.css'
 
 export default function SingleSpot(){
     const dispatch = useDispatch()
     const {spotId}=useParams()
-    const spot=useSelector(state => state?.spots.singleSpot)
-    const reviewsObj = useSelector((state) => state?.reviews.allReviews)
-    const reviews = Object.values(reviewsObj)
+    const user = useSelector(state => state.session.user);
+    const spot=useSelector(state => state?.spots?.singleSpot)
+    const reviewsObj = useSelector((state) => state?.reviews?.allReviews)
+    let reviews;
+    if (reviewsObj) reviews = Object.values(reviewsObj)
     const sortedReviews = reviews?.sort((a,b) => new Date(b.updatedAt) - new Date(a.updatedAt))
     const SpotUser = useSelector(state => state?.spots.singleSpot.Owner)
     const currentUser = useSelector(state => state.session.user)
-    let reviewsLength = reviews.length 
+    let reviewsLength = reviews?.length 
+
+    const [startDate, setStartDate] = useState(new Date());
+    const initialEndDate = startDate ? new Date(startDate.getTime() + 24 * 60 * 60 * 1000) : null;
+    const [endDate, setEndDate] = useState(initialEndDate);
+    const [errors, setErrors] = useState({});
+    const [submitted, setSubmitted] = useState(false);
+    const { setModalContent } = useModal();
+    useEffect(() => {
+        let errors = {};
+        if (!startDate) errors.start = "Start date is required"
+        if (!endDate) errors.end = "End date is required"
+
+        setErrors(errors);
+
+    }, [startDate, endDate])
+
     
 
     let months = {
@@ -35,6 +58,8 @@ export default function SingleSpot(){
         "11": "November",
         "12": "December"
     }
+
+    
     
    
     useEffect(() =>{
@@ -43,12 +68,47 @@ export default function SingleSpot(){
 
     },[dispatch])
 
+    function handleCheckInDate(date) {
+        setStartDate(date);
+      }
+    
+      function handleCheckOutDate(date) {
+        setEndDate(date);
+      }
     
 
+    
+    if(!reviewsObj)  return <div>Loading ...</div>
+
     // alert function
-    function handlealert(){
-        alert("Feature coming soon......")
+    const handlealert = async (e) => {
+        e.preventDefault();
+        setSubmitted(true);
+    
+        const newBooking = {
+          startDate,
+          endDate,
+        };
+    
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (startDate < today) {
+          setErrors("You cannot book a spot in the past.");
+          return;
+        }
+        if (Object.values(errors).length) return;
+
+    dispatch(CurrentUserBookingList(spotId, newBooking))
+      .then(() => {
+        setModalContent(
+          <div className="reserved-modal">
+            <h2>Reservation booked!</h2>
+            <p>To manage your booked getaways head to the user profile.</p>
+          </div>
+        );
+      })
     }
+
     let sum = 0;
     for(let r of reviews){
         sum+=r.stars
@@ -59,7 +119,7 @@ export default function SingleSpot(){
     if(!SpotUser.id)   return null
    
 
-    const CurrentUserReview = reviews.find(r => r.userId === currentUser.id )
+    const CurrentUserReview = reviews.find(r => r.userId === currentUser?.id )
     
     const reviewNum = (num) => {
         if (num === 0) return "★ New"
@@ -87,10 +147,9 @@ export default function SingleSpot(){
                 <h2 className="spot-user-heading">Hosted by {SpotUser.firstName} {SpotUser.lastName}</h2>
                 <p>{spot.description}</p>
             </div>
-            
-            <div className="call-out-box">
-                
-                <div className="spot-night">
+        {/* Reserve Button for logged-in user     */}
+       <div className="call-out-box">    
+            <div className="spot-night">
                 <span> ${spot.price} night  </span>
                 {!AvgRating ? <div className="new">
                     <i class="fa-sharp fa-solid fa-star"></i>
@@ -98,9 +157,27 @@ export default function SingleSpot(){
                 </div> : 
                 ( <div><span> ★ {Number.parseFloat(AvgRating).toFixed(1)}  </span>   
                 <span> {reviewNum(reviewsLength)} </span></div> )}
-                </div>               
+            </div>               
                 
-                <button className="reserve-button" onClick={handlealert}>Reserve</button>    
+                {/* <button className="reserve-button" onClick={handlealert}>Reserve</button>     */}
+                <div className="reserve-div">
+                { user ? (
+                                    <OpenModalButton
+                                        buttonText="Reserve"
+                                        modalComponent={<ReserveSpotModal spot={spot} />}
+                                    />
+                                ) : (
+
+                                    <OpenModalButton
+                                        buttonText="Reserve"
+                                        modalComponent={<LoginFormModal />}
+                                    />
+
+                                )
+                  }
+              </div>
+                
+                      
             </div>
         </div>
         

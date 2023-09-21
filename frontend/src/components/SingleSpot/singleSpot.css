@@ -62,7 +62,7 @@ h2#spot-name{
     border-radius: 8px;
     
 }
-.reserve-button{
+.reserve-div > button{
     /* border:1px solid black; */
     padding:12px;
     margin-left: 1.5rem;
