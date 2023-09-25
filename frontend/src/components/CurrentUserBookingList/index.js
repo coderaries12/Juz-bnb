@@ -87,10 +87,10 @@ export default function CurrentUserBookingList(){
                     return (
                     <div>
                         <h2> Upcoming Trips</h2>
-                        <NavLink to={`/spots/${booking.Spot?.id}`}>
-                            <img src={booking.Spot?.previewImage} alt="spot" />
-                            <p>{booking.Spot?.name}</p>
-                            <p>
+                        <NavLink to={`/spots/${booking.Spot?.id}`} style={{textDecoration:"none", color:"black", fontSize:"18px"}}>
+                            <img src={booking.Spot?.previewImage} alt="spot" style={{borderRadius:"0.8rem", height:"200px", width:"300px"}} />
+                            <p style={{marginTop:"0.8rem"}}>{booking.Spot?.name}</p>
+                            <p style={{color:"darkgray", marginTop:"0.4rem"}}>
                                 {formatDate(booking.startDate)} to{" "}
                                 {formatDate(booking.endDate)}
                             </p>
