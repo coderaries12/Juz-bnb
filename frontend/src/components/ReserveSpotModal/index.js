@@ -29,23 +29,6 @@ export default function ReserveSpotModal({ spot }) {
 
     }, [startDate, endDate])
 
-    function calculateNumberOfNights() {
-        const oneDay = 24 * 60 * 60 * 1000;
-        const checkIn = new Date(startDate);
-        const checkOut = new Date(endDate);
-        const numberOfNights = Math.round(Math.abs((checkIn - checkOut) / oneDay));
-    
-        return numberOfNights;
-      }
-    
-      function calculateTotalAmount() {
-        const numberOfNights = calculateNumberOfNights();
-        const totalAmount = spot.price * numberOfNights;
-    
-        return totalAmount;
-      }
-
-
     useEffect(() => {
         setEndDate(initialEndDate)
     }, [startDate])
@@ -68,7 +51,7 @@ export default function ReserveSpotModal({ spot }) {
           }
           if (Object.values(errors).length) return;
 
-          dispatch(CurrentUserBookingList(spot.id, newBooking))
+          dispatch(thunkcreateanewbooking(newBooking, spot.id))
           .then(() => {
             setModalContent(
               <div className="reserved-modal">
@@ -77,27 +60,28 @@ export default function ReserveSpotModal({ spot }) {
               </div>
             );
           })
-                // let newErrors = {};
-                // if (error && error.message === "Authentication required") {
-                //     newErrors.message = "You must be logged in to request a booking"
-                // }
-                // if (error && error.endDate) {
-                //     newErrors.end = error.endDate;
-
-                // }
-                // if (error && error.startDate) {
-
-                //     newErrors.start = error.startDate;
-                // }
-                // if (!error) {
-
-                //     newErrors.message = "You can not book a reservation for your own spot."
-                // }
-                // setErrors(newErrors);
-                return
-            
-
-
+          .catch(async (res) => {
+            let error = await res.json();
+            error = error.errors;
+    
+            let newErrors = {};
+    
+            if (error && error.endDate) {
+              newErrors.end = error.endDate;
+            }
+    
+            if (error && error.startDate) {
+              newErrors.start = error.startDate;
+            }
+    
+            if (!error) {
+              newErrors.message =
+                "You can not book a reservation for your own spot.";
+            }
+    
+            setErrors(newErrors);
+            return;
+          })
 
     }
 
