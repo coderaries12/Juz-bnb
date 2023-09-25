@@ -15,8 +15,9 @@ export default function PastBooking({booking}){
     useEffect(() =>{
     dispatch(thunkloadcurrentuserreviews())
         },[dispatch])
-    //let userSpotReview = Object.values(useSelector((state) => state?.reviews.allCurrentUserReviews))
-    
+    let userSpotReview = useSelector((state) => state?.reviews.allCurrentUserReviews)
+    let userSpotReviewArray
+    if(userSpotReview)  userSpotReviewArray = Object.values(userSpotReview)
     function formatDate(dateString) {
             const date= new Date(dateString).toLocaleDateString("en-US", {
                 month: "long",
@@ -25,11 +26,12 @@ export default function PastBooking({booking}){
           })
           return date;
         } 
-    // let bookingReview
-    //     bookingReview=userSpotReview?.filter((review) => review.spotId === booking.spotId)       
+    let bookingReview
+        bookingReview=userSpotReviewArray?.filter((review) => review.spotId === booking.spotId)       
     return(
-        <div style={{display:"flex"}}>
+        <div style={{display:"flex", flexDirection:"column"}}>
                            <NavLink to={`/spots/${booking.Spot?.id}`} style={{textDecoration:"none", color:"black", fontSize:"18px"}}>
+                                <div >
                                 <div>
                                 <img style={{borderRadius:"0.8rem", height:"200px", width:"300px"}} src={booking.Spot?.previewImage} alt="spot"  />
                                 </div>
@@ -40,16 +42,17 @@ export default function PastBooking({booking}){
                                     {formatDate(booking.endDate)}
                                 </div>
                                 </div>
+                                </div>
                         </NavLink> 
                         
                         
-                        {/* { !bookingReview?.length && (<div >
+                        { ! bookingReview?.length && (<div >
 
                             <OpenModalButton buttonText="Post your Review"
                                 modalComponent={<PostReview spotId={booking.Spot.id} spot={booking.Spot} />}
                                 style={{ fontSize: '10px', height: '1.5rem', borderRadius: '6px' }}
                             />
-                            </div>)}   */}
+                            </div>)}  
 
                         </div>) 
     

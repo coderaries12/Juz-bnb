@@ -100,9 +100,9 @@ export default function CurrentUserBookingList(){
 
                 })}
             </div>
-            <div className="past-trip-div">
+            <div style={{marginTop:"2rem"}}>
                 {allBookings.length > 0 && BookingsPast.length > 0 && (<h2 >Where you've been</h2>)}
-                <div>
+                <div style={{display:"flex",flexDirection:"row",gap:"5rem"}}>
                     {BookingsPast.map(booking => {
                         return (
                             <div key={booking.id}>
