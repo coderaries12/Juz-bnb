@@ -15,6 +15,7 @@ export default function CurrentUserBookingList(){
     const history= useHistory()
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true);
+    const sessioUser = useSelector(state => state?.session?.user)
     const allBookings = Object.values(useSelector(state => state?.bookings?.allBookings))
     //let userSpotReview = Object.values(useSelector((state) => state?.reviews.allCurrentUserReviews))
     
@@ -83,10 +84,12 @@ export default function CurrentUserBookingList(){
                             }}
                         >Start searching</button>
                     </div>)}
+                <h2> Upcoming Trips</h2>
+                <div style={{display:"flex",flexDirection:"row", gap:"8rem"}} >
                 {BookingsFuture.map(booking => {
                     return (
-                    <div>
-                        <h2> Upcoming Trips</h2>
+                    <div >
+                        
                         <NavLink to={`/spots/${booking.Spot?.id}`} style={{textDecoration:"none", color:"black", fontSize:"18px"}}>
                             <img src={booking.Spot?.previewImage} alt="spot" style={{borderRadius:"0.8rem", height:"200px", width:"300px"}} />
                             <p style={{marginTop:"0.8rem"}}>{booking.Spot?.name}</p>
@@ -95,10 +98,26 @@ export default function CurrentUserBookingList(){
                                 {formatDate(booking.endDate)}
                             </p>
                         </NavLink>
+                        <div style={{display:"flex",flexDirection:"row", gap:"0.5rem"}}>
+                        <div>
+                            <OpenModalButton 
+                                    buttonText="Delete Booking" 
+                            /> 
+                        </div>
+                        <div>
+                            <OpenModalButton 
+                                    buttonText="Edit Booking" 
+                            /> 
+                        </div>
+
+                        </div>
+                        
                        
-                    </div>)
+                    </div>
+                    )
 
                 })}
+            </div>
             </div>
             <div style={{marginTop:"2rem"}}>
                 {allBookings.length > 0 && BookingsPast.length > 0 && (<h2 >Where you've been</h2>)}
