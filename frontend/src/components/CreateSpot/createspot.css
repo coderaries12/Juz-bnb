@@ -53,6 +53,7 @@ textarea{
 input{
     margin:1px;
     margin-bottom: 10px;
+    margin-left: 5px;
 }
 span.errors{
     color:red;
