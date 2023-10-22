@@ -2,10 +2,10 @@
 # Juz-bnb
       
 Juz-bnb is a soft clone of Airbnb. 
-* Implemented full CRUD functionality within an application using REDUX and REACT.js to create, retrieve, update and delete data dynamically.
+* Implemented full CRUD functionality within an application using REDUX and REACT.js to create, retrieve, update, and delete data dynamically.
 * Integrated user authentication and Bcrypt.js for secure password hashing and a safe and protected user experience.
-* Implemented session authentication to check permissions when enabling edit and delete feats. All delete buttons were dynamic, allowing users to delete review or spot without the need to reload using event listener and a fetch request.
-* Managed and stored data through Express.js and SQL to ease the data flow queries from user interactions.
+* Implemented session authentication to check permissions when enabling edit and delete feats. All delete buttons were dynamic, allowing users to delete review or spot without the need to reload using an event listener and a fetch request.
+* Managed and stored data through Express.js and Sequelize to ease the data flow queries from user interactions.
 
 
 Check out [Juzbnb](https://authenticate-me-4sxd.onrender.com) 
@@ -49,9 +49,9 @@ Logged-in Users can
 Logged-in Users can
 * Upload multiple images of their spot to AWS S3
 
-### Google Maps Api
-Logged in Users can
-* Locate their spot with Google Maps Api 
+### Google Maps API
+Logged-in Users can
+* Locate their spot with Google Maps API 
 
 
 ## Database Schema Design
