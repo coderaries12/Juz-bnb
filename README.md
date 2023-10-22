@@ -3,7 +3,7 @@
       
 Juz-bnb is a soft clone of Airbnb. 
 * Implemented full CRUD functionality within an application using REDUX and REACT.js to create, retrieve, update and delete data dynamically.
-* Integrated user authentication and Crypt.js for secure password hashing and a safe and protected user experience.
+* Integrated user authentication and Bcrypt.js for secure password hashing and a safe and protected user experience.
 * Implemented session authentication to check permissions when enabling edit and delete feats. All delete buttons were dynamic, allowing users to delete review or spot without the need to reload using event listener and a fetch request.
 * Managed and stored data through Express.js and SQL to ease the data flow queries from user interactions.
 
